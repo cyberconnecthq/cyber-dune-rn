@@ -11,25 +11,32 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
    ```
 
 2. Prebuild the app
+
    ```bash
    npx expo prebuild -p android/ios
    ```
 
 3. Install and Run app
-   ```
+
+   ```bash
    npx expo run:android/ios
    ```
 
 4. After install app, you can start the app easily by
+
    ```bash
     npx expo start
    ```
 
+## Native Module
 
+We created 2 native modules, cyber-passkey and cyber-widget.
+How to interact with react-native, see:
 
-
-
+- Expo modules API Tutorials: [ https://docs.expo.dev/workflow/customizing/](https://docs.expo.dev/modules/native-module-tutorial/)
+  
 In the output, you'll find options to open the app in a
+
 - [development build](https://docs.expo.dev/develop/development-builds/introduction/)
 - [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
 - [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
