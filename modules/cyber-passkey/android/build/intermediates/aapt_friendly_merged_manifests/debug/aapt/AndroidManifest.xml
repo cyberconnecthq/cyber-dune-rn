@@ -4,4 +4,30 @@
 
     <uses-sdk android:minSdkVersion="23" />
 
+    <application android:allowBackup="true" >
+        <activity
+            android:name="expo.modules.cyberpasskey.PasskeyActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|uiMode"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.App.SplashScreen"
+            android:windowSoftInputMode="adjustResize" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="com.cc.link3" />
+                <data android:scheme="cyberdune" />
+            </intent-filter>
+        </activity>
+    </application>
+
 </manifest>

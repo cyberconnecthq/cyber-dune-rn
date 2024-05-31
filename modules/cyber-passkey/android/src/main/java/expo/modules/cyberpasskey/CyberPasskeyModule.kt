@@ -1,5 +1,7 @@
 package expo.modules.cyberpasskey
 
+import android.app.Activity
+import android.content.Intent
 import expo.modules.kotlin.modules.Module
 import expo.modules.kotlin.modules.ModuleDefinition
 
@@ -24,6 +26,12 @@ class CyberPasskeyModule : Module() {
     // Defines a JavaScript synchronous function that runs the native code on the JavaScript thread.
     Function("hello") {
       "Hello world! 👋"
+    }
+
+    Function("startActivity") {
+      appContext.currentActivity?.let {
+        it.startActivity(Intent(it, PasskeyActivity::class.java))
+      }
     }
 
     // Defines a JavaScript function that always returns a Promise and whose native code
