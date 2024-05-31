@@ -8,6 +8,9 @@ export default {
     ios: {
         buildNumber: "1.0.0",
         bundleIdentifier: "com.cc.link3",
+        "associatedDomains": [
+          "webcredentials:link3.to"
+        ],
         supportsTablet: true
     },
     android: {
@@ -40,7 +43,15 @@ export default {
         favicon: "./assets/images/favicon.png"
     },
     plugins: [
-        "expo-router"
+        "expo-router",
+        [
+            "expo-build-properties",
+            {
+                ios: {
+                    deploymentTarget: '16.0'
+                }
+            }
+        ]
     ],
     owner: "darx"
 };
