@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 # cyber-dune-rn
-=======
-# Welcome to your Expo app 👋
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
@@ -13,14 +10,26 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
    npm install
    ```
 
-2. Start the app
+2. Prebuild the app
+   ```bash
+   npx expo prebuild -p android/ios
+   ```
 
+3. Install and Run app
+   ```
+   npx expo run:android/ios
+   ```
+
+4. After install app, you can start the app easily by
    ```bash
     npx expo start
    ```
 
-In the output, you'll find options to open the app in a
 
+
+
+
+In the output, you'll find options to open the app in a
 - [development build](https://docs.expo.dev/develop/development-builds/introduction/)
 - [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
 - [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
