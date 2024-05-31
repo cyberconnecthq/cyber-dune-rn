@@ -1,9 +1,18 @@
 {
-  "platforms": ["ios", "tvos", "android", "web"],
+  "platforms": [
+    "ios",
+    "tvos",
+    "android",
+    "web"
+  ],
   "ios": {
-    "modules": ["CyberPasskeyModule"]
+    "modules": [
+      "CyberPasskeyModule"
+    ]
   },
   "android": {
-    "modules": ["expo.modules.cyberpasskey.CyberPasskeyModule"]
+    "modules": [
+      "expo.modules.cyberpasskey.CyberPasskeyModule"
+    ]
   }
 }

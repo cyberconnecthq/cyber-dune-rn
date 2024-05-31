@@ -1,4 +1,4 @@
-package com.cc.link3
+package com.cyberconnnect.link3
 
 import android.os.Build
 import android.os.Bundle

@@ -1,4 +1,4 @@
-package com.cc.link3
+package com.cyberconnnect.link3
 
 import android.app.Application
 import android.content.res.Configuration

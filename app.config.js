@@ -9,7 +9,7 @@ export default {
         buildNumber: "1.0.0",
         bundleIdentifier: "com.cc.link3",
         "associatedDomains": [
-          "webcredentials:link3.to"
+            "webcredentials:link3.to"
         ],
         supportsTablet: true
     },
@@ -19,7 +19,7 @@ export default {
             foregroundImage: "./assets/images/logo.png",
             backgroundColor: "#FFFFFF"
         },
-        package: "com.cc.link3"
+        package: "com.cyberconnnect.link3"
     },
     scheme: "cyberdune",
     slug: "cyber-dune",
