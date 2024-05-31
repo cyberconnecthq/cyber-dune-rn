@@ -1,0 +1,26 @@
+import { NativeModulesProxy, EventEmitter, Subscription } from 'expo-modules-core';
+
+// Import the native module. On web, it will be resolved to CyberPasskey.web.ts
+// and on native platforms to CyberPasskey.ts
+import CyberPasskeyModule from './src/CyberPasskeyModule';
+import CyberPasskeyView from './src/CyberPasskeyView';
+import { ChangeEventPayload, CyberPasskeyViewProps } from './src/CyberPasskey.types';
+
+// Get the native constant value.
+export const PI = CyberPasskeyModule.PI;
+
+export function hello(): string {
+  return CyberPasskeyModule.hello();
+}
+
+export async function setValueAsync(value: string) {
+  return await CyberPasskeyModule.setValueAsync(value);
+}
+
+const emitter = new EventEmitter(CyberPasskeyModule ?? NativeModulesProxy.CyberPasskey);
+
+export function addChangeListener(listener: (event: ChangeEventPayload) => void): Subscription {
+  return emitter.addListener<ChangeEventPayload>('onChange', listener);
+}
+
+export { CyberPasskeyView, CyberPasskeyViewProps, ChangeEventPayload };

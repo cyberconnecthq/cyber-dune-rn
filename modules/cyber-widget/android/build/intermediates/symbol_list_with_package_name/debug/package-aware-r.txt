@@ -1,0 +1,4 @@
+expo.modules.cyberwidget
+id widget_text
+layout hello_world_widget
+xml hello_world_widget_info
