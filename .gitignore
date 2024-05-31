@@ -15,3 +15,5 @@ web-build/
 *.apk
 *.ipa
 android/app/build/*
+modules/cyber-passkey/android/app/build/*
+modules/cyber-widget/android/app/build/*
