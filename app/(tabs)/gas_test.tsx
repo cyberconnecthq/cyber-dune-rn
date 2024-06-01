@@ -11,7 +11,8 @@ const GasFeeWidget: React.FC = () => {
         try {
             // 使用 ethers 提供的默认提供程序
             const provider: Provider = ethers.getDefaultProvider('mainnet');
-            const gasPrice = (await provider.getFeeData()).gasPrice;
+            // const gasPrice = (await provider.getFeeData()).gasPrice;
+            const gasPrice = 0;
             // 将 gasPrice 转换为 Gwei
             setGasPrice(ethers.formatUnits(gasPrice ?? 0, 'gwei'));
             setLoading(false);

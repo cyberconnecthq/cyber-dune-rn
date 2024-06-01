@@ -25,3 +25,21 @@ export type TxDataResponse = {
 export type TxDataResponseAll = {
     result: TxDataResponse;
  };
+
+export type RestakeData = {
+  amount_restaked_net_ezETH: number;
+  amount_restaked_net_pufETH: number;
+  amount_restaked_net_weETH: number;
+  block_day: string; // or Date if you prefer to handle date objects
+  cumulative_amount_restaked_ezETH: number;
+  cumulative_amount_restaked_pufETH: number;
+  cumulative_amount_restaked_weETH: number;
+  cumulative_net_amount_restaked_total: number;
+  cumulative_num_deposit_cnt: number;
+  cumulative_num_restake_cnt: number;
+  cumulative_num_withdraw_cnt: number;
+  net_restaked_amount: number;
+  num_deposit_cnt: number;
+  num_restake_all_cnt: number;
+  num_withdraw_cnt: number;
+}

@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig } from 'axios';
-import { TxData } from './dataType'
+import { TxData, RestakeData } from './dataType'
 
 export class NetworkingError extends Error {
   public readonly _tag = 'NetworkingError';
@@ -11,7 +11,7 @@ export class NetworkingError extends Error {
   }
 }
 
-function createEndpointUrl(queryId: number = 3502728, limit: number = 5): string {
+function createEndpointUrl(queryId: number, limit: number): string {
   return `https://api.dune.com/api/v1/query/${queryId}/results?limit=${limit}`;
 }
 
@@ -24,7 +24,6 @@ const client = axios.create({
 export const axiosGet = async (url: string, config?: AxiosRequestConfig<unknown>) => {
   try {
     const response = await client.get(url, config);
-    console.log('fetch res', response);
     return response.data;
   } catch (error) {
     console.log('error fetch', error);
@@ -32,7 +31,13 @@ export const axiosGet = async (url: string, config?: AxiosRequestConfig<unknown>
   }
 };
 
-export const axiosGetTxNumber = async (queryId?: number, limit?: number): Promise<TxData[]> => {
+export const axiosGetTxNumber = async (queryId: number = 3502728, limit: number = 5): Promise<TxData[]> => {
+  const endpointUrl = createEndpointUrl(queryId, limit);
+  const res = await axiosGet(endpointUrl);
+  return res.result.rows;
+};
+
+export const axiosGetRtxNumber = async (queryId: number = 3607806, limit: number = 1): Promise<RestakeData[]> => {
   const endpointUrl = createEndpointUrl(queryId, limit);
   const res = await axiosGet(endpointUrl);
   return res.result.rows;

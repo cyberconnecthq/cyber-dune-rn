@@ -3,6 +3,8 @@ import { StyleSheet, Text, View, ScrollView, ActivityIndicator, SafeAreaView, St
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons, FontAwesome5 } from '@expo/vector-icons';
 import { LineChart, PieChart } from 'react-native-chart-kit';
+import * as Linking from 'expo-linking';
+import { Link, router, Navigator, Tabs } from 'expo-router';
 
 const screenWidth = Dimensions.get('window').width;
 
@@ -136,6 +138,29 @@ const App: React.FC = () => {
       }
     };
     fetchData();
+
+    const getInitialUrl = async () => {
+      const initialUrl = await Linking.getInitialURL();
+      handleUrl({ url: initialUrl });
+    };
+    getInitialUrl();
+
+    const handleUrl = async (event: any) => {
+      console.log('Received URL:', event);
+      const { url } = event;
+      if (url) {
+        console.log('Received URL:', url);
+        if (url.includes('cyberDune://login')) {
+          router.replace('./explore');
+        } else if (url.includes('cyberDune://dashboard')) {
+          router.replace('./index');
+        } else {
+          console.log('invalid url', url);
+        }
+      }
+    }
+
+    Linking.addEventListener('url', handleUrl);
   }, []);
 
   if (loading) {
