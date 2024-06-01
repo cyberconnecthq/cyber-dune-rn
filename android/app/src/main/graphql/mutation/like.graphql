@@ -1,0 +1,5 @@
+mutation like($input: LikePostRequest!) {
+    like(input: $input) {
+        status
+    }
+}

@@ -1,0 +1,7 @@
+mutation verifyPostAnswers($input: VerifyPostAnswersRequest!) {
+  verifyPostAnswers(input: $input) {
+    status
+    correct
+    token
+  }
+}

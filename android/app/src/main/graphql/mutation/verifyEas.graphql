@@ -1,0 +1,6 @@
+mutation verifyEas($input: SubmitEasWhitelistInput!) {
+    submitEasWhitelist(input: $input) {
+        status
+        verifyStatus
+    }
+}

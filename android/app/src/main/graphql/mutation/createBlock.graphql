@@ -1,0 +1,6 @@
+mutation createBlock($profileId: ID!, $input: CreateBlockInput!) {
+    createBlock(profileId: $profileId, input: $input) {
+        status
+        message
+    }
+}

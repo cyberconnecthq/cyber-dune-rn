@@ -1,0 +1,26 @@
+query getUnclaimedEvents {
+  me {
+    status
+    message
+    data {
+      unclaimedEvents {
+        id
+        info
+        title
+        posterUrl
+        startTimestamp
+        endTimestamp
+        status
+        registrantsCount
+        registerStatus
+        organizer {
+          ...Organizer
+        }
+        lightInfo {
+          hasRaffle
+          hasW3ST
+        }
+      }
+    }
+  }
+}

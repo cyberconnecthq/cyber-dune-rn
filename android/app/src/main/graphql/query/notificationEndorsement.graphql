@@ -1,0 +1,15 @@
+query notificationEndorsements($after: String) {
+  me {
+    data {
+      notifications(first: 50, after: $after) {
+        list {
+          ...RecommendationNotification
+          ...Skill
+        }
+        pageInfo {
+          ...PageInfo
+        }
+      }
+    }
+  }
+}

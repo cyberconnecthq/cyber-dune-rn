@@ -1,0 +1,5 @@
+mutation cancelLike($input: CancelLikeRequest!) {
+    cancelLike(input: $input) {
+        status
+    }
+}

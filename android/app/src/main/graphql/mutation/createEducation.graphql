@@ -1,0 +1,5 @@
+mutation createEducation($input: CreateEducationInput!) {
+    createEducation(input: $input) {
+        status
+    }
+}

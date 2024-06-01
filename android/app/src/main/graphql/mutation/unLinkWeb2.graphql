@@ -1,0 +1,5 @@
+mutation UnlinkWeb2($request: UnlinkWeb2Request!) {
+  UnlinkWeb2(request: $request) {
+    status
+  }
+}

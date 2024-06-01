@@ -1,0 +1,11 @@
+mutation collectPermissionPost($input: CollectPermissionPostRequest!) {
+  collectPermissionPost(input: $input) {
+    chainId
+    collectId
+    collector
+    essenceId
+    preData
+    profileId
+    status
+  }
+}

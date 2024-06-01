@@ -1,0 +1,5 @@
+mutation RegisterFCMToken($input: RegisterFCMTokenRequest!) {
+    registerFCMToken(request: $input) {
+        status
+    }
+}

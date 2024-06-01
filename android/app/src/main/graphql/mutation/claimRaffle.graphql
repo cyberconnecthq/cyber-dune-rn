@@ -1,0 +1,12 @@
+mutation claimRaffle($eventId: ID!) {
+  claimRaffleAward(eventId: $eventId) {
+    type
+    status
+    profileId
+    currency
+    signature
+    amount
+    deadline
+    code
+  }
+}

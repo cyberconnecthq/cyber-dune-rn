@@ -1,0 +1,5 @@
+mutation setPrimaryCyberId($handle: String!) {
+    setPrimaryCyberId(input: {handle: $handle}) {
+        status
+    }
+}

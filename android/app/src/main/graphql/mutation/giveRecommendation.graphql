@@ -1,0 +1,5 @@
+mutation giveRecommendation($input: GiveRecommendationInput!) {
+    giveRecommendation(input: $input) {
+        status
+    }
+}

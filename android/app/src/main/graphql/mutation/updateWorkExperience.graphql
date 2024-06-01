@@ -1,0 +1,6 @@
+mutation updateWorkExperience($input: UpdateWorkExperienceInput!) {
+    updateWorkExperience(input: $input) {
+        status
+    }
+}
+    

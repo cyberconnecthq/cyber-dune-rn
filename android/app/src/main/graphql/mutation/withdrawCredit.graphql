@@ -1,0 +1,5 @@
+mutation withdrawCredit($input: WithdrawCreditInput!) {
+  withdrawCredit(input: $input) {
+    status
+  }
+}

@@ -1,0 +1,26 @@
+query referralHistory($after: String) {
+  inviteHistory(first: 20, after: $after) {
+    pageInfo {
+      ...PageInfo
+    }
+    list {
+      ...ReferralHistory
+    }
+    invitedCount
+    verifiedCount
+  }
+}
+
+fragment ReferralHistory on InviteHistory {
+  user {
+    lightInfo {
+      avatar
+      displayName
+      handle
+    }
+    profile {
+      id
+    }
+  }
+  isVerificationCompleted
+}

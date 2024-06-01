@@ -1,0 +1,78 @@
+query getPost($id: String!) {
+  post(id: $id) {
+    id
+    author {
+      __typename
+      ... on Organization {
+        __typename
+        lightInfo {
+          displayName
+          profileHandle
+          profilePicture
+        }
+      }
+      ... on User {
+        privateInfo {
+          address
+        }
+      }
+    }
+    profile {
+      __typename
+      id
+      handle
+      ... on PerProfile {
+        bio
+        personalDisplayName: displayName {
+          displayName
+        }
+        isFollowing
+        personalprofilePicture: profilePicture {
+          picture
+        }
+      }
+      ... on OrgProfile {
+        bio
+        displayName
+        isFollowing
+        profilePicture
+        organization {
+          id
+        }
+      }
+    }
+
+    title
+    description
+    body
+    cover
+    arweaveTxHash
+    publishedAt
+    commentVisible
+    viewCount
+    essence {
+      contract
+      tokenUri
+      tokenId
+      cyberAccount
+      imageUrl
+      chainId
+      profileId
+      essenceId
+      mwType
+      mwInfo {
+        currencyAddress
+        endTime
+        startTime
+        mwAddress
+        price
+        profileRequired
+        totalSupply
+      }
+      postQuestion {
+        questions
+        options
+      }
+    }
+  }
+}

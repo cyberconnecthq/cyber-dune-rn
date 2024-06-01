@@ -1,0 +1,5 @@
+mutation updateTelegramSubscribe($input: UpdateTelegramSubscribeRequest!) {
+  updateTelegramSubscribe(input: $input) {
+    status
+  }
+}

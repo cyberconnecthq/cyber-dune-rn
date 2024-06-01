@@ -1,0 +1,5 @@
+mutation checkPointTask($taskId: String!, $referralCode: String!) {
+  checkPointTask(taskId: $taskId, referralCode: $referralCode) {
+    status
+  }
+}

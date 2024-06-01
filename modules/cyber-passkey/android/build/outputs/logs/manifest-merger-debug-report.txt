@@ -1,14 +1,14 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/huangshaoqing/Desktop/rn-programe/CyberDune/modules/cyber-passkey/android/src/main/AndroidManifest.xml:1:1-2:12
-INJECTED from /Users/huangshaoqing/Desktop/rn-programe/CyberDune/modules/cyber-passkey/android/src/main/AndroidManifest.xml:1:1-2:12
+ADDED from /Users/wangchong/AndroidStudioProjects/cyber-dune-rn/modules/cyber-passkey/android/src/main/AndroidManifest.xml:1:1-2:12
+INJECTED from /Users/wangchong/AndroidStudioProjects/cyber-dune-rn/modules/cyber-passkey/android/src/main/AndroidManifest.xml:1:1-2:12
 	package
-		INJECTED from /Users/huangshaoqing/Desktop/rn-programe/CyberDune/modules/cyber-passkey/android/src/main/AndroidManifest.xml
+		INJECTED from /Users/wangchong/AndroidStudioProjects/cyber-dune-rn/modules/cyber-passkey/android/src/main/AndroidManifest.xml
 uses-sdk
-INJECTED from /Users/huangshaoqing/Desktop/rn-programe/CyberDune/modules/cyber-passkey/android/src/main/AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from /Users/huangshaoqing/Desktop/rn-programe/CyberDune/modules/cyber-passkey/android/src/main/AndroidManifest.xml
-INJECTED from /Users/huangshaoqing/Desktop/rn-programe/CyberDune/modules/cyber-passkey/android/src/main/AndroidManifest.xml
+INJECTED from /Users/wangchong/AndroidStudioProjects/cyber-dune-rn/modules/cyber-passkey/android/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/wangchong/AndroidStudioProjects/cyber-dune-rn/modules/cyber-passkey/android/src/main/AndroidManifest.xml
+INJECTED from /Users/wangchong/AndroidStudioProjects/cyber-dune-rn/modules/cyber-passkey/android/src/main/AndroidManifest.xml
 	android:targetSdkVersion
-		INJECTED from /Users/huangshaoqing/Desktop/rn-programe/CyberDune/modules/cyber-passkey/android/src/main/AndroidManifest.xml
+		INJECTED from /Users/wangchong/AndroidStudioProjects/cyber-dune-rn/modules/cyber-passkey/android/src/main/AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from /Users/huangshaoqing/Desktop/rn-programe/CyberDune/modules/cyber-passkey/android/src/main/AndroidManifest.xml
+		INJECTED from /Users/wangchong/AndroidStudioProjects/cyber-dune-rn/modules/cyber-passkey/android/src/main/AndroidManifest.xml

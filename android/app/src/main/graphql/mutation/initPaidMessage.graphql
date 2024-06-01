@@ -1,0 +1,9 @@
+mutation initPaidMessage($input: InitPaidMessageInput!) {
+  initPaidMessage(input: $input) {
+    status
+    message {
+      id
+    }
+    sponsorSig
+  }
+}

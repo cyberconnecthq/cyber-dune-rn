@@ -1,0 +1,5 @@
+mutation addSkillEndorsement($skillId: ID!) {
+    addSkillEndorsement(skillId: $skillId) {
+        status
+    }
+}

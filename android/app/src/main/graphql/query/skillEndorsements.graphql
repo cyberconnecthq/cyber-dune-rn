@@ -1,0 +1,32 @@
+query skillEndorsements($skillId: ID!) {
+  endorsements(skillId: $skillId) {
+    endorsed
+    users {
+      id
+      lightInfo {
+        handle
+        avatar
+        displayName
+        formattedAddress
+        attestation {
+          uid
+        }
+      }
+      profile {
+        id
+        ... on PerProfile {
+          headline {
+            twitterId
+            twitterHandle
+            displayName
+            avatar
+            title
+            description
+            profileId
+          }
+          isVerified
+        }
+      }
+    }
+  }
+}

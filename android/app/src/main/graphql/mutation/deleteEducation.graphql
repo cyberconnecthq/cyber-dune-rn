@@ -1,0 +1,5 @@
+mutation deleteEducation($input: ID!) {
+    deleteEducation(educationId: $input) {
+        status
+    }
+}

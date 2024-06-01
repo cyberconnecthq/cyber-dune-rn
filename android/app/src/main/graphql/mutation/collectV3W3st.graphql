@@ -1,0 +1,13 @@
+mutation collectV3W3st($eventId: ID!, $chainId: Int!) {
+  collectV3W3ST(eventId: $eventId, chainId: $chainId) {
+    status
+    gasLess
+    collector
+    cyberAccount
+    tokenId
+    data
+    collectId
+    chainId
+    sponsorSig
+  }
+}

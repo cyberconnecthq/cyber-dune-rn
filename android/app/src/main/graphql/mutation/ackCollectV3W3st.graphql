@@ -1,0 +1,5 @@
+mutation ackCollectV3W3st($ackRequest: AckCollectV3W3STRequest!) {
+    ackCollectV3W3ST(input: $ackRequest) {
+        status
+    }
+}

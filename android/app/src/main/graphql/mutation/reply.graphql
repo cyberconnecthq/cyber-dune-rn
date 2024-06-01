@@ -1,0 +1,6 @@
+mutation reply($postId: String!, $body: String!, $commentId: String!) {
+    publishReply(input: {body: $body, postId: $postId, commentId: $commentId}) {
+        status
+        contentId
+    }
+}

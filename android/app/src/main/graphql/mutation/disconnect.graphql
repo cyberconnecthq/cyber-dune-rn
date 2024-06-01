@@ -1,0 +1,5 @@
+mutation disconnect($profileId: String!) {
+    disconnect(input: {profileId: $profileId}) {
+        status
+    }
+}

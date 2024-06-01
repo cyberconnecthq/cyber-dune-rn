@@ -1,0 +1,10 @@
+query getProposalsInSpace($first: Int = 3, $spaceId: String) {
+  proposals(first: $first, where: {space: $spaceId}) {
+    id
+    title
+    body
+    start
+    end
+    state
+  }
+}

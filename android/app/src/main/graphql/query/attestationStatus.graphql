@@ -1,0 +1,14 @@
+query attestationStatus {
+  me {
+    status
+    message
+    data {
+      lightInfo {
+        attestation {
+          status
+          uid
+        }
+      }
+    }
+  }
+}

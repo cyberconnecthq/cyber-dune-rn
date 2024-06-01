@@ -1,0 +1,16 @@
+query followingOrgs($after: String) {
+  me {
+    status
+    message
+    data {
+      followings(first: 10, after: $after, type: ORGANIZATION) {
+        pageInfo {
+          ...PageInfo
+        }
+        list {
+          ...FollowingOrgs
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,18 @@
+query pendingDeposit {
+  me {
+    data {
+      creditHistories(first: 1, after: "", operation: DEPOSIT) {
+        list {
+          status
+          confirmed
+          time
+          chainId
+          txHash
+          value {
+            ...Price
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,11 @@
+query attestations($id: String!) {
+  getAttestation(where: {id: $id}) {
+    id
+    revoked
+    recipient
+    attester
+    decodedDataJson
+    timeCreated
+    refUID
+  }
+}

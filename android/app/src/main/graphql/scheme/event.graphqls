@@ -1,0 +1,447 @@
+type Event {
+  # ------ public fields ------
+  id: ID!
+  title: String!
+  language: Int!
+  tags: [String!]!
+  info: String!
+  recap: String!
+  posterUrl: Url!
+  startTimestamp: Timestamp!
+  endTimestamp: Timestamp!
+  createTimestamp: Timestamp!
+  status: EventStatus!
+  location: EventLocation!
+  timezone: String!
+  visibility: EventVisibility!
+  speakers: [EventSpeaker!]
+
+  organizer: Organization!
+
+  registrantsTokenHoldings: [TokenSummary!]
+  registrants(first: Int, after: String): UserPage!
+  registrantsCount: Int!
+
+  lightInfo: EventLightInfo!
+  w3st: W3ST
+  raffle: Raffle
+  """
+  current user status
+  """
+  registerStatus: EventRegisterStatus!
+  recapLikeInfo: RecapLikeInfo!
+  # ------ private fields ------
+  analysis: EventAnalysis @orgAdminOnly
+  w3stWhitelistPage(first: Int, after: String): W3STWhitelistPage @orgAdminOnly
+  w3stWhitelistCount: Int! @orgAdminOnly
+}
+
+type EventLightInfo {
+  hasRaffle: Boolean!
+  hasW3ST: Boolean!
+}
+
+enum EventStatus {
+  LIVE
+  DELETED
+  CANCELED
+  UPCOMING
+  ENDED
+}
+
+enum EventRegisterStatus {
+  NOT_REGISTERED
+  REGISTERED
+  ADDED_TO_CALENDAR
+}
+
+enum EventVisibility {
+  PUBLIC
+  FOLLOWERS
+  PRIVATE
+}
+
+type EventPage {
+  pageInfo: PageInfo!
+  list: [Event!]!
+}
+
+type DiscordServer {
+  server: String!
+  serverName: String!
+  channels: [DiscordChannel!]!
+  autoSync: Boolean!
+}
+
+enum DiscordChannel_Type {
+  VOICE_CHANNEL
+  STAGE_CHANNEL
+}
+
+type DiscordChannel {
+  channel: String!
+  channelName: String!
+  channelType: DiscordChannel_Type!
+}
+
+type DiscordServerPage {
+  pageInfo: PageInfo!
+  list: [DiscordServer!]!
+}
+
+type TwitterSpaceEvent {
+  link: Url!
+}
+
+type DiscordEvent {
+  server: String!
+  serverName: String!
+  channel: String!
+  channelName: String!
+  inviteLink: String!
+  autoSync: Boolean!
+}
+
+type OtherEvent {
+  link: Url!
+}
+
+union EventLocation = TwitterSpaceEvent | DiscordEvent | OtherEvent
+
+type EventAnalysis {
+  participants(first: Int, after: String): EventAudiencePage!
+  participantsCount: Int!
+  registrants(first: Int, after: String): EventAudiencePage!
+  registrantsCount: Int!
+  tokenHolders(first: Int, after: String): EventAudiencePage!
+  tokenHoldersCount: Int!
+  raffleWinners(first: Int, after: String): EventAudiencePage!
+  raffleWinnersCount: Int!
+  raffleParticipants(first: Int, after: String): EventAudiencePage!
+  raffleParticipantsCount: Int!
+}
+
+type EventAudiencePage {
+  pageInfo: PageInfo!
+  list: [EventAudience!]!
+}
+
+type EventAudience {
+  user: UserAnalysisInfo!
+  raffleClaimed: Boolean!
+  stayTime: Int!
+}
+
+type UserAnalysisInfo {
+  address: String!
+  profileId: ID!
+  avatar: String!
+  avatarFrameTokenId: ID
+  isKol: Boolean!
+  displayName: String!
+
+  twitter: TwitterUser
+  discord: DiscordUser
+}
+
+type TwitterUser {
+  twitterId: String!
+  twitterHandle: String!
+  displayName: String!
+  avatar: String!
+  followersCount: Int!
+}
+
+type DiscordUser {
+  discordId: String!
+  displayName: String!
+  discriminator: String!
+  avatar: String!
+  role: [String!]!
+}
+
+type TokenSummary {
+  type: ERCType!
+  contract: String!
+  collection: String!
+  logo: Url!
+  ownedCount: Int!
+  ownersCount: Int!
+}
+
+enum CheckSpaceUrlResponse_Status {
+  SUCCESS
+  INVALID_PARAMETER
+  SPACE_NOT_FOUND
+  LIVE_SPACE
+  ENDED_SPACE
+  INTERNAL_ERROR
+}
+
+type CheckSpaceUrlResponse {
+  status: CheckSpaceUrlResponse_Status!
+  valid: Boolean!
+  title: String!
+  startTimestamp: Timestamp!
+}
+
+input UpsertEventInput {
+  title: String!
+  info: String!
+  recap: String!
+  posterUrl: Url!
+  startTimestamp: Timestamp!
+  endTimestamp: Timestamp!
+  location: UpsertEventLocationInput!
+  speakers: [EventSpeakerInput!]
+  timezone: String!
+  language: Int!
+  tags: [String!]!
+  visibility: EventVisibility!
+}
+
+type EventSpeaker {
+  twitterId: String!
+  twitterHandle: String!
+  displayName: String!
+  avatar: Url!
+  avatarFrameTokenId: ID
+  isKol: Boolean!
+  title: String!
+  profileId: ID
+  twitterFollowers: Int!
+}
+
+input EventSpeakerInput {
+  twitterId: String
+  displayName: String!
+  avatar: Url!
+  title: String!
+  handle: String!
+  twitterFollowers: Int
+}
+
+input TwitterSpaceEventInput {
+  link: Url!
+}
+
+input DiscordEventInput {
+  server: String!
+  serverName: String!
+  channel: String!
+  channelName: String!
+  autoSync: Boolean!
+}
+
+input OtherEventInput {
+  link: Url!
+}
+
+input UpsertEventLocationInput {
+  twitterSpaceEvent: TwitterSpaceEventInput
+  discordEvent: DiscordEventInput
+  otherEvent: OtherEventInput
+}
+
+enum CreateEventResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  PERMISSION_DENIED
+  INVALID_PARAMETER
+  ORG_NOT_VERIFIED
+  INVALID_DURATION
+}
+
+type CreateEventResponse {
+  status: CreateEventResponse_Status!
+  eventId: String
+}
+
+enum UpdateEventResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  PERMISSION_DENIED
+  INVALID_PARAMETER
+  EVENT_NOT_FOUND
+  TRY_AGAIN_LATER
+  INVALID_DURATION
+  TOO_MANY_TAGS
+  INVALID_TAG_LENGTH
+}
+
+type UpdateEventResponse {
+  status: UpdateEventResponse_Status!
+}
+
+enum DeleteEventResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  PERMISSION_DENIED
+  EVENT_NOT_FOUND
+  CAN_NOT_DELETE
+}
+
+type DeleteEventResponse {
+  status: DeleteEventResponse_Status!
+}
+
+enum CancelEventResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  PERMISSION_DENIED
+  EVENT_NOT_FOUND
+  CAN_NOT_CANCEL
+}
+
+type CancelEventResponse {
+  status: CancelEventResponse_Status!
+}
+
+enum RegisterEventResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  INVALID_PARAMETER
+  EVENT_NOT_FOUND
+  ALREADY_REGISTERED
+}
+
+type RegisterEventResponse {
+  status: RegisterEventResponse_Status!
+}
+
+enum AddDiscordBotResponse_Status {
+  SUCCESS
+  GUILD_NOT_EXIST
+}
+
+type AddDiscordBotResponse {
+  status: AddDiscordBotResponse_Status!
+  message: String!
+}
+
+enum SendAddCalendarResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  EMAIL_NOT_LINKED
+  EVENT_NOT_FOUND
+  NOT_REGISTERED
+  ALREADY_EMAILED
+}
+
+type SendAddCalendarResponse {
+  status: SendAddCalendarResponse_Status!
+  message: String!
+}
+
+type RecapLikeInfo {
+  likedCount: Int!
+  isLiked: Boolean!
+}
+
+enum LikeRecapResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  INVALID_PARAMETER
+  EVENT_NOT_FOUND
+  RECAP_NOT_EXIST
+}
+
+type LikeRecapResponse {
+  status: LikeRecapResponse_Status!
+}
+
+enum UnLikeRecapResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  INVALID_PARAMETER
+}
+
+type UnLikeRecapResponse {
+  status: UnLikeRecapResponse_Status
+}
+
+enum TrendingEventsRequest_EventOrder {
+  REGISTER_COUNT_DESC
+  START_TIME_ASC
+  CREATE_TIME_DESC
+}
+
+enum EventType {
+  TWITTER_EVENT
+  DISCORD_EVENT
+  OTHER_EVENT
+}
+
+input TrendingEventsRequest_EventFilter {
+  languages: [Int!]
+  tags: [String!]
+  enableEssence: Boolean
+  enableRaffle: Boolean
+  eventType: [EventType!]
+}
+
+input ExploreEventsRequest {
+  type: ExploreEventsRequest_Type!
+  language: Int
+}
+
+enum ExploreEventsRequest_Type {
+  FEATURED
+  TODAY_UPCOMING
+  NOTABLE_SPEAKER
+  NEWLY_ADDED
+  RAFFLE
+  LANGUAGE
+}
+
+type CountExploreEventsResponse {
+  TwitterEventsCount: Int
+  DiscordEventsCount: Int
+  LanguageEventsCount: [String!]
+  TagEventsCount: [String!]
+  RaffleEventsCount: Int
+  W3STEventsCount: Int
+}
+
+type W3STWhitelistPage {
+  pageInfo: PageInfo!
+  list: [String!]!
+}
+
+enum AddW3STWhitelistResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  INVALID_PARAMETER
+  EVENT_NOT_FOUND
+  PERMISSION_DENIED
+}
+
+type AddW3STWhitelistResponse {
+  status: AddW3STWhitelistResponse_Status!
+  newlyAdded: Int!
+}
+
+extend type Query {
+  event(id: ID!): Event
+  exploreEvents(request: ExploreEventsRequest!): [Event!]!
+  countExploreEvents: CountExploreEventsResponse!
+  trendingEventTags: [String!]!
+  trendingEvents(first: Int, after: String, order: TrendingEventsRequest_EventOrder, filter: TrendingEventsRequest_EventFilter): EventPage!
+  pastEvents(first: Int, after: String, hasRecap: Boolean): EventPage!
+  discordServers(orgId: ID!, first: Int, after: String): DiscordServerPage!
+  checkSpaceUrl(spaceUrl: Url!): CheckSpaceUrlResponse!
+  featuredCybertrekEvents: [Event!]
+}
+
+extend type Mutation {
+  addDiscordBot(orgId: ID!, guildId: ID!): AddDiscordBotResponse!
+  createEvent(orgId: ID!, input: UpsertEventInput!): CreateEventResponse!
+  updateEvent(eventId: ID!, orgId: ID!, input: UpsertEventInput!): UpdateEventResponse!
+  deleteEvent(eventId: ID!, orgId: ID!): DeleteEventResponse!
+  cancelEvent(eventId: ID!, orgId: ID!): CancelEventResponse!
+  registerEvent(eventId: ID!): RegisterEventResponse!
+  sendAddCalendar(eventId: ID!): SendAddCalendarResponse!
+  likeRecap(eventId: ID!): LikeRecapResponse!
+  unLikeRecap(eventId: ID!): UnLikeRecapResponse!
+  addW3STWhitelist(eventId: ID!, file: Upload!): AddW3STWhitelistResponse!
+}

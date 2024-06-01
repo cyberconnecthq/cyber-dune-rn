@@ -1,0 +1,6 @@
+mutation follow($input: FollowRequest!) {
+    follow(input: $input) {
+        status
+        tsInServer
+    }
+}

@@ -1,0 +1,5 @@
+mutation removeSkillEndorsement($skillId: ID!) {
+    removeSkillEndorsement(skillId: $skillId) {
+        status
+    }
+}

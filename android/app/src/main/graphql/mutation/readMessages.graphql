@@ -1,0 +1,5 @@
+mutation readMessages($input: ReadMessagesInput!) {
+  readMessages(input: $input) {
+    status
+  }
+}

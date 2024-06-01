@@ -1,0 +1,8 @@
+mutation sendVerificationCodeToEmail($type: SendVerificationCodeToEmailRequest_Type!, $email: String!, $recaptchaToken: String!) {
+    sendVerificationCodeToEmail(
+        request: {type: $type, email: $email, recaptchaToken: $recaptchaToken}
+    ) {
+        status
+        message
+    }
+}

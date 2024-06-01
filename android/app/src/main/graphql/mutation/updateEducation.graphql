@@ -1,0 +1,5 @@
+mutation updateEducation($input: UpdateEducationInput!) {
+    updateEducation(input: $input) {
+        status
+    }
+}

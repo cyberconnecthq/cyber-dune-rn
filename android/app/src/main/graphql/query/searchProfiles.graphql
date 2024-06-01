@@ -1,0 +1,10 @@
+query searchProfiles($input: SearchProfilesInput!) {
+  searchProfiles(input: $input) {
+    profiles {
+      ...SearchPerProfile
+    }
+    orgProfiles {
+      ...SearchOrgProfile
+    }
+  }
+}

@@ -1,0 +1,7 @@
+mutation reserveMnemonicUsername($username: String!) {
+    reserveMnemonicUsername(username: $username) {
+        result
+        username
+        challenge
+    }
+}

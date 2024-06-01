@@ -1,0 +1,6 @@
+query headlineVerifyStatus($orgTwitterId: String!, $headlineType: HeadlineType!) {
+  easWhitelistVerifyStatus(twitterId: $orgTwitterId, headlineType: $headlineType) {
+    status
+    verifyStatus
+  }
+}

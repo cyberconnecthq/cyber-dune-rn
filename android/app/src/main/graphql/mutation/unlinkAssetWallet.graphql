@@ -1,0 +1,5 @@
+mutation unlinkAssetWallet($address: String!) {
+    unlinkAssetWallet(address: $address) {
+        status
+    }
+}

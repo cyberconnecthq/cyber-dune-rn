@@ -1,0 +1,10 @@
+query organizaitonConnections($after: String) {
+  organization: featuredProfiles(filter: ORGANIZATION, first: 50, after: $after) {
+    list {
+      ...ConnectionOrgProfile
+    }
+    pageInfo {
+      ...PageInfo
+    }
+  }
+}

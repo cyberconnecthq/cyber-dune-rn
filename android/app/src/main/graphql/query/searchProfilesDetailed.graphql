@@ -1,0 +1,16 @@
+query searchProfilesDetailed($input: SearchProfilesInput!) {
+  searchProfiles(input: $input) {
+    profiles {
+      ...SearchPerProfileDetailed
+    }
+    orgProfiles {
+      ...SearchOrgProfileDetailed
+    }
+    pageInfo {
+      startCursor
+      endCursor
+      hasNextPage
+      hasPreviousPage
+    }
+  }
+}

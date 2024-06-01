@@ -29,5 +29,28 @@
       </intent-filter>
     </activity>
     <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" android:exported="false"/>
+    <activity
+        android:name=".ui.CyberDuneLoginActivity"
+        android:exported="true">
+<!--      <intent-filter>-->
+<!--        <action android:name="android.intent.action.MAIN" />-->
+
+<!--        <category android:name="android.intent.category.LAUNCHER" />-->
+<!--      </intent-filter>-->
+      <intent-filter>
+        <action android:name="com.cyberconnect.link3.PASSKEY" />
+
+        <category android:name="android.intent.category.DEFAULT" />
+      </intent-filter>
+    </activity>
+    <activity android:name=".ui.MyReactActivity"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+      <activity android:name=".ui.CyberAccountActivity"/>
+      <activity android:name=".ui.ReceiveActivity"/>
+      <activity android:name=".ui.SendActivity"/>
+    <activity
+      android:name="com.journeyapps.barcodescanner.CaptureActivity"
+      android:screenOrientation="fullSensor"
+      tools:replace="screenOrientation" />
   </application>
 </manifest>

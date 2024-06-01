@@ -1,0 +1,17 @@
+query getPostStatus($postId: String!) {
+  post(id: $postId) {
+    commentVisible
+    commentCount
+    likeCount
+    dislikeCount
+    essence {
+      totalSupply
+      totalCollected
+      userBalance
+    }
+    likedStatus {
+      liked
+      disliked
+    }
+  }
+}

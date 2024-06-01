@@ -1,0 +1,5 @@
+mutation createSkill($input: CreateSkillInput!) {
+    createSkill(input: $input) {
+        status
+    }
+}

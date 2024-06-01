@@ -1,0 +1,5 @@
+mutation deleteRecommendation($profileId: ID!) {
+    deleteRecommendation(profileId: $profileId) {
+        status
+    }
+}

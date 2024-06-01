@@ -1,0 +1,6 @@
+mutation deleteBlock($id: ID!) {
+    deleteBlock(id: $id) {
+        status
+        message
+    }
+}

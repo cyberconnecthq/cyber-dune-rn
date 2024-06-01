@@ -1,0 +1,116 @@
+query header {
+  me {
+    status
+    message
+    data {
+      id
+      totalEarned {
+        value
+        decimal
+        currency
+      }
+      profile {
+        ... on PerProfile {
+          id
+          handle
+          displayName {
+            type
+          }
+          headline {
+            avatar
+            title
+            displayName
+            twitterHandle
+            twitterId
+            headlineType
+            followersCount
+          }
+          isVerified
+          identities {
+            headline {
+              avatar
+              title
+              displayName
+              twitterHandle
+              twitterId
+              headlineType
+              followersCount
+            }
+            attestation {
+              uid
+              status
+              type
+            }
+          }
+          blocks {
+            type
+            isPlaceHolder
+          }
+        }
+      }
+      lightInfo {
+        avatar
+        formattedAddress
+        displayName
+        handle
+        avatarFrameTokenId
+        attestation {
+          uid
+          status
+          type
+        }
+      }
+      privateInfo {
+        address
+        discordId
+        twitterId
+        twitterAuthorized
+        accessToken
+        email
+        v3SdkToken
+        linkedinId
+        githubId
+      }
+      v3Info {
+        cyberAccount
+        credits {
+          balance
+          decimals
+          pending
+          locked
+        }
+      }
+      cyberIds {
+        tokenId
+        handle
+        isPrimary
+      }
+      turnkeyUserInfo {
+        subOrgId
+        turnkeyUserId
+        username
+      }
+      chatUser {
+        creditBalance {
+          value
+          decimal
+          currency
+        }
+      }
+      dmCreditAccount {
+        balance {
+          ...Price
+        }
+        nonWithdrawableBalance {
+          ...Price
+        }
+        withdrawableBalance {
+          ...Price
+        }
+      }
+      pointAccount {
+        totalPoints
+      }
+    }
+  }
+}

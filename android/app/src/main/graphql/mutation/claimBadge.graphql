@@ -1,0 +1,11 @@
+mutation claimBadge($eventId: ID!, $chainId: Int!) {
+  collectW3ST(eventId: $eventId, chainId: $chainId) {
+    status
+    gasLess
+    collector
+    profileId
+    essenceId
+    preData
+    collectId
+  }
+}

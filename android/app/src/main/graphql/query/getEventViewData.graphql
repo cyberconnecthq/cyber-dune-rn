@@ -1,0 +1,77 @@
+
+query getEventViewData($id: ID!) {
+  event(id: $id) {
+    __typename
+    id
+    title
+    info
+    recap
+    posterUrl
+    startTimestamp
+    endTimestamp
+    timezone
+    registerStatus
+    status
+    speakers {
+      ...Speaker
+    }
+    organizer {
+      twitterId
+      id
+      followersCount
+      verification
+      currentAccess
+      lightInfo {
+        profileHandle
+        isFollowing
+        displayName
+        profilePicture
+      }
+      profile {
+        id
+      }
+    }
+    w3st {
+      ...W3stOnEventViewPage
+    }
+    registrantsCount
+    registrants(first: 7) {
+      pageInfo {
+        ...PageInfo
+      }
+      list {
+        lightInfo {
+          handle
+          avatar
+          avatarFrameTokenId
+          displayName
+          formattedAddress
+        }
+      }
+    }
+    raffle {
+      ...Raffle
+    }
+    location {
+      __typename
+      ...TwitterSpaceEvent
+      ...DiscordEvent
+      ... on DiscordEvent {
+        inviteLink
+      }
+      ...OtherEvent
+    }
+    tags
+    language
+    recapLikeInfo {
+      likedCount
+      isLiked
+    }
+    registrantsTokenHoldings {
+      collection
+      logo
+      ownedCount
+      ownersCount
+    }
+  }
+}

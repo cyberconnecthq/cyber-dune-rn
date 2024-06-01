@@ -1,0 +1,9 @@
+mutation registerFreePersonalProfile {
+    registerProfile(type: PERSONAL, eligibility: {type: WHITE_LIST}) {
+        status
+        message
+        data {
+            handle
+        }
+    }
+}

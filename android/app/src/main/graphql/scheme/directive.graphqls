@@ -1,0 +1,2 @@
+directive @admin on FIELD_DEFINITION
+directive @orgAdminOnly on FIELD_DEFINITION

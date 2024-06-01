@@ -1,0 +1,24 @@
+query searchOrgs($text: String, $after: String, $first: Int = 50) {
+  organizations(after: $after, displayNameFilter: $text, first: $first) {
+    pageInfo {
+      startCursor
+      endCursor
+      hasNextPage
+      hasPreviousPage
+    }
+    list {
+      profile {
+        id
+      }
+      followersCount
+      lightInfo {
+        profilePicture
+        displayName
+        isFollowing
+        profileHandle
+      }
+    }
+    totalCount
+  }
+}
+    

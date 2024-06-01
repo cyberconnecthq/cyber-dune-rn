@@ -1,0 +1,25 @@
+query points {
+  me {
+    status
+    message
+    data {
+      pointAccount {
+        completedTasksCount
+        totalPoints
+      }
+      pointTasks {
+        ...PointTask
+      }
+    }
+  }
+}
+
+fragment PointTask on PointTask {
+  id
+  name
+  phase
+  points
+  status
+  taskType
+  subtitle
+}

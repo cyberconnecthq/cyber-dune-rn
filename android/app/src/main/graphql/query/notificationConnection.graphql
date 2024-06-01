@@ -1,0 +1,33 @@
+query notificationConnection($after: String) {
+  me {
+    data {
+      notifications(first: 50, after: $after) {
+        list {
+          ...ConnectionNotification
+        }
+        pageInfo {
+          ...PageInfo
+        }
+      }
+    }
+  }
+}
+
+fragment ConnectionNotification on ConnectionNotification {
+  __typename
+  hasRead
+  id
+  timestamp
+  type
+  status
+  from {
+    lightInfo {
+      avatar
+      displayName
+      handle
+      profileId
+    }
+
+  }
+}
+

@@ -1,0 +1,57 @@
+query getPostComment($postId: String!, $first: Int = 30, $after: String) {
+  post(id: $postId) {
+    comments(first: $first, after: $after) {
+      pageInfo {
+        startCursor
+        endCursor
+        hasNextPage
+        hasPreviousPage
+      }
+      list {
+        id
+        author {
+          lightInfo {
+            handle
+            avatar
+            avatarFrameTokenId
+            displayName
+            formattedAddress
+          }
+        }
+        trendingComments {
+          list {
+            id
+            body
+            likedStatus {
+              liked
+            }
+            likeCount
+            commentCount
+            publishedAt
+            author {
+              lightInfo {
+                handle
+                avatar
+                displayName
+                formattedAddress
+              }
+            }
+          }
+        }
+        body
+        likedStatus {
+          liked
+        }
+        likeCount
+        commentCount
+        publishedAt
+      }
+    }
+  }
+}
+
+query getPostCommentCount($postId: String!) {
+  post(id: $postId) {
+    commentCount
+  }
+}

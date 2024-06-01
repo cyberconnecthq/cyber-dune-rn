@@ -1,0 +1,6 @@
+mutation updateBlock($id: ID!, $input: UpdateBlockInput!) {
+    updateBlock(id: $id, input: $input) {
+        status
+        message
+    }
+}

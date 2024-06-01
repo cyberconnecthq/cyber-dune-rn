@@ -1,0 +1,7 @@
+mutation linkAssetWallet($address: EVMAddress!, $nonce: String!, $token: String!, $signature: String!) {
+    linkAssetWallet(
+        input: {address: $address, nonce: $nonce, token: $token, signature: $signature}
+    ) {
+        status
+    }
+}

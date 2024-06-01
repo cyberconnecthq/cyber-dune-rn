@@ -1,0 +1,5 @@
+mutation cancelLikeComment($commentId: String!) {
+    cancelLikeComment(input: {commentId: $commentId}) {
+        status
+    }
+}

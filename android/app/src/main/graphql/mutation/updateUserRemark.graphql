@@ -1,0 +1,5 @@
+mutation updateUserRemark($input: UpdateUserRemarkRequestInput!) {
+    updateUserRemark(input: $input) {
+        status
+    }
+}

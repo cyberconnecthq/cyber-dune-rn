@@ -1,0 +1,6 @@
+mutation updatePersonal($id: ID!, $input: UpdatePersonalInput!) {
+  updatePersonal(id: $id, input: $input) {
+    status
+    message
+  }
+}
