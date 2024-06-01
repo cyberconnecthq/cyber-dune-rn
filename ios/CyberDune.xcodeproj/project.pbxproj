@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		007336A52C0B19820072FD53 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 007336A42C0B19820072FD53 /* WidgetKit.framework */; };
+		007336A72C0B19820072FD53 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 007336A62C0B19820072FD53 /* SwiftUI.framework */; };
+		007336AA2C0B19820072FD53 /* CyberDuneWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007336A92C0B19820072FD53 /* CyberDuneWidgetBundle.swift */; };
+		007336AC2C0B19820072FD53 /* CyberDuneWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007336AB2C0B19820072FD53 /* CyberDuneWidget.swift */; };
+		007336AE2C0B19830072FD53 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 007336AD2C0B19830072FD53 /* Assets.xcassets */; };
+		007336B22C0B19830072FD53 /* CyberDuneWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 007336A32C0B19820072FD53 /* CyberDuneWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		007336B82C0B1FAE0072FD53 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007336B72C0B1FAE0072FD53 /* Extensions.swift */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
@@ -17,7 +24,39 @@
 		BEBF9403841C41128F9B153A /* noop-file.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7000A6EF2BB44FB78AFDC86D /* noop-file.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		007336B02C0B19830072FD53 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 007336A22C0B19820072FD53;
+			remoteInfo = CyberDuneWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		007336B32C0B19830072FD53 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				007336B22C0B19830072FD53 /* CyberDuneWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		007336A32C0B19820072FD53 /* CyberDuneWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CyberDuneWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		007336A42C0B19820072FD53 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		007336A62C0B19820072FD53 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		007336A92C0B19820072FD53 /* CyberDuneWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CyberDuneWidgetBundle.swift; sourceTree = "<group>"; };
+		007336AB2C0B19820072FD53 /* CyberDuneWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CyberDuneWidget.swift; sourceTree = "<group>"; };
+		007336AD2C0B19830072FD53 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		007336AF2C0B19830072FD53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		007336B72C0B1FAE0072FD53 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* CyberDune.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CyberDune.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = CyberDune/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = CyberDune/AppDelegate.mm; sourceTree = "<group>"; };
@@ -36,6 +75,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		007336A02C0B19820072FD53 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				007336A72C0B19820072FD53 /* SwiftUI.framework in Frameworks */,
+				007336A52C0B19820072FD53 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		13B07F8C1A680F5B00A75B9A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -47,6 +95,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		007336A82C0B19820072FD53 /* CyberDuneWidget */ = {
+			isa = PBXGroup;
+			children = (
+				007336A92C0B19820072FD53 /* CyberDuneWidgetBundle.swift */,
+				007336AB2C0B19820072FD53 /* CyberDuneWidget.swift */,
+				007336B72C0B1FAE0072FD53 /* Extensions.swift */,
+				007336AD2C0B19830072FD53 /* Assets.xcassets */,
+				007336AF2C0B19830072FD53 /* Info.plist */,
+			);
+			path = CyberDuneWidget;
+			sourceTree = "<group>";
+		};
 		13B07FAE1A68108700A75B9A /* CyberDune */ = {
 			isa = PBXGroup;
 			children = (
@@ -68,6 +128,8 @@
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				58EEBF8E8E6FB1BC6CAF49B5 /* libPods-CyberDune.a */,
+				007336A42C0B19820072FD53 /* WidgetKit.framework */,
+				007336A62C0B19820072FD53 /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -84,6 +146,7 @@
 			children = (
 				13B07FAE1A68108700A75B9A /* CyberDune */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
+				007336A82C0B19820072FD53 /* CyberDuneWidget */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				D65327D7A22EEC0BE12398D9 /* Pods */,
@@ -98,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				13B07F961A680F5B00A75B9A /* CyberDune.app */,
+				007336A32C0B19820072FD53 /* CyberDuneWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -139,6 +203,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		007336A22C0B19820072FD53 /* CyberDuneWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 007336B62C0B19830072FD53 /* Build configuration list for PBXNativeTarget "CyberDuneWidgetExtension" */;
+			buildPhases = (
+				0073369F2C0B19820072FD53 /* Sources */,
+				007336A02C0B19820072FD53 /* Frameworks */,
+				007336A12C0B19820072FD53 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CyberDuneWidgetExtension;
+			productName = CyberDuneWidgetExtension;
+			productReference = 007336A32C0B19820072FD53 /* CyberDuneWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		13B07F861A680F5B00A75B9A /* CyberDune */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "CyberDune" */;
@@ -151,10 +232,12 @@
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				800E24972A6A228C8D4807E9 /* [CP] Copy Pods Resources */,
 				5E1F34CA8E3F721CDD567D20 /* [CP] Embed Pods Frameworks */,
+				007336B32C0B19830072FD53 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				007336B12C0B19830072FD53 /* PBXTargetDependency */,
 			);
 			name = CyberDune;
 			productName = CyberDune;
@@ -167,8 +250,12 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 1500;
 				LastUpgradeCheck = 1130;
 				TargetAttributes = {
+					007336A22C0B19820072FD53 = {
+						CreatedOnToolsVersion = 15.0;
+					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = Z3RAQJK6F2;
 						LastSwiftMigration = 1250;
@@ -190,11 +277,20 @@
 			projectRoot = "";
 			targets = (
 				13B07F861A680F5B00A75B9A /* CyberDune */,
+				007336A22C0B19820072FD53 /* CyberDuneWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		007336A12C0B19820072FD53 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				007336AE2C0B19830072FD53 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		13B07F8E1A680F5B00A75B9A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -313,10 +409,20 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		0073369F2C0B19820072FD53 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				007336AA2C0B19820072FD53 /* CyberDuneWidgetBundle.swift in Sources */,
+				007336AC2C0B19820072FD53 /* CyberDuneWidget.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		13B07F871A680F5B00A75B9A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				007336B82C0B1FAE0072FD53 /* Extensions.swift in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 				B18059E884C0ABDD17F3DC3D /* ExpoModulesProvider.swift in Sources */,
@@ -326,11 +432,109 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		007336B12C0B19830072FD53 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 007336A22C0B19820072FD53 /* CyberDuneWidgetExtension */;
+			targetProxy = 007336B02C0B19830072FD53 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		007336B42C0B19830072FD53 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = Z3RAQJK6F2;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CyberDuneWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = CyberDuneWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cc.link3.CyberDuneWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		007336B52C0B19830072FD53 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = Z3RAQJK6F2;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CyberDuneWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = CyberDuneWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cc.link3.CyberDuneWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6C2E3173556A471DD304B334 /* Pods-CyberDune.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = CyberDune/CyberDune.entitlements;
@@ -370,6 +574,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7A4D352CD337FB3A3BF06240 /* Pods-CyberDune.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = CyberDune/CyberDune.entitlements;
@@ -527,6 +732,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		007336B62C0B19830072FD53 /* Build configuration list for PBXNativeTarget "CyberDuneWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				007336B42C0B19830072FD53 /* Debug */,
+				007336B52C0B19830072FD53 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "CyberDune" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
