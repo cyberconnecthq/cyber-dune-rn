@@ -1,0 +1,43 @@
+query getTrendingPosts($after: String, $filter: TrendingPostsRequest_PostFilter, $first: Int = 20) {
+  trendingPosts(after: $after, filter: $filter, first: $first) {
+    list {
+      id
+      title
+      cover
+      description
+      viewCount
+      publishedAt
+      likeCount
+      readTime
+      essence {
+        totalCollected
+        totalSupply
+      }
+      likedStatus {
+        liked
+      }
+      profile {
+        ...ProfileInTrending
+      }
+    }
+    pageInfo {
+      startCursor
+      endCursor
+      hasNextPage
+      hasPreviousPage
+    }
+  }
+}
+
+fragment ProfileInTrending on Profile {
+  ...UnionBaseProfile
+  ... on PerProfile {
+    isFollowing
+  }
+  ... on OrgProfile {
+    isFollowing
+    organization {
+      verification
+    }
+  }
+}

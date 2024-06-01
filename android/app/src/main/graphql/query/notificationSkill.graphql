@@ -1,0 +1,37 @@
+query notificationSkill($after: String) {
+  me {
+    data {
+      notifications(first: 50, after: $after) {
+        list {
+          ...Skill
+        }
+        pageInfo {
+          ...PageInfo
+        }
+      }
+    }
+  }
+}
+
+fragment Skill on SkillEndorsementNotification {
+  __typename
+  hasRead
+  id
+  timestamp
+  type
+  content {
+    endorsed
+    endorserCount
+    id
+    name
+  }
+  from {
+    lightInfo {
+      avatar
+      displayName
+      handle
+      profileId
+    }
+  }
+}
+

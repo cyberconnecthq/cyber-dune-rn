@@ -1,0 +1,10 @@
+query getTwitterInfoByHandle($twitterHandle: String!) {
+  getTwitterInfoByHandle(twitterHandle: $twitterHandle) {
+    avatar
+    displayName
+    followersCount
+    status
+    twitterHandle
+    twitterId
+  }
+}

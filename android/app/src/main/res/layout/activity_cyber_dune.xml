@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+   >
+
+    <com.cyberconnect.link3.ui.LoadingButton
+        android:id="@+id/passkey_create"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/edit_height"
+        android:background="@drawable/action_button_bg"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="@dimen/page_general_padding"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="@dimen/page_general_padding"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/passkey_login"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:button_text="@string/passkey_create"
+        app:text_color="@color/action_button_text_color"
+        app:text_size="@dimen/text_primary_size"
+        app:text_bold="true"
+        />
+
+    <com.cyberconnect.link3.ui.LoadingButton
+        android:id="@+id/passkey_login"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/edit_height"
+        android:background="@drawable/action_button_bg"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="@dimen/page_general_padding"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="@dimen/page_general_padding"
+        app:layout_constraintTop_toBottomOf="@id/passkey_create"
+        android:layout_marginTop="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:button_text="@string/passkey_login"
+        app:text_color="@color/action_button_text_color"
+        app:text_size="@dimen/text_primary_size"
+        app:text_bold="true"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

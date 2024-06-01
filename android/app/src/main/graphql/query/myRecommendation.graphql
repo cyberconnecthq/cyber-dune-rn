@@ -1,0 +1,62 @@
+query myRecommendation {
+  me {
+    data {
+      myRecommendations {
+        received {
+          hidden
+          content
+          user {
+            id
+            lightInfo {
+              handle
+              avatar
+              displayName
+              formattedAddress
+            }
+            profile {
+              id
+              ... on PerProfile {
+                headline {
+                  twitterId
+                  twitterHandle
+                  displayName
+                  avatar
+                  title
+                  profileId
+                }
+                isVerified
+              }
+            }
+          }
+        }
+        given {
+          hidden
+          content
+          user {
+            id
+            lightInfo {
+              handle
+              avatar
+              displayName
+              formattedAddress
+            }
+            profile {
+              id
+              ... on PerProfile {
+                headline {
+                  twitterId
+                  twitterHandle
+                  displayName
+                  avatar
+                  title
+                  profileId
+                }
+                isVerified
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

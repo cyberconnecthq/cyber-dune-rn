@@ -1,0 +1,17 @@
+query getExplorePosts($input: ExplorePostsRequest!) {
+  explorePosts(input: $input) {
+    id
+    title
+    cover
+    description
+    viewCount
+    publishedAt
+    likeCount
+    likedStatus {
+      liked
+    }
+    profile {
+      ...ProfileInTrending
+    }
+  }
+}

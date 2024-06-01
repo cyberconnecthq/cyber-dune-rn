@@ -1,0 +1,10 @@
+query recentVerifiedProfiles($after: String) {
+  recentVerifiedProfiles(first: 20, after: $after) {
+    list {
+      ...ConnectionPersonalProfile
+    }
+    pageInfo {
+      ...PageInfo
+    }
+  }
+}

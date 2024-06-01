@@ -1,0 +1,5 @@
+mutation claimEas {
+  ClaimEasAttestation {
+    Status
+  }
+}

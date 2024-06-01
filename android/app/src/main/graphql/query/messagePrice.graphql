@@ -1,0 +1,14 @@
+query messagePrice($id: ID!) {
+  me {
+    data {
+      chat(id: $id) {
+        price {
+          price {
+            ...Price
+          }
+          priceStatus
+        }
+      }
+    }
+  }
+}

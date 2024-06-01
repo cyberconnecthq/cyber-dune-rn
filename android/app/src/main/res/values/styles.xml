@@ -14,4 +14,29 @@
   <style name="Theme.App.SplashScreen" parent="AppTheme">
     <item name="android:windowBackground">@drawable/splashscreen</item>
   </style>
+  <declare-styleable name="link3_style">
+    <attr name="date_time_color" format="color|reference"/>
+    <attr name="tab_text_color" format="color|reference"/>
+  </declare-styleable>
+  <declare-styleable name="loadingButton">
+    <attr name="button_text" format="string"/>
+    <attr name="text_size" format="dimension"/>
+    <attr name="text_color" format="color|reference"/>
+    <attr name="text_bold" format="boolean"/>
+    <attr name="icon_location_start" format="boolean"/>
+    <attr name="text_icon" format="reference"/>
+  </declare-styleable>
+  <declare-styleable name="question_mark">
+    <attr name="hint" format="string"/>
+  </declare-styleable>
+  <declare-styleable name="profile_view">
+    <attr name="title_width_percentage" format="float"/>
+  </declare-styleable>
+  <declare-styleable name="multi_avatar_view">
+    <attr name="avatar_size" format="dimension"/>
+  </declare-styleable>
+  <declare-styleable name="name_card">
+    <attr name="edit_mode" format="boolean"/>
+    <attr name="show_last_line_number" format="boolean"/>
+  </declare-styleable>
 </resources>

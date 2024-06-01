@@ -1,0 +1,32 @@
+query getCyberAccountInfo {
+  me {
+    data {
+      v3Info {
+        cyberAccount
+        credits {
+          decimals
+          balance
+          pending
+          locked
+        }
+      }
+      totalEarned {
+        ...Price
+      }
+      dmCreditAccount {
+        balance {
+          ...Price
+        }
+        nonWithdrawableBalance {
+          ...Price
+        }
+        withdrawableBalance {
+          ...Price
+        }
+      }
+      pointAccount {
+        totalPoints
+      }
+    }
+  }
+}

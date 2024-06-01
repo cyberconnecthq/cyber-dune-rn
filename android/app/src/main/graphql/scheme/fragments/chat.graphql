@@ -1,0 +1,103 @@
+fragment PerMessage on Message {
+    content
+    id
+    msgType
+    paid {
+        earnValue {
+            ...Price
+        }
+        status
+        value {
+            ...Price
+        }
+        refundAt
+    }
+    sender {
+        lightInfo {
+            displayName
+            handle
+            avatar
+        }
+    }
+    chatUser {
+        lightInfo {
+            displayName
+            handle
+            avatar
+        }
+    }
+    msgTime
+    replyToEarn
+    status
+}
+
+fragment Price on TokenValue {
+    currency
+    decimal
+    value
+}
+
+fragment TargetUserInfo on User {
+    id
+    lightInfo {
+        handle
+        avatar
+        displayName
+        formattedAddress
+        attestation {
+            uid
+        }
+        remark
+    }
+    profile {
+        ...TargetUserProfile
+    }
+}
+
+fragment TargetUserProfile on PerProfile {
+    id
+    connectStatus
+    reputation {
+        total
+    }
+    mutualConnectionCount
+    mutualConnections(first: 3, after: "") {
+        list {
+            ... on PerProfile {
+                __typename
+                profilePicture {
+                    picture
+                }
+            }
+        }
+    }
+    isVerified
+    headline {
+        twitterId
+        twitterHandle
+        displayName
+        avatar
+        title
+        description
+        profileId
+        headlineType
+    }
+}
+
+fragment CreditHistoryRow on CreditHistory {
+    chatUser {
+        lightInfo {
+            avatar
+            displayName
+            profileId
+        }
+    }
+    confirmed
+    operation
+    status
+    source
+    value {
+        ...Price
+    }
+    time
+}

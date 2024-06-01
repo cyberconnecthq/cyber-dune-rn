@@ -1,0 +1,28 @@
+"""
+The `EVMAddress` custom scalar type represents EVM-based address format.
+"""
+scalar EVMAddress
+"""
+The `DateTime` custom scalar type represents date and time as the ISO Date string, e.g. 2020-04-23T20:15:44Z
+"""
+scalar DateTime
+"""
+The `Timestamp` custom scalar type represents 10-digit timestamp, e.g. 1661325789
+"""
+scalar Timestamp
+"""
+The `Url` custom scalar type represents URL links.
+"""
+scalar Url
+
+scalar Upload
+
+type PageInfo {
+  startCursor: String!
+  endCursor: String!
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+}
+
+type Query {}
+type Mutation {}

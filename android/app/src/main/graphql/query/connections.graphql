@@ -1,0 +1,34 @@
+query connections {
+  organization: featuredProfiles(filter: ORGANIZATION, first: 12) {
+    list {
+      ...ConnectionOrgProfile
+    }
+  }
+  topProfiles: featuredProfiles(filter: PERSONAL, first: 12) {
+    list {
+      ...ConnectionPersonalProfile
+    }
+  }
+  me {
+    data {
+      schoolmatesProfiles {
+        orgList {
+          avatar
+          name
+        }
+        profile {
+          ...ConnectionPersonalProfile
+        }
+      }
+      similarWorkExperiencesProfiles {
+        orgList {
+          avatar
+          name
+        }
+        profile {
+          ...ConnectionPersonalProfile
+        }
+      }
+    }
+  }
+}

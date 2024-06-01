@@ -1,0 +1,30 @@
+query getTrendingEvents(
+  $first: Int
+  $after: String
+  $order: TrendingEventsRequest_EventOrder
+  $filter: TrendingEventsRequest_EventFilter
+) {
+  trendingEvents(first: $first, after: $after, order: $order, filter: $filter) {
+    pageInfo {
+      ...PageInfo
+    }
+    list {
+      id
+      info
+      title
+      posterUrl
+      startTimestamp
+      endTimestamp
+      registrantsCount
+      registerStatus
+      status
+      organizer {
+        ...Organizer
+      }
+      lightInfo {
+        hasRaffle
+        hasW3ST
+      }
+    }
+  }
+}

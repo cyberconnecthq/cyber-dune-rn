@@ -1,0 +1,211 @@
+fragment Speaker on EventSpeaker {
+  twitterId
+  twitterHandle
+  displayName
+  avatar
+  title
+  profileId
+  twitterFollowers
+  avatarFrameTokenId
+}
+
+fragment Organizer on Organization {
+  twitterId
+  id
+  followersCount
+  verification
+  currentAccess
+  lightInfo {
+    isFollowing
+    displayName
+    profilePicture
+    profileHandle
+  }
+}
+
+fragment W3stOnEventViewPage on W3ST {
+  version
+  gasless
+  imageUrl
+  contractInfo {
+    deployStatus
+    chainId
+    essenceAddress
+    tokenHoldersCount
+  }
+  v3contractInfo {
+    deployStatus
+    chainId
+    w3stAddress
+    tokenHoldersCount
+    cyberAccount
+    tokenId
+  }
+  requirements {
+    type
+    value
+  }
+}
+
+fragment OrganizerForV3EventCard on Organization {
+  verification
+  lightInfo {
+    displayName
+    profilePicture
+    profileHandle
+  }
+}
+
+fragment W3STRequirement on W3STRequirement {
+  type
+  value
+}
+
+fragment W3stWithoutEligible on W3ST {
+  gasless
+  imageUrl
+  contractInfo {
+    deployStatus
+    profileAddress
+    chainId
+    essenceAddress
+    essenceId
+    tokenHoldersCount
+    profileId
+    # tokenHolders is removed from W3ST
+  }
+  requirements {
+    type
+    value
+  }
+}
+
+fragment EventAudiencePage on EventAudiencePage {
+  pageInfo {
+    startCursor
+    endCursor
+    hasNextPage
+    hasPreviousPage
+  }
+  list {
+    stayTime
+    raffleClaimed
+    user {
+      address
+      profileId
+      avatar
+      displayName
+      avatarFrameTokenId
+      isKol
+      discord {
+        discordId
+        discriminator
+        displayName
+        avatar
+        role
+      }
+      twitter {
+        twitterId
+        twitterHandle
+        displayName
+        avatar
+        followersCount
+      }
+    }
+  }
+}
+
+fragment TokenAward on TokenAward {
+  chainId
+  tokenIcon
+  symbol
+  contractAddress
+  amount
+}
+
+fragment CodeAward on CodeAward {
+  code
+  description
+}
+
+fragment Raffle on Raffle {
+  awards {
+    ...TokenAward
+    ...CodeAward
+  }
+  tweetUrl
+  joinStatus {
+    status
+    myAward
+  }
+  winnersCount
+  joinedCount
+  claimDeadline
+  participateDeadline
+  requirement {
+    retweet
+    follow
+    comment
+    likeAndRetweet
+    tag
+    multiFollow
+    whitelist
+    attend
+    twittersToFollow {
+      twitterId
+      twitterHandle
+    }
+  }
+}
+
+fragment TwitterSpaceEvent on TwitterSpaceEvent {
+  link
+}
+
+fragment DiscordEvent on DiscordEvent {
+  server
+  serverName
+  channel
+  channelName
+  autoSync
+}
+
+fragment OtherEvent on OtherEvent {
+  link
+}
+
+fragment EventCardWithPoster on Event {
+  id
+  title
+  posterUrl
+  startTimestamp
+  endTimestamp
+  registerStatus
+  registrantsCount
+  status
+  organizer {
+    verification
+    lightInfo {
+      displayName
+      profilePicture
+      profileHandle
+    }
+  }
+  lightInfo {
+    hasRaffle
+    hasW3ST
+  }
+}
+
+fragment MyEventCard on Event {
+  id
+  info
+  title
+  posterUrl
+  startTimestamp
+  endTimestamp
+  status
+  organizer {
+    ...Organizer
+  }
+}

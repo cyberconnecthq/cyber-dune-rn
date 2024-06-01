@@ -1,0 +1,15 @@
+query searchConnections($query: String!, $after: String, $connectStatus: ConnectStatus!) {
+  SearchConnections(
+    query: $query
+    after: $after
+    first: 20
+    connectStatus: $connectStatus
+  ) {
+    pageInfo {
+      ...PageInfo
+    }
+    list {
+      ...MyConnectionItem
+    }
+  }
+}

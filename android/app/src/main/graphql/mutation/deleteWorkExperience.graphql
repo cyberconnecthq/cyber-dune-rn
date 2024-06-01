@@ -1,0 +1,5 @@
+mutation deleteWorkExperience($input: ID!) {
+    deleteWorkExperience(workExperienceId: $input) {
+        status
+    }
+}

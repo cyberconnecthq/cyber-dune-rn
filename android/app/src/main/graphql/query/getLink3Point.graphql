@@ -1,0 +1,9 @@
+query getLink3Point {
+  me {
+    data {
+      pointAccount {
+        totalPoints
+      }
+    }
+  }
+}

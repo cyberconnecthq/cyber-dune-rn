@@ -1,0 +1,30 @@
+query getFollowingOrgsEvents($first: Int, $after: String) {
+  me {
+    data {
+      followingOrgsEvents(first: $first, after: $after) {
+        pageInfo {
+          ...PageInfo
+        }
+        list {
+          id
+          info
+          title
+          posterUrl
+          startTimestamp
+          endTimestamp
+          registrantsCount
+          registerStatus
+          status
+          organizer {
+            ...Organizer
+          }
+
+          lightInfo {
+            hasRaffle
+            hasW3ST
+          }
+        }
+      }
+    }
+  }
+}

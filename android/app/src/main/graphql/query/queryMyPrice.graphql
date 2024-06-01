@@ -1,0 +1,12 @@
+query myPrice {
+  me {
+    data {
+      price {
+        priceStatus
+        price {
+          ...Price
+        }
+      }
+    }
+  }
+}

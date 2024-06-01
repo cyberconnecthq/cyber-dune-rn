@@ -1,0 +1,5 @@
+mutation ackAllNotification {
+    ackAllNotifications {
+        status
+    }
+}

@@ -1,0 +1,18 @@
+query getCalendarEvents($startTimestamp: Timestamp!, $endTimestamp: Timestamp!) {
+  me {
+    data {
+      calendarEvents(startTimestamp: $startTimestamp, endTimestamp: $endTimestamp) {
+        id
+        info
+        title
+        posterUrl
+        startTimestamp
+        endTimestamp
+        status
+        organizer {
+          ...Organizer
+        }
+      }
+    }
+  }
+}

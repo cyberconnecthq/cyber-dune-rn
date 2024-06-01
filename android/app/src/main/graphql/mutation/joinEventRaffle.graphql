@@ -1,0 +1,18 @@
+mutation joinEventRaffle($eventId: ID!, $token: String!, $nonce: String!, $verifier: String!) {
+  joinRaffle(eventId: $eventId, token: $token, nonce: $nonce, verifier: $verifier) {
+    status
+    requirement {
+      retweet
+      follow
+      likeAndRetweet
+      tag
+      comment
+      whitelist
+      attend
+      twittersToFollow {
+        twitterId
+        twitterHandle
+      }
+    }
+  }
+}

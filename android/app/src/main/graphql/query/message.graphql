@@ -1,0 +1,9 @@
+query message($id: ID!) {
+  me {
+    data {
+      message(id: $id) {
+        ...PerMessage
+      }
+    }
+  }
+}

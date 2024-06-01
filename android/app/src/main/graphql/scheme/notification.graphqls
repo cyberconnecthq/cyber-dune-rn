@@ -1,0 +1,122 @@
+interface Notification {
+    id: ID!
+    type: NotificationType!
+    hasRead: Boolean!
+    timestamp: Timestamp!
+}
+
+enum NotificationType {
+    POST_NOTIFICATION
+    REPLY_NOTIFICATION
+    LIKE_NOTIFICATION
+    EVENT_BEGIN_NOTIFICATION
+    CONNECTION_NOTIFICATION
+    RECOMMENDATION_NOTIFICATION
+    SKILL_ENDORSEMENT_NOTIFICATION
+    DM_NOTIFICATION
+    PAID_DM_NOTIFICATION
+}
+
+type PostNotification implements Notification {
+    id: ID!
+    hasRead: Boolean!
+    type: NotificationType!
+    timestamp: Timestamp!
+
+    from: User!
+    content: Post!
+}
+
+type ReplyNotification implements Notification {
+    id: ID!
+    hasRead: Boolean!
+    type: NotificationType!
+    timestamp: Timestamp!
+
+    from: User!
+    content: Comment!
+    target: Comment!
+}
+
+type LikeNotification implements Notification {
+    id: ID!
+    hasRead: Boolean!
+    type: NotificationType!
+    timestamp: Timestamp!
+
+    from: User!
+    target: Comment!
+    count: Int!
+}
+
+type EventBeginNotification implements Notification {
+    id: ID!
+    hasRead: Boolean!
+    type: NotificationType!
+    timestamp: Timestamp!
+
+    from: User!
+    content: Event!
+}
+
+type ConnectionNotification implements Notification {
+    id: ID!
+    hasRead: Boolean!
+    type: NotificationType!
+    timestamp: Timestamp!
+
+    from: User!
+    status: ConnectStatus!
+}
+
+type RecommendationNotification implements Notification {
+    id: ID!
+    hasRead: Boolean!
+    type: NotificationType!
+    timestamp: Timestamp!
+
+    from: User!
+    content: Recommendation!
+}
+
+type SkillEndorsementNotification implements Notification {
+    id: ID!
+    hasRead: Boolean!
+    type: NotificationType!
+    timestamp: Timestamp!
+
+    from: User!
+    content: Skill!
+}
+
+type NotificationPage {
+    pageInfo: PageInfo!
+    list: [Notification!]!
+}
+
+input AckNotificationRequest {
+    id: String!
+}
+
+type AckNotificationResponse {
+    status: AckNotificationResponse_Status!
+}
+
+enum AckNotificationResponse_Status {
+    SUCCESS
+    NOT_LOGIN
+}
+
+type AckAllNotificationsResponse {
+    status: AckAllNotificationsResponse_Status!
+}
+
+enum AckAllNotificationsResponse_Status {
+    SUCCESS
+    NOT_LOGIN
+}
+
+extend type Mutation {
+    ackNotification(input: AckNotificationRequest!): AckNotificationResponse!
+    ackAllNotifications: AckAllNotificationsResponse!
+}

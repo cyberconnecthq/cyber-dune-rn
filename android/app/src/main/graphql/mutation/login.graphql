@@ -1,0 +1,29 @@
+mutation login(
+  $address: EVMAddress!
+  $signature: String!
+  $signedMessage: String!
+  $token: String
+  $isEIP1271: Boolean
+  $chainId: Int
+) {
+  login(
+    request: {
+      address: $address
+      signature: $signature
+      signedMessage: $signedMessage
+      token: $token
+      isEIP1271: $isEIP1271
+      chainId: $chainId
+    }
+  ) {
+    status
+    message
+    data {
+      id
+      privateInfo {
+        address
+        accessToken
+      }
+    }
+  }
+}

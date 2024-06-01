@@ -1,0 +1,14 @@
+query getMyEvents($after: String) {
+  me {
+    data {
+      registeredEvents(first: 10, after: $after, ended: false) {
+        list {
+          ...MyEventCard
+        }
+        pageInfo {
+          ...PageInfo
+        }
+      }
+    }
+  }
+}

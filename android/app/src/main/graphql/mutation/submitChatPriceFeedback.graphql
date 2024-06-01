@@ -1,0 +1,5 @@
+mutation submitChatPriceFeedback($input: SubmitChatPriceFeedbackInput!) {
+  submitChatPriceFeedback(input: $input) {
+    status
+  }
+}

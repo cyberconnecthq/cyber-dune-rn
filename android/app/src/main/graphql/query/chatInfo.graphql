@@ -1,0 +1,19 @@
+query chatInfo($id: ID!) {
+  me {
+    data {
+      chat(id: $id) {
+        id
+        receiverDeleted
+        user {
+          ...TargetUserInfo
+        }
+        price {
+          price {
+            ...Price
+          }
+          priceStatus
+        }
+      }
+    }
+  }
+}

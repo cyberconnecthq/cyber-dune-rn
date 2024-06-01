@@ -1,0 +1,5 @@
+mutation connect($profileId: String!) {
+    connect(input: {profileId: $profileId}) {
+        status
+    }
+}

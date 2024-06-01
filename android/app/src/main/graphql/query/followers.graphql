@@ -1,0 +1,20 @@
+query followers($after: String) {
+  me {
+    status
+    message
+    data {
+      profile {
+        ... on PerProfile {
+          pendingConnection(first: 20, after: $after) {
+            pageInfo {
+              ...PageInfo
+            }
+            list {
+              ...MyConnectionItem
+            }
+          }
+        }
+      }
+    }
+  }
+}

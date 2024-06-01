@@ -1,0 +1,33 @@
+query getExploreData {
+  featuredEvents: exploreEvents(request: { type: FEATURED }) {
+    ...PosterEventCard
+  }
+}
+
+fragment PosterEventCard on Event {
+  id
+  title
+  posterUrl
+  startTimestamp
+  endTimestamp
+  registerStatus
+  registrantsCount
+  status
+  organizer {
+    ...OrganizerForV3EventCard
+  }
+  lightInfo {
+    hasRaffle
+    hasW3ST
+  }
+}
+
+fragment NotableSpeakerEventCard on Event {
+  id
+  title
+  startTimestamp
+  endTimestamp
+  registerStatus
+  registrantsCount
+  status
+}

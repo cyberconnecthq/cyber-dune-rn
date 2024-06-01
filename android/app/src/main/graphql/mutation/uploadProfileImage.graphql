@@ -1,0 +1,6 @@
+mutation uploadProfileImage($type: ImageUsage!, $file: Upload!, $profileId: ID!) {
+    uploadProfileImage(imageUsage: $type, profileId: $profileId, file: $file) {
+        url
+        status
+    }
+}

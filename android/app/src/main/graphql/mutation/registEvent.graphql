@@ -1,0 +1,5 @@
+mutation registerEvent($eventId: ID!) {
+  registerEvent(eventId: $eventId) {
+    status
+  }
+}

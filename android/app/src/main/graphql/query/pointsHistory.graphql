@@ -1,0 +1,17 @@
+query pointsHistory($after: String) {
+  pointHistory(first: 10, after: $after) {
+    pageInfo {
+      ...PageInfo
+    }
+    list {
+      ...PointHistory
+    }
+  }
+}
+
+fragment PointHistory on PointHistory {
+  task {
+    ...PointTask
+  }
+  createdAt
+}

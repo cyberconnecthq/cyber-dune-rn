@@ -1,0 +1,5 @@
+mutation blockChatUser($userId: ID!) {
+    blockChatUser(userId: $userId) {
+        status
+    }
+}

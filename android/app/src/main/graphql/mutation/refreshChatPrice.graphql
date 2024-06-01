@@ -1,0 +1,5 @@
+mutation refreshChatPrice($userId: ID!) {
+  refreshChatPrice(userId: $userId) {
+    status
+  }
+}

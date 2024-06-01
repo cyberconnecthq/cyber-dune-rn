@@ -1,0 +1,17 @@
+
+query getMyWest($first: Int, $after: String) {
+  me {
+    data {
+      myW3ST(first: $first, after: $after) {
+        pageInfo {
+          ...PageInfo
+        }
+        list {
+          tokenUri
+          chainId
+          version
+        }
+      }
+    }
+  }
+}

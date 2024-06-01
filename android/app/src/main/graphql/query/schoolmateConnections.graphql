@@ -1,0 +1,9 @@
+query schoolmatesConnections {
+  me {
+    data {
+      schoolmatesProfiles {
+        ...PerProfileWithOrg
+      }
+    }
+  }
+}

@@ -1,0 +1,48 @@
+query getMessageList($after: String) {
+  me {
+    data {
+      chats(first: 20, after: $after) {
+        list {
+          ...MessageListItem
+        }
+        pageInfo {
+          ...PageInfo
+        }
+        chatsWithEarn {
+          ...MessageListItem
+        }
+      }
+    }
+  }
+}
+
+fragment MessageListItem on Chat {
+  id
+  user {
+    id
+    lightInfo {
+      handle
+      avatar
+      displayName
+      formattedAddress
+      remark
+    }
+  }
+  unreadCount
+  lastMessage {
+    content
+    msgTime
+    msgType
+    replyToEarn
+    paid {
+      earnValue {
+        ...Price
+      }
+      status
+      refundAt
+    }
+    sender {
+      id
+    }
+  }
+}

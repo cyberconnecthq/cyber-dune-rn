@@ -1,0 +1,5 @@
+mutation updateBlockVisibility($input: UpdateBlockVisibilityInput!) {
+  updateBlockVisibility(input: $input) {
+    status
+  }
+}

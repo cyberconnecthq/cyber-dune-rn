@@ -1,0 +1,7 @@
+mutation nonce($address: EVMAddress!) {
+  nonce(request: { address: $address }) {
+    status
+    message
+    data
+  }
+}

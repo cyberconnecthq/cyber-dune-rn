@@ -1,0 +1,14 @@
+query individualConnections($after: String) {
+  recommended: me {
+    data {
+      recommendedProfiles(first: 12, after: $after) {
+        list {
+          ...ConnectionPersonalProfile
+        }
+        pageInfo {
+          ...PageInfo
+        }
+      }
+    }
+  }
+}

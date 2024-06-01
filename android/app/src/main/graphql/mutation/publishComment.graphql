@@ -1,0 +1,6 @@
+mutation publishComment($input: PublishPostCommentRequest!) {
+    publishComment( input: $input) {
+        status
+        contentID
+    }
+}

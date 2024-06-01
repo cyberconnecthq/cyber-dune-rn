@@ -1,0 +1,9 @@
+query assetWallets {
+  me {
+    data {
+      privateInfo {
+        assetWallets
+      }
+    }
+  }
+}

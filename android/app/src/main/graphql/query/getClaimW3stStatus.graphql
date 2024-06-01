@@ -1,0 +1,25 @@
+query getClaimW3stStatus($id: ID!) {
+  event(id: $id) {
+    organizer {
+      ...Organizer
+    }
+    w3st {
+      eligible {
+        unclaimed
+        claiming
+        claimed
+        stayTime
+        readyToClaim
+        claimedByOther
+        firstClaim
+        requirements {
+          eligible
+          requirement {
+            type
+            value
+          }
+        }
+      }
+    }
+  }
+}

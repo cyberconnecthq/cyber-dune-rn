@@ -1,0 +1,12 @@
+mutation linkWeb2($type: LoginType!, $email: String, $token: String!, $twitterOAuthCode: TwitterOAuth!, $linkedInOAuth: LinkedInOAuth) {
+  linkWeb2(
+    request: {type: $type, email: $email, token: $token, twitterOAuth: $twitterOAuthCode, linkedInOAuth: $linkedInOAuth}
+  ) {
+    status
+    message
+    twitter {
+      twitterHandle
+      twitterId
+    }
+  }
+}

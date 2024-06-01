@@ -1,0 +1,33 @@
+query settings {
+  me {
+    status
+    message
+    data {
+      id
+      privateInfo {
+        accessToken
+        twitterId
+        discordId
+        email
+        linkedinId
+        linkedinInfo {
+          needRefresh
+        }
+        githubId
+        telegram {
+          telegramId
+          username
+          subscribed
+        }
+      }
+      priceFeedback {
+        feedback
+      }
+      profile {
+        ... on PerProfile {
+          isVerified
+        }
+      }
+    }
+  }
+}

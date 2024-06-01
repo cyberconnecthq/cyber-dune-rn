@@ -1,0 +1,35 @@
+query notificationRecommendation($after: String) {
+  me {
+    data {
+      notifications(first: 50, after: $after) {
+        list {
+          ...RecommendationNotification
+        }
+        pageInfo {
+          ...PageInfo
+        }
+      }
+    }
+  }
+}
+
+fragment RecommendationNotification on RecommendationNotification {
+  __typename
+  hasRead
+  id
+  timestamp
+  type
+  content {
+    content
+    hidden
+  }
+  from {
+    lightInfo {
+      avatar
+      displayName
+      handle
+      profileId
+    }
+  }
+}
+

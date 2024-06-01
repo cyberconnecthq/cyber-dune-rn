@@ -1,0 +1,19 @@
+query getRegistrants($id: ID!, $first: Int, $after: String) {
+  event(id: $id) {
+    registrantsCount
+    registrants(first: $first, after: $after) {
+      pageInfo {
+        ...PageInfo
+      }
+      list {
+        lightInfo {
+          avatar
+          displayName
+          formattedAddress
+          avatarFrameTokenId
+          handle
+        }
+      }
+    }
+  }
+}

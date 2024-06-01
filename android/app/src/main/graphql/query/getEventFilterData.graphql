@@ -1,0 +1,10 @@
+query getEventFilterData {
+  countExploreEvents {
+    DiscordEventsCount
+    LanguageEventsCount
+    RaffleEventsCount
+    TagEventsCount
+    TwitterEventsCount
+    W3STEventsCount
+  }
+}

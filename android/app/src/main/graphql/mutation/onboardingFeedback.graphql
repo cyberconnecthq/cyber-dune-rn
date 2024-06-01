@@ -1,0 +1,5 @@
+mutation onboardingFeedback($feedback: OnboardingFeedbackRequest!) {
+    onboardingFeedback(input: $feedback) {
+        status
+    }
+}

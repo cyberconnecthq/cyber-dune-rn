@@ -1,0 +1,15 @@
+query privateInfo {
+  me {
+    status
+    message
+    data {
+      privateInfo {
+        accessToken
+        twitterId
+        discordId
+        email
+        twitterAuthorized
+      }
+    }
+  }
+}

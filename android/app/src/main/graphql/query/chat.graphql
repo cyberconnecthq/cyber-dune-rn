@@ -1,0 +1,21 @@
+query chat($id: ID!, $after: String, $first: Int = 20) {
+  me {
+    data {
+      chat(id: $id) {
+        receiverDeleted
+        lastMessage {
+          ...PerMessage
+        }
+        messages(first: $first, after: $after, order: PREVIOUS) {
+          list {
+            ...PerMessage
+          }
+          pageInfo {
+            ...PageInfo
+          }
+        }
+      }
+    }
+  }
+}
+

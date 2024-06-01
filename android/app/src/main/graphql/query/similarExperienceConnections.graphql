@@ -1,0 +1,9 @@
+query similarExperienceConnections {
+  me {
+    data {
+      similarWorkExperiencesProfiles {
+        ...PerProfileWithOrg
+      }
+    }
+  }
+}

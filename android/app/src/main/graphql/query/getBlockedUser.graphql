@@ -1,0 +1,34 @@
+query getBlockedUser {
+  me {
+    data {
+      blockChatUsers {
+        ...BlockedUser
+      }
+    }
+  }
+}
+
+fragment BlockedUser on User {
+  id
+  lightInfo {
+    handle
+    avatar
+    displayName
+    attestation {
+      uid
+    }
+  }
+  profile {
+    ...BlockedUserProfile
+  }
+}
+
+fragment BlockedUserProfile on PerProfile {
+  id
+  isVerified
+  headline {
+    displayName
+    title
+  }
+}
+    

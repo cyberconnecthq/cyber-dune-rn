@@ -1,0 +1,16 @@
+query cyberCreditHistory($after: String) {
+  me {
+    status
+    message
+    data {
+      creditHistories(first: 10, after: $after) {
+        list {
+          ...CreditHistoryRow
+        }
+        pageInfo {
+          ...PageInfo
+        }
+      }
+    }
+  }
+}

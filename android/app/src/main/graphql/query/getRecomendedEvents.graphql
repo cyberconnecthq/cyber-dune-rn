@@ -1,0 +1,7 @@
+query getRecomendedEvents {
+  trendingEvents(first: 12) {
+    list {
+      ...PosterEventCard
+    }
+  }
+}

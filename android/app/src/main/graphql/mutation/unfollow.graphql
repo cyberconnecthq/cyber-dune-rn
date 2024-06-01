@@ -1,0 +1,5 @@
+mutation unfollow($profileId: String!) {
+    unfollow(input: {profileId: $profileId}) {
+        status
+    }
+}

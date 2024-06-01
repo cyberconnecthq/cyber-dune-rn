@@ -1,0 +1,58 @@
+query homePageData {
+  organization: featuredProfiles(filter: ORGANIZATION, first: 12) {
+    list {
+      ...ConnectionOrgProfile
+    }
+  }
+  recommended: me {
+    data {
+      recommendedProfiles(first: 12, after: "") {
+        list {
+          ...ConnectionPersonalProfile
+        }
+      }
+    }
+  }
+  profiles: me {
+    data {
+      schoolmatesProfiles {
+        ...PerProfileWithOrg
+      }
+      similarWorkExperiencesProfiles {
+        ...PerProfileWithOrg
+      }
+    }
+  }
+  exploreEvents(request: {type: FEATURED}) {
+    ...EventCardWithPoster
+  }
+  explorePosts(input: {type: FEATURED}) {
+    ...PostCard
+  }
+}
+
+fragment PostCard on Post {
+  id
+  title
+  cover
+  description
+  publishedAt
+  readTime
+  essence {
+    totalCollected
+    totalSupply
+  }
+  profile {
+    ...ProfileInPostCard
+  }
+}
+
+fragment ProfileInPostCard on Profile {
+  __typename
+  ...UnionBaseProfile
+  ... on OrgProfile {
+    organization {
+      verification
+    }
+  }
+}

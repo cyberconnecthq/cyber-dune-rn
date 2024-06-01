@@ -1,0 +1,5 @@
+mutation viewPost($input: ViewPostRequest!) {
+  viewPost(input: $input) {
+    status
+  }
+}

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/action_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/action_bar_height"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <ImageView
+        android:id="@+id/avatar"
+        android:layout_width="@dimen/account_avatar_size"
+        android:layout_height="@dimen/account_avatar_size"
+        app:layout_constraintTop_toBottomOf="@id/action_bar"
+        android:layout_marginTop="@dimen/page_general_padding"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="@dimen/page_general_padding"
+        android:visibility="gone"
+        />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_primary_size"
+        android:textColor="@color/primary_text_color"
+        app:layout_constraintTop_toTopOf="@id/avatar"
+        app:layout_constraintStart_toEndOf="@id/avatar"
+        android:layout_marginStart="@dimen/page_general_padding"
+        app:layout_constraintEnd_toStartOf="@id/aa_copy"
+        android:layout_marginEnd="8dp"
+        />
+
+    <ImageView
+        android:id="@+id/aa_copy"
+        android:layout_width="@dimen/verification_icon_size"
+        android:layout_height="@dimen/verification_icon_size"
+        android:src="@drawable/icon_copy"
+        app:layout_constraintTop_toTopOf="@id/name"
+        app:layout_constraintBottom_toBottomOf="@id/name"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="@dimen/page_general_padding"
+        />
+
+    <View
+        android:id="@+id/middle_divider"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_height"
+        android:background="@color/list_divider"
+        app:layout_constraintTop_toBottomOf="@id/name"
+        android:layout_marginTop="@dimen/page_general_padding"
+        />
+
+    <TextView
+        android:id="@+id/message_credit_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_primary_size"
+        android:textColor="@color/secondary_text_color"
+        app:layout_constraintTop_toBottomOf="@id/middle_divider"
+        android:layout_marginTop="@dimen/page_general_padding"
+        app:layout_constraintStart_toStartOf="@id/name"
+        android:text="ETH(Cyber) Balance"
+        />
+
+    <TextView
+        android:id="@+id/message_credit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_primary_size"
+        android:textColor="@color/brand_500"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/message_credit_title"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toStartOf="@id/message_credit_title"
+        android:text="$0"
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/middle_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5"
+        />
+
+    <View
+        android:id="@+id/deposit_bg"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/button_height"
+        android:background="@drawable/border_line_bg"
+        app:layout_constraintTop_toBottomOf="@id/message_credit"
+        android:layout_marginTop="@dimen/page_general_padding"
+        app:layout_constraintStart_toStartOf="@id/message_credit"
+        app:layout_constraintEnd_toStartOf="@id/middle_guideline"
+        android:layout_marginEnd="6dp"
+        />
+
+    <ImageView
+        android:id="@+id/deposit_icon"
+        android:layout_width="@dimen/back_icon_size"
+        android:layout_height="@dimen/back_icon_size"
+        android:src="@drawable/icon_deposit"
+        app:layout_constraintStart_toStartOf="@id/deposit_bg"
+        app:layout_constraintEnd_toStartOf="@id/deposit_text"
+        android:layout_marginEnd="4dp"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintTop_toTopOf="@id/deposit_bg"
+        app:layout_constraintBottom_toBottomOf="@id/deposit_bg"
+        />
+
+    <TextView
+        android:id="@+id/deposit_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_secondary_size"
+        android:textColor="@color/primary_text_color"
+        android:textStyle="bold"
+        android:text="Receive"
+        app:layout_constraintStart_toEndOf="@id/deposit_icon"
+        app:layout_constraintEnd_toEndOf="@id/deposit_bg"
+        app:layout_constraintTop_toTopOf="@id/deposit_bg"
+        app:layout_constraintBottom_toBottomOf="@id/deposit_bg"
+        />
+
+    <View
+        android:id="@+id/withdraw_bg"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/button_height"
+        android:background="@drawable/border_line_bg"
+        app:layout_constraintTop_toTopOf="@id/deposit_bg"
+        app:layout_constraintStart_toEndOf="@id/middle_guideline"
+        android:layout_marginStart="6dp"
+        app:layout_constraintEnd_toEndOf="@id/refresh_wallets"
+        />
+
+    <ImageView
+        android:id="@+id/withdraw_icon"
+        android:layout_width="@dimen/back_icon_size"
+        android:layout_height="@dimen/back_icon_size"
+        android:src="@drawable/icon_withdraw"
+        app:layout_constraintStart_toStartOf="@id/withdraw_bg"
+        app:layout_constraintEnd_toStartOf="@id/withdraw_text"
+        android:layout_marginEnd="4dp"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintTop_toTopOf="@id/withdraw_bg"
+        app:layout_constraintBottom_toBottomOf="@id/withdraw_bg"
+        />
+
+    <TextView
+        android:id="@+id/withdraw_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_secondary_size"
+        android:textColor="@color/primary_text_color"
+        android:textStyle="bold"
+        android:text="Send"
+        app:layout_constraintStart_toEndOf="@id/withdraw_icon"
+        app:layout_constraintEnd_toEndOf="@id/withdraw_bg"
+        app:layout_constraintTop_toTopOf="@id/withdraw_bg"
+        app:layout_constraintBottom_toBottomOf="@id/withdraw_bg"
+        />
+
+    <ImageView
+        android:id="@+id/refresh_wallets"
+        android:layout_width="@dimen/verification_icon_size"
+        android:layout_height="@dimen/verification_icon_size"
+        android:src="@drawable/icon_refresh"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="@dimen/page_general_padding"
+        app:layout_constraintTop_toTopOf="@id/message_credit_title"
+        app:layout_constraintBottom_toBottomOf="@id/message_credit"
+        />
+
+<!--    <View-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:background="@color/list_divider"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/gas_credit"-->
+<!--        android:layout_marginTop="@dimen/page_general_padding"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        />-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>
