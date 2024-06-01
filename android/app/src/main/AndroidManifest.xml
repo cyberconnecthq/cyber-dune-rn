@@ -55,11 +55,32 @@
         <category android:name="android.intent.category.DEFAULT" />
       </intent-filter>
     </activity>
-      <activity android:name=".ui.ReceiveActivity"/>
-      <activity android:name=".ui.SendActivity"/>
+    <activity android:name=".ui.ReceiveActivity"
+        android:exported="true">
+      <intent-filter>
+        <action android:name="com.cyberconnect.link3.QR" />
+
+        <category android:name="android.intent.category.DEFAULT" />
+      </intent-filter>
+    </activity>
+    <activity android:name=".ui.SendActivity"
+        android:exported="true">
+      <intent-filter>
+        <action android:name="com.cyberconnect.link3.TRANSFER" />
+
+        <category android:name="android.intent.category.DEFAULT" />
+      </intent-filter>
+    </activity>
     <activity
       android:name="com.journeyapps.barcodescanner.CaptureActivity"
       android:screenOrientation="fullSensor"
-      tools:replace="screenOrientation" />
+        tools:replace="screenOrientation"
+        android:exported="true">
+      <intent-filter>
+        <action android:name="com.cyberconnect.link3.SCAN" />
+
+        <category android:name="android.intent.category.DEFAULT" />
+      </intent-filter>
+    </activity>
   </application>
 </manifest>

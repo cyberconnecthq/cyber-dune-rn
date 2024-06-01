@@ -43,6 +43,12 @@ class CyberMenuWidget : AppWidgetProvider() {
             val views = RemoteViews(context.packageName, R.layout.menu_widget)
             views.setOnClickPendingIntent(R.id.profile_button, PendingIntent.getActivity(context, 0, Intent("com.cyberconnect.link3.WALLET").apply { addCategory(Intent.CATEGORY_DEFAULT) },
                 PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_IMMUTABLE))
+            views.setOnClickPendingIntent(R.id.transfer_button, PendingIntent.getActivity(context, 0, Intent("com.cyberconnect.link3.TRANSFER").apply { addCategory(Intent.CATEGORY_DEFAULT) },
+                PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_IMMUTABLE))
+            views.setOnClickPendingIntent(R.id.qr_button, PendingIntent.getActivity(context, 0, Intent("com.cyberconnect.link3.QR").apply { addCategory(Intent.CATEGORY_DEFAULT) },
+                PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_IMMUTABLE))
+            views.setOnClickPendingIntent(R.id.scan_button, PendingIntent.getActivity(context, 0, Intent("com.cyberconnect.link3.SCAN").apply { addCategory(Intent.CATEGORY_DEFAULT) },
+                PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_IMMUTABLE))
 
             views.setTextViewText(R.id.title, title)
             views.setTextViewText(R.id.content, content)
