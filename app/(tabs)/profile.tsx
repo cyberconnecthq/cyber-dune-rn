@@ -4,6 +4,7 @@ import CyberPasskeyModule from '@/modules/cyber-passkey/src/CyberPasskeyModule';
 import { Button } from 'react-native';
 import { useFocusEffect } from 'expo-router';
 import { router } from 'expo-router';
+import * as Linking from 'expo-linking';
 
 const PasskeyComponent: React.FC = () => {
   const [user, setUser] = useState<any>(null);
@@ -19,6 +20,25 @@ const PasskeyComponent: React.FC = () => {
   }
 
   useEffect(() => {
+
+  
+    const handleUrl = async (event: any) => {
+      console.log('Received URL:', event);
+      const { url } = event;
+      if (url) {
+        console.log('Received URL:', url);
+        if (url.includes('cyberDune://login')) {
+          router.replace('./profile');
+        } else if (url.includes('cyberDune://dashboard')) {
+          router.replace('./index');
+        } else {
+          console.log('invalid url', url);
+        }
+      }
+    }
+  
+    Linking.addEventListener('url', handleUrl);
+
     const fetchData = async () => {
       const eoa = CyberPasskeyModule.getEOA();
       const avatar = CyberPasskeyModule.getAvatar();
@@ -44,7 +64,6 @@ const PasskeyComponent: React.FC = () => {
     };
 
     fetchData();
-
 
     // 直接使用原生模块的addListener
     const listener = CyberPasskeyModule.addListener('onLogin', (event) => {
