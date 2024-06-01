@@ -1,6 +1,7 @@
 package expo.modules.cyberpasskey
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import expo.modules.kotlin.modules.Module
 import expo.modules.kotlin.modules.ModuleDefinition
@@ -29,11 +30,12 @@ class CyberPasskeyModule : Module() {
     }
 
     Function("getEOA") {
-      null  
+        val sharedPref = appContext.currentActivity?.getSharedPreferences("com.cyberconnect.link3.preference", Context.MODE_PRIVATE)
+        if (sharedPref != null) sharedPref.getString("wallet", null) else null
     }
 
     Function("getAvatar") {
-      null
+      "https://ccgateway.infura-ipfs.io/ipfs/QmUjoJbH21wJZWtib3zQarhewyazXY4VWfQzeV8F4v5nPc"
     }
 
     Function("startActivity") {

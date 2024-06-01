@@ -36,6 +36,7 @@ class ApplicationViewModel: ViewModel() {
     companion object Const {
         const val PREF_KEY_SIGNING_KEY_REGISTERED = "signing_key_registered_"
         const val PREF_KEY_ACCESS_TOKEN = "access_token"
+        const val PREF_KEY_WALLET = "wallet"
         const val PREF_KEY_DARK_MODE = "dark_mode"
         const val PREF_KEY_SPLASH_GUIDE_VERSION = "splash_guide_version"
         const val PREF_KEY_NOTIFICATION_PERMISSION_VERSION = "notification_permission_version"
@@ -202,8 +203,9 @@ class ApplicationViewModel: ViewModel() {
                         MeResponse_Status.SUCCESS -> {
                             val userData = response.data?.me?.data
                             accessToken = userData?.privateInfo?.accessToken ?: ""
-                            sharedPref.edit().putString(PREF_KEY_ACCESS_TOKEN, accessToken).apply()
                             val address = userData?.privateInfo?.address as String?
+                            sharedPref.edit().putString(PREF_KEY_ACCESS_TOKEN, accessToken).putString(
+                                PREF_KEY_WALLET, address).apply()
                             _userProfile.value = UserProfile(
                                 accessToken = accessToken,
                                 walletAddress = address,
