@@ -1,4 +1,4 @@
-package com.cyberconnect.link3.ui
+package com.cyberconnnect.link3.ui
 
 import android.content.ClipData
 import android.content.ClipboardManager
@@ -9,11 +9,11 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.cyber.cyberdune.viewmodel.DefaultUserProfile
-import com.cyberconnect.link3.MainApplication
-import com.cyberconnect.link3.R
-import com.cyberconnect.link3.utils.DuneUtil
-import com.cyberconnect.link3.utils.showSnackBar
-import com.cyberconnect.link3.viewmodel.ApplicationViewModel
+import com.cyberconnnect.link3.MainApplication
+import com.cyberconnnect.link3.R
+import com.cyberconnnect.link3.utils.DuneUtil
+import com.cyberconnnect.link3.utils.showSnackBar
+import com.cyberconnnect.link3.viewmodel.ApplicationViewModel
 
 open class BaseActivity : AppCompatActivity() {
 

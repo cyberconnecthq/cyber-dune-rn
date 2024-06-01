@@ -1,5 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios';
-import { TxData, RestakeData } from './dataType'
+import { TxData, RestakeData } from './dataType';
+import CyberPasskeyModule from '@/modules/cyber-passkey/src/CyberPasskeyModule';
 
 export class NetworkingError extends Error {
   public readonly _tag = 'NetworkingError';
@@ -31,9 +32,15 @@ export const axiosGet = async (url: string, config?: AxiosRequestConfig<unknown>
   }
 };
 
+const saveData = async (total: string) => {
+  console.log('save', total);
+  CyberPasskeyModule.setTotalStakedCyber(total);
+}
+
 export const axiosGetTxNumber = async (queryId: number = 3502728, limit: number = 5): Promise<TxData[]> => {
   const endpointUrl = createEndpointUrl(queryId, limit);
   const res = await axiosGet(endpointUrl);
+  saveData(res.result.rows[0].cumulative_amount_staked_total);
   return res.result.rows;
 };
 

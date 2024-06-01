@@ -1,4 +1,4 @@
-package com.cyberconnect.link3.ui
+package com.cyberconnnect.link3.ui
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,8 +8,8 @@ import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.cyberconnect.link3.R
-import com.cyberconnect.link3.databinding.SubpageActionBarBinding
+import com.cyberconnnect.link3.R
+import com.cyberconnnect.link3.databinding.SubpageActionBarBinding
 
 /**
  * The base Activity for sub pages whose ActionBar includes a back icon and page title.

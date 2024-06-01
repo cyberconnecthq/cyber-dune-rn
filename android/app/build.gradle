@@ -87,9 +87,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace 'com.cyberconnect.link3'
+    namespace 'com.cyberconnnect.link3'
     defaultConfig {
-        applicationId 'com.cyberconnect.link3'
+        applicationId 'com.cyberconnnect.link3'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

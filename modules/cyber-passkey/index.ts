@@ -29,6 +29,10 @@ export function logout() {
   return CyberPasskeyModule.logout()
 }
 
+export function setTotalStakedCyber() {
+  return CyberPasskeyModule.setTotalStakedCyber()
+}
+
 export async function setValueAsync(value: string) {
   return await CyberPasskeyModule.setValueAsync(value);
 }

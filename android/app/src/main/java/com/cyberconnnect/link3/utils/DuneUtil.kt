@@ -1,4 +1,4 @@
-package com.cyberconnect.link3.utils
+package com.cyberconnnect.link3.utils
 
 import android.util.Base64
 import java.security.SecureRandom

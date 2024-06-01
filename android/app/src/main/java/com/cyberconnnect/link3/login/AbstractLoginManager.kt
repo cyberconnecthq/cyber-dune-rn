@@ -1,8 +1,8 @@
-package com.cyberconnect.link3.login
+package com.cyberconnnect.link3.login
 
 import android.content.Context
-import com.cyberconnect.link3.LoginMutation
-import com.cyberconnect.link3.viewmodel.ApplicationViewModel
+import com.cyberconnnect.link3.LoginMutation
+import com.cyberconnnect.link3.viewmodel.ApplicationViewModel
 import kotlinx.coroutines.CoroutineScope
 
 abstract class AbstractLoginManager(val applicationViewModel: ApplicationViewModel) {

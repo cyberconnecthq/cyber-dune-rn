@@ -1,9 +1,9 @@
-package com.cyberconnect.link3
+package com.cyberconnnect.link3
 
 import android.os.Build
 import android.os.Bundle
-import com.cyberconnect.link3.BuildConfig
-import com.cyberconnect.link3.R
+import com.cyberconnnect.link3.BuildConfig
+import com.cyberconnnect.link3.R
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate
 import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint.fabricEnabled

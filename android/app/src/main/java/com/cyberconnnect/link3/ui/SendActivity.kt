@@ -1,4 +1,4 @@
-package com.cyberconnect.link3.ui
+package com.cyberconnnect.link3.ui
 
 import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
@@ -14,16 +14,16 @@ import android.widget.AdapterView
 import androidx.lifecycle.lifecycleScope
 import coil.load
 import com.cyber.cyberdune.viewmodel.DefaultUserProfile
-import com.cyberconnect.link3.R
-import com.cyberconnect.link3.databinding.ActivityCyberAccountBinding
-import com.cyberconnect.link3.databinding.ActivityReceiveBinding
-import com.cyberconnect.link3.databinding.ActivitySendBinding
-import com.cyberconnect.link3.utils.Chains
-import com.cyberconnect.link3.utils.DuneUtil
-import com.cyberconnect.link3.utils.Web3Util
-import com.cyberconnect.link3.utils.showSnackBar
-import com.cyberconnect.link3.utils.toPx
-import com.cyberconnect.link3.utils.toWei
+import com.cyberconnnect.link3.R
+import com.cyberconnnect.link3.databinding.ActivityCyberAccountBinding
+import com.cyberconnnect.link3.databinding.ActivityReceiveBinding
+import com.cyberconnnect.link3.databinding.ActivitySendBinding
+import com.cyberconnnect.link3.utils.Chains
+import com.cyberconnnect.link3.utils.DuneUtil
+import com.cyberconnnect.link3.utils.Web3Util
+import com.cyberconnnect.link3.utils.showSnackBar
+import com.cyberconnnect.link3.utils.toPx
+import com.cyberconnnect.link3.utils.toWei
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.EncodeHintType
 import com.journeyapps.barcodescanner.BarcodeEncoder

@@ -1,9 +1,9 @@
-package com.cyberconnect.link3
+package com.cyberconnnect.link3
 
 import android.app.Application
 import android.content.res.Configuration
-import com.cyberconnect.link3.BuildConfig
-import com.cyberconnect.link3.viewmodel.ApplicationViewModel
+import com.cyberconnnect.link3.BuildConfig
+import com.cyberconnnect.link3.viewmodel.ApplicationViewModel
 import com.facebook.react.PackageList
 import com.facebook.react.ReactApplication
 import com.facebook.react.ReactHost

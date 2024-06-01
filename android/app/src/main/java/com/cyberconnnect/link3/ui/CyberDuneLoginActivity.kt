@@ -1,4 +1,4 @@
-package com.cyberconnect.link3.ui
+package com.cyberconnnect.link3.ui
 
 import android.app.Activity
 import android.content.Intent
@@ -6,9 +6,9 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.cyber.cyberdune.viewmodel.DefaultUserProfile
-import com.cyberconnect.link3.MainApplication
-import com.cyberconnect.link3.databinding.ActivityCyberDuneBinding
-import com.cyberconnect.link3.viewmodel.ApplicationViewModel
+import com.cyberconnnect.link3.MainApplication
+import com.cyberconnnect.link3.databinding.ActivityCyberDuneBinding
+import com.cyberconnnect.link3.viewmodel.ApplicationViewModel
 
 class CyberDuneLoginActivity : BaseActivity() {
 

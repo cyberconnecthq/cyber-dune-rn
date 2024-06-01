@@ -1,12 +1,11 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Image, ScrollView, Platform, NativeEventEmitter, NativeModules, SafeAreaView } from 'react-native';
-
+import { StyleSheet, Text, View, Image, ScrollView, Platform, SafeAreaView } from 'react-native';
 import CyberPasskeyModule from '@/modules/cyber-passkey/src/CyberPasskeyModule';
 import { Button } from 'react-native';
 import { useFocusEffect } from 'expo-router';
+import { router } from 'expo-router';
 
-
-const App: React.FC = () => {
+const PasskeyComponent: React.FC = () => {
   const [user, setUser] = useState<any>(null);
   const [balances, setBalances] = useState<any[]>([]);
 
@@ -75,6 +74,10 @@ const App: React.FC = () => {
 
     },[]));
 
+  const handleScanQRCode = () => {
+    router.push('../camera/camera')
+  };
+
   return (
     <SafeAreaView>
       <ScrollView contentContainerStyle={styles.container} >
@@ -101,9 +104,7 @@ const App: React.FC = () => {
             ))}
           </View>
         )}
-        {
-          <View style={styles.button}>
-          </View>}
+        <Button title="扫描二维码" onPress={handleScanQRCode} />
       </ScrollView>
     </SafeAreaView>
   );
@@ -143,7 +144,7 @@ const App: React.FC = () => {
       marginBottom: 5,
     },
     address: {
-      fontSize: 14,
+      fontSize: 12,
       color: '#808080', // Grey text
     },
     totalBalance: {
@@ -182,4 +183,4 @@ const App: React.FC = () => {
     },
   });
 
-export default App;
+export default PasskeyComponent;

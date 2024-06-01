@@ -1,8 +1,8 @@
-package com.cyberconnect.link3.ui
+package com.cyberconnnect.link3.ui
 
 import android.app.Activity
 import android.os.Bundle
-import com.cyberconnect.link3.BuildConfig
+import com.cyberconnnect.link3.BuildConfig
 import com.facebook.react.PackageList
 import com.facebook.react.ReactInstanceManager
 import com.facebook.react.ReactPackage

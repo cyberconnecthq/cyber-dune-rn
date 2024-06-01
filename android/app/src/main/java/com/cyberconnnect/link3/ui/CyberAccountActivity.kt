@@ -1,4 +1,4 @@
-package com.cyberconnect.link3.ui
+package com.cyberconnnect.link3.ui
 
 import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
@@ -13,12 +13,12 @@ import android.view.View
 import android.widget.AdapterView
 import androidx.lifecycle.lifecycleScope
 import com.cyber.cyberdune.viewmodel.DefaultUserProfile
-import com.cyberconnect.link3.R
-import com.cyberconnect.link3.databinding.ActivityCyberAccountBinding
-import com.cyberconnect.link3.utils.DuneUtil
-import com.cyberconnect.link3.utils.Web3Util
-import com.cyberconnect.link3.utils.showSnackBar
-import com.cyberconnect.link3.utils.toWei
+import com.cyberconnnect.link3.R
+import com.cyberconnnect.link3.databinding.ActivityCyberAccountBinding
+import com.cyberconnnect.link3.utils.DuneUtil
+import com.cyberconnnect.link3.utils.Web3Util
+import com.cyberconnnect.link3.utils.showSnackBar
+import com.cyberconnnect.link3.utils.toWei
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import timber.log.Timber

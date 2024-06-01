@@ -15,7 +15,6 @@
   <string name="title_event_all">Events</string>
   <string name="title_event_following">My Following</string>
   <string name="title_individual">Individual</string>
-
   <string name="event_detail_participants">PARTICIPANTS</string>
   <string name="event_detail_where">WHERE</string>
   <string name="event_detail_when">WHEN</string>
@@ -46,7 +45,6 @@
   <string name="link_twitter_title">Link Your Twitter</string>
   <string name="link_twitter">Link Twitter</string>
   <string name="link_twitter_hint">We have just upgrade our authentication method. Please authenticate your Twitter again for better user experience.</string>
-
   <string name="event_detail_claim_w3st_not_ready">Token will be available to claim after the event</string>
   <string name="event_detail_claim_w3st_ready">The token is available to claim now</string>
   <string name="event_detail_claim_w3st_network">Network</string>
@@ -64,13 +62,12 @@
   <string name="claim_w3st_step3">STEP3</string>
   <string name="claim_w3st">Claim W3ST 🔥</string>
   <string name="claim_w3st_gas_credit">Check SmartGas</string>
-  <string name="claim_w3st_not_eligible">You are NOT eligible,\nplease check the requirements above</string>
+  <string name="claim_w3st_not_eligible">You are NOT eligible,nplease check the requirements above</string>
   <string name="event_detail_claim_w3st_requirement_not_meet">You do NOT meet this requirement.</string>
   <string name="event_detail_claim_w3st_kyc_title">KYC Token</string>
-  <string name="event_detail_claim_w3st_kyc_hint">The KYC(Know Your Customer) token is a non-transferable token representing the token holder has passed KYC verification.\nCurrently, we support Binance Account Bound(BAB) token. Any Binance KYC user can request to issue a BAB token to their wallet. Instructions can be found [here](https://www.binance.com/en/support/faq/how-to-mint-binance-account-bound-bab-token-bacaf9595b52440ea2b023195ba4a09c).</string>
+  <string name="event_detail_claim_w3st_kyc_hint">The KYC(Know Your Customer) token is a non-transferable token representing the token holder has passed KYC verification.nCurrently, we support Binance Account Bound(BAB) token. Any Binance KYC user can request to issue a BAB token to their wallet. Instructions can be found [here](https://www.binance.com/en/support/faq/how-to-mint-binance-account-bound-bab-token-bacaf9595b52440ea2b023195ba4a09c).</string>
   <string name="event_detail_claim_w3st_requirement_twitter">Due to the limitation of Twitter API, Link3 can only track up to 1,000 concurrent users on mobile. If you joined the Twitter Space on web or there are too many people in the space, you may not be able to meet the requirement for claiming the token.</string>
   <string name="event_detail_claim_w3st_requirement_stay">Your eligibility will be checked after the event.</string>
-
   <string name="post_card_collected">Collected</string>
   <string name="post_detail_collection_hint">This entry has been permanently stored on-chain.</string>
   <string name="post_detail_collection_author">AUTHOR’S CYBERPROFILE</string>
@@ -90,10 +87,8 @@
   <string name="post_detail_minting_free">Minting is free</string>
   <string name="post_detail_comment_hint">Leave a comment...</string>
   <string name="show_more_replies">Show more replies</string>
-
   <string name="org_followed">Following</string>
   <string name="org_unfollowed">Follow</string>
-
   <string name="profile_welcom_title">Welcome to Link3</string>
   <string name="profile_app_description">Discover Web3 Content, Profiles, and Events!</string>
   <string name="profile_connect_wallet">Connect Wallet</string>
@@ -133,25 +128,20 @@
   <string name="setting_disconnect_github_hint">Are you sure you want to disconnect your github from link3?</string>
   <string name="claim_w3st_connect_discord_hint">Please connect your Discord to check your eligibility.</string>
   <string name="claim_w3st_connect_twitter_hint">Please connect your Twitter to check your eligibility.</string>
-
-
   <string name="w3st_title">W3ST</string>
   <string name="w3st_available">Available to Claim</string>
   <string name="get_more_w3st">Get More W3ST</string>
   <string name="what_is_w3st">What is W3ST?</string>
   <string name="my_w3st_hint">Web3 Status Token (WΞST) is a ERC-721 token representing your Web3 on-chain status. You can claim a W3ST by joining a Link3 event.</string>
-
   <string name="login_verify_account">Verify your account</string>
   <string name="login_verify_send_message">Send message</string>
   <string name="login_verify_cancel">Cancel</string>
   <string name="login_verify_hint">To finish connecting, you must sign a message in your wallet to verify that you are the owner of this account.</string>
-
   <string name="wallet_app_suggested">Suggested</string>
   <string name="wallet_app_metamask">MetaMask</string>
   <string name="external_wallet">External wallet</string>
   <string name="wallet_app_walletconnect">WalletConnect</string>
   <string name="wallet_app_rainbow">Rainbow</string>
-
   <string name="empty_event">There is no event yet</string>
   <string name="empty_page">Nothing here</string>
   <string name="empty_connection">There is no profile yet</string>
@@ -165,24 +155,19 @@
   <string name="network_error">Network error. Please try again later.</string>
   <string name="load_more_network_error">Network error. Click to reload.</string>
   <string name="reload">Reload</string>
-
   <string name="search">Search</string>
   <string name="search_transition">SearchTransition</string>
-
   <string name="dark_mode">Dark Mode</string>
-
   <string name="skip">Skip</string>
   <string name="splash_guide_one">Explore premier Web3 communities and networks</string>
   <string name="splash_guide_two">Engage in Web3 online events and claim tokens effortlessly</string>
   <string name="splash_guide_three">Stay informed with the latest and trending Web3 articles</string>
-
   <string name="notification_channel_name">Link3 channel</string>
   <string name="notification_channel_description">Link3 notifications</string>
   <string name="notification_permission_title">Request Notification Permission</string>
   <string name="notification_permission_hint">Enabling notifications to stay updated on connections, messages, and event news!</string>
   <string name="notification_permission_grant">Grant</string>
   <string name="notification_event_title">Link3 Event</string>
-
   <string name="label_back_icon">Back</string>
   <string name="label_event_card">Event Card</string>
   <string name="label_event_notable_speaker_card">Notable Speaker Event Card</string>
@@ -200,13 +185,9 @@
   <string name="label_home_event">Event Tab</string>
   <string name="label_home_post">Post Tab</string>
   <string name="label_home_organization">Organization Tab</string>
-
   <string name="filter">Filter</string>
-
   <string name="add_chain_fail_title">Add Chain Failed</string>
-
   <string name="network_busy_error">Network busy. Please try again later.</string>
-
   <string name="oauth_twitter_used">This X account has already been linked to another profile!</string>
   <string name="oauth_discord_used">This Discord account has already been linked to another profile!</string>
   <string name="oauth_linkedin_used">This LinkedIn account has already been linked to another profile!</string>
@@ -220,14 +201,11 @@
   <string name="oauth_cool_down_linkedin">You can only disconnect linkedin once in 24 hours, please try again later.</string>
   <string name="oauth_cool_down_email">You can only disconnect email once in 24 hours, please try again later.</string>
   <string name="oauth_cool_down_telegram">You can only disconnect Telegram once in 24 hours, please try again later.</string>
-
   <string name="wallet_connection_expired">The wallet connection expired. Please try to connect your wallet again.</string>
   <string name="wallet_connection_expired_title">Connection Expired</string>
-
   <string name="profile_show_more">Show more</string>
   <string name="show_less">Show less</string>
   <string name="profile_collapse">Collapse</string>
-
   <string name="me_setting_notification">Notifications</string>
   <string name="me_setting_paid_message">Paid Messages</string>
   <string name="me_setting_connections">Connections</string>
@@ -237,9 +215,7 @@
   <string name="me_setting_organization">Organizations</string>
   <string name="me_setting_account_setting">Account Settings</string>
   <string name="me_setting_disconnect">Log Out</string>
-
   <string name="chat_send">Send</string>
-
   <string name="signer">Signer</string>
   <string name="gas_credit">SmartGas</string>
   <string name="smartgas_loading">SmartGas -</string>
@@ -262,14 +238,14 @@
   <string name="pay_message_refund_hint">*Payment will be refunded if no response after %s hours</string>
   <string name="your_message">Your Message</string>
   <string name="receiver">Receiver</string>
-
   <string name="top_up_declaration1">I acknowledge that I cannot withdraw my gas balance. It will only be used for gas fees for transactions with my CyberAccount.</string>
   <string name="top_up_declaration2">I acknowledge that gas is denominated in $USD as per the current exchange rate.</string>
   <string name="top_up_declaration3">I am aware that the SmartGas will be denominated as USD based on the current exchange rate.</string>
   <string name="eth">ETH</string>
-
-  <string name="event_raffle_attend_warning">We will only select winners from participants <b>who at least stay for 10 minutes for the event</b>. Please join the event to get a chance for raffle rewards.</string>
-
+  <string name="event_raffle_attend_warning">
+    We will only select winners from participants . Please join the event to get a chance for raffle rewards.
+    <b>who at least stay for 10 minutes for the event</b>
+  </string>
   <string name="reset">Reset</string>
   <string name="featured_events">Featured Events</string>
   <string name="discover">Discover</string>
@@ -278,10 +254,8 @@
   <string name="picture">Picture</string>
   <string name="business_card">Business Card</string>
   <string name="search_no_result">No Results</string>
-
   <string name="account_setting_primary_account">Primary Handle</string>
   <string name="account_setting_social_medias">Connected Accounts</string>
-
   <string name="edit_profile_title">Edit Info</string>
   <string name="edit_profile_banner">Banner</string>
   <string name="edit_profile_display_name">Display Name *</string>
@@ -342,11 +316,6 @@
   <string name="edit_profile_skill_add_hint">Enter skills here</string>
   <string name="edit_profile_skill_endorse">Endorse</string>
   <string name="edit_profile_skill_cancel_endorse">Cancel Endorsement</string>
-  <plurals name="edit_profile_skill_endorsement">
-    <item quantity="zero">%d Endorsement</item>
-    <item quantity="one">%d Endorsement</item>
-    <item quantity="other">%d Endorsements</item>
-  </plurals>
   <string name="edit_profile_credentials">Credentials Showcase</string>
   <string name="edit_profile_credentials_galaxy">Galaxy Credentials</string>
   <string name="edit_profile_credentials_poap">POAP</string>
@@ -395,10 +364,7 @@
   <string name="profile_save_image_success">Image saved!</string>
   <string name="profile_reputation_score">Reputation Score</string>
   <string name="profile_reputation_score_explanation">We will calculate a reputation score to show on the profile, improve your profile to enhance your reputation.</string>
-
-
   <string name="coming_soon">Coming Soon</string>
-
   <string name="connection_connect">Connect</string>
   <string name="connection">Connection</string>
   <string name="connections">Connections</string>
@@ -408,7 +374,6 @@
   <string name="new_connection">New Connections</string>
   <string name="pending_connection_title">Requests Received</string>
   <string name="connecting_title">Requests Sent</string>
-
   <string name="chat_reply_hint">Write a message</string>
   <string name="mutual_connections">Mutual Connections</string>
   <string name="chat_paying">Payment failed</string>
@@ -434,10 +399,9 @@
   <string name="price_task_two">Add your LinkedIn profile</string>
   <string name="price_task_three">Verify your Web3 employment</string>
   <string name="verify_org_member">Verify your ORG member identity</string>
-  <string name="concern_about_price">I think my message price is currently </string>
+  <string name="concern_about_price">"I think my message price is currently "</string>
   <string name="price_too_high">Too High</string>
   <string name="price_too_low">Too Low</string>
-
   <string name="passkey_start">New to Link3?</string>
   <string name="passkey_create">Sign up with a passkey</string>
   <string name="passkey_login">Sign in with your passkey</string>
@@ -448,28 +412,23 @@
   <string name="passkey_authenticate_confirm">Confirm Authentication</string>
   <string name="passkey_hint">*Passkeyname is the username for every passkey. Power by CyberID.</string>
   <string name="login_existing_user">Existing user?</string>
-
   <string name="pending_operation_title">Waiting for confirmation</string>
-  <string name="pending_operation_cacel_hint">Automatically cancel the transaction in </string>
+  <string name="pending_operation_cacel_hint">"Automatically cancel the transaction in "</string>
   <string name="pending_operation_gas_hold">SmartGas on hold</string>
   <string name="pending_operation_transaction_time">Transaction Time</string>
-
   <string name="title_verify">Verify</string>
   <string name="verify_by_email">Verify by email</string>
   <string name="verify_try_another">Try another email</string>
   <string name="why_verify_title">Why do you need to verify</string>
   <string name="why_verify">Obtaining the verification icon to enhance your experience credibility.</string>
-  <string name="verify_input_hint">Email@orgname.com</string>
+  <string name="verify_input_hint">Email\@orgname.com</string>
   <string name="verify_waitlist_title">You’re on Waitlist</string>
-  <string name="verify_waitlist_hint">The email “%s” is not yet on our allowlist, please wait for manual review.\n\nYou can try another email that may have been added to our allowlist.</string>
-
+  <string name="verify_waitlist_hint">The email “%s” is not yet on our allowlist, please wait for manual review.nnYou can try another email that may have been added to our allowlist.</string>
   <string name="search_org">Organization</string>
   <string name="search_people">People</string>
   <string name="search_show_all">Show All Results</string>
-
   <string name="balance">Balance</string>
   <string name="message_credit_explanation">The paid messaging credit is issued by the official, can only be used for paid messages, and cannot be withdrawn or used for other transactions.</string>
-
   <string name="notification_skill">Skills</string>
   <string name="notification_empty">No Notifications</string>
   <string name="my_wallet">My Wallets</string>
@@ -500,7 +459,7 @@
   <string name="how_verify_title">How are emails verified?</string>
   <string name="how_verify_hint">Our community\'s authenticity is paramount. Thus, we validate emails using a carefully selected roster of recognized crypto firms and entities. If your work email is not on our list, submit it for consideration.</string>
   <string name="what_verify_title">Are there other ways to complete verification on Link3?</string>
-  <string name="what_verify_hint">Beyond work email verification, you can also be verified upon receiving an invite from a Link3-recognized organization\'s admin. Accepting such an invitation will complete your verification instantly. </string>
+  <string name="what_verify_hint">"Beyond work email verification, you can also be verified upon receiving an invite from a Link3-recognized organization\'s admin. Accepting such an invitation will complete your verification instantly. "</string>
   <string name="replace_email_title">Are you sure you want to replace your email?</string>
   <string name="replace_email_message">Your current email address will be replaced with the work email you provided, for use on Link3.</string>
   <string name="replace_email">Replace</string>
@@ -510,7 +469,7 @@
   <string name="pts">pts</string>
   <string name="total_points">Total Points</string>
   <string name="check">Check</string>
-  <string name="point_task_hint">Unlock professional\nnetworking opportunities\nand earn Link3 Points</string>
+  <string name="point_task_hint">Unlock professionalnnetworking opportunitiesnand earn Link3 Points</string>
   <string name="point_task_not_complete">Task not completed!</string>
   <string name="point_task_complete">Good job! You have earned %d points!</string>
   <string name="history">History</string>
@@ -531,7 +490,10 @@
   <string name="referral_code_copied">Referral code has been copied to clipboard</string>
   <string name="invalid_referral_code">The code is invalid, please try another one</string>
   <string name="unverified">Unverified</string>
-  <string name="get_referred_success">You have earned <b>150 points!</b></string>
+  <string name="get_referred_success">
+    "You have earned "
+    <b>150 points!</b>
+  </string>
   <string name="get_referred_verify_step_one">Verify the referral code</string>
   <string name="get_referred_verify_step_two">Complete organization verification</string>
   <string name="share">Share</string>
@@ -552,7 +514,7 @@
   <string name="referral_tip_question">・How do I get points by referral?</string>
   <string name="referral_tip_one">Both you and your invited friends will receive rewards when invited friend completes the organization identity verification.</string>
   <string name="referral_tip_two">Each successful referral will get you 50 points. If you invite your colleague to Link3, both of you will get 150 points.</string>
-  <string name="referral_twitter">I have verified my professional status with @CyberConnectHQ on Link3, a web3 professional network where verified identities meet value-based communication.\nUse my code %s to verify your employment status on Link3 for bonus points.\nDownload the app at link3.to</string>
+  <string name="referral_twitter">I have verified my professional status with \@CyberConnectHQ on Link3, a web3 professional network where verified identities meet value-based communication.nUse my code %s to verify your employment status on Link3 for bonus points.nDownload the app at link3.to</string>
   <string name="referral_copy_text_title">Share this on your social media</string>
   <string name="copy">Copy</string>
   <string name="homepage_verify_now">Verify Organization Now</string>
@@ -568,7 +530,7 @@
   <string name="mint_now">Mint Now</string>
   <string name="task_explore">Explore</string>
   <string name="task_explore_hint">Explore more ways to rack up your points!</string>
-  <string name="task_mint_cyberid_hint">New to Link3? Mint a CyberID first! </string>
+  <string name="task_mint_cyberid_hint">"New to Link3? Mint a CyberID first! "</string>
   <string name="task_update_profile">Update profile</string>
   <string name="homepage_refer_other_hint">Earn points upon invitees\' successful verification.</string>
   <string name="point_task_description_default">Get to know you better</string>
@@ -659,7 +621,7 @@
   <string name="deposit_amount">Deposit Amount</string>
   <string name="customize">Customize</string>
   <string name="deposit_min">Min 0.50</string>
-  <string name="deposit_hint">- The estimated time for the transfer to be completed is approximately 3-5 minutes. Please be patient and wait for the transaction to be processed.\n- The deposited amount can only be used for sending paid message, and it can be withdrawn again at a later time.</string>
+  <string name="deposit_hint">- The estimated time for the transfer to be completed is approximately 3-5 minutes. Please be patient and wait for the transaction to be processed.n- The deposited amount can only be used for sending paid message, and it can be withdrawn again at a later time.</string>
   <string name="deposit_by_link">Deposit by Link</string>
   <string name="official_pick">Recommended</string>
   <string name="withdraw_token">USDT-Optimism</string>
@@ -802,6 +764,10 @@
   <string name="onboarding_complete_profile">Complete setting up your profile</string>
   <string name="name_card">Link3 Name Card</string>
   <string name="how_it_works">How it works</string>
-  <string name="name_card_hint">1. Add the name card to your wallet.\n2. At networking events, show your name card in the wallet.\n3.Scan QR code to exchange name card in Telegram.</string>
-
+  <string name="name_card_hint">1. Add the name card to your wallet.n2. At networking events, show your name card in the wallet.n3.Scan QR code to exchange name card in Telegram.</string>
+  <plurals name="edit_profile_skill_endorsement">
+    <item quantity="zero">%d Endorsement</item>
+    <item quantity="one">%d Endorsement</item>
+    <item quantity="other">%d Endorsements</item>
+  </plurals>
 </resources>

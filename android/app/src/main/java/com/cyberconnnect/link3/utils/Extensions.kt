@@ -1,4 +1,4 @@
-package com.cyberconnect.link3.utils
+package com.cyberconnnect.link3.utils
 
 import android.content.res.Resources
 import android.text.TextUtils
@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import com.cyberconnect.link3.R
-import com.cyberconnect.link3.databinding.PromptToastBinding
+import com.cyberconnnect.link3.R
+import com.cyberconnnect.link3.databinding.PromptToastBinding
 import org.web3j.utils.Convert
 import java.math.BigDecimal
 

@@ -1,7 +1,7 @@
 package com.cyber.cyberdune.viewmodel
 
-import com.cyberconnect.link3.fragment.Price
-import com.cyberconnect.link3.type.PersonalDisplayName_Type
+import com.cyberconnnect.link3.fragment.Price
+import com.cyberconnnect.link3.type.PersonalDisplayName_Type
 
 data class UserProfile(
     val accessToken: String? = "",

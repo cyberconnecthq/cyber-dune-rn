@@ -51,7 +51,15 @@ export default {
                     deploymentTarget: '16.0'
                 }
             }
-        ]
+        ],
+        [
+            "expo-camera",
+            {
+              "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera",
+              "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone",
+              "recordAudioAndroid": true
+            }
+          ]
     ],
     owner: "darx"
 };

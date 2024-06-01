@@ -1,15 +1,15 @@
-package com.cyberconnect.link3.ui
+package com.cyberconnnect.link3.ui
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import com.apollographql.apollo3.api.Optional
-import com.cyberconnect.link3.databinding.PasskeyLoginBottomSheetBinding
-import com.cyberconnect.link3.type.PasskeyAttestation
-import com.cyberconnect.link3.type.PasskeyTransport
-import com.cyberconnect.link3.type.RegisterTurnkeyUserRequest
-import com.cyberconnect.link3.utils.DuneUtil
-import com.cyberconnect.link3.viewmodel.ApplicationViewModel
+import com.cyberconnnect.link3.databinding.PasskeyLoginBottomSheetBinding
+import com.cyberconnnect.link3.type.PasskeyAttestation
+import com.cyberconnnect.link3.type.PasskeyTransport
+import com.cyberconnnect.link3.type.RegisterTurnkeyUserRequest
+import com.cyberconnnect.link3.utils.DuneUtil
+import com.cyberconnnect.link3.viewmodel.ApplicationViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch

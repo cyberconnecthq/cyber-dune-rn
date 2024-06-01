@@ -34,46 +34,52 @@ public class CyberPasskeyModule: Module {
                 }
             }
         }
-        
-        Function("getEOA") { () -> String? in
-            if PassportManager.sharedInstance.logined {
-                return PassportManager.sharedInstance.getEOA()
-            } else {
-                return nil
-            }
-        }
-        
-        Function("getAvatar") { () -> String? in
-            if PassportManager.sharedInstance.logined {
-                return PassportManager.sharedInstance.getEOA().generateUserAvatar()
-            } else {
-                return nil
-            }
-        }
+      
+      Function("getEOA") { () -> String? in
+          if PassportManager.sharedInstance.logined {
+              return PassportManager.sharedInstance.getEOA()
+          } else {
+              return nil
+          }
+      }
+      
+      
+      Function("getAvatar") { () -> String? in
+          if PassportManager.sharedInstance.logined {
+              return PassportManager.sharedInstance.getEOA().generateUserAvatar()
+          } else {
+              return nil
+          }
+      }
         
         Function("logout") {
             if PassportManager.sharedInstance.logined {
                 PassportManager.sharedInstance.performLogout()
             }
         }
-        
-        
-        // Defines a JavaScript function that always returns a Promise and whose native code
-        // is by default dispatched on the different thread than the JavaScript runtime runs on.
-        AsyncFunction("setValueAsync") { (value: String) in
-            // Send an event to JavaScript.
-            self.sendEvent("onChange", [
-                "value": value
-            ])
-        }
-        
-        // Enables the module to be used as a native view. Definition components that are accepted as part of the
-        // view definition: Prop, Events.
-        View(CyberPasskeyView.self) {
-            // Defines a setter for the `name` prop.
-            Prop("name") { (view: CyberPasskeyView, prop: String) in
-                print(prop)
-            }
-        }
+
+      
+      Function("setTotalStakedCyber") { (total: String) -> Void in
+        UserDefaults.standard.set(total, forKey:"totalStakedCyber")
+      }
+
+      
+    // Defines a JavaScript function that always returns a Promise and whose native code
+    // is by default dispatched on the different thread than the JavaScript runtime runs on.
+    AsyncFunction("setValueAsync") { (value: String) in
+      // Send an event to JavaScript.
+      self.sendEvent("onChange", [
+        "value": value
+      ])
     }
+
+    // Enables the module to be used as a native view. Definition components that are accepted as part of the
+    // view definition: Prop, Events.
+    View(CyberPasskeyView.self) {
+      // Defines a setter for the `name` prop.
+      Prop("name") { (view: CyberPasskeyView, prop: String) in
+        print(prop)
+      }
+    }
+  }
 }

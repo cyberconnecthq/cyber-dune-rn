@@ -1,4 +1,4 @@
-package com.cyberconnect.link3
+package com.cyberconnnect.link3
 
 import android.text.TextUtils
 import com.apollographql.apollo3.ApolloClient

@@ -1,4 +1,4 @@
-package com.cyberconnect.link3.ui
+package com.cyberconnnect.link3.ui
 
 import android.content.Context
 import android.graphics.Typeface
@@ -10,9 +10,9 @@ import android.view.View
 import android.widget.FrameLayout
 import android.widget.ProgressBar
 import android.widget.TextView
-import com.cyberconnect.link3.R
-import com.cyberconnect.link3.databinding.LoadingButtonBinding
-import com.cyberconnect.link3.utils.toPx
+import com.cyberconnnect.link3.R
+import com.cyberconnnect.link3.databinding.LoadingButtonBinding
+import com.cyberconnnect.link3.utils.toPx
 
 class LoadingButton @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr) {
