@@ -178,6 +178,23 @@
         app:layout_constraintBottom_toBottomOf="@id/message_credit"
         />
 
+    <com.cyberconnect.link3.ui.LoadingButton
+        android:id="@+id/log_out"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/edit_height"
+        android:background="@drawable/action_button_bg"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="@dimen/page_general_padding"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="@dimen/page_general_padding"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="24dp"
+        app:button_text="Log out"
+        app:text_color="@color/action_button_text_color"
+        app:text_size="@dimen/text_primary_size"
+        app:text_bold="true"
+        />
+
 <!--    <View-->
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="0dp"-->

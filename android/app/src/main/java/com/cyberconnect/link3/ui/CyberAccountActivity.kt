@@ -63,6 +63,12 @@ class CyberAccountActivity : SubBaseActivity() {
             animator.start()
         }
 
+        binding.logOut.setOnClickListener {
+            applicationViewModel.logout()
+            startActivity(Intent(this, CyberDuneLoginActivity::class.java))
+            finish()
+        }
+
         applicationViewModel.web3jCreated.observe(this) {
             queryEthBalance()
         }
