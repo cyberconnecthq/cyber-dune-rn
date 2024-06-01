@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Image, ScrollView, Platform, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, Image, ScrollView, Platform, SafeAreaView, TouchableOpacity } from 'react-native';
 import CyberPasskeyModule from '@/modules/cyber-passkey/src/CyberPasskeyModule';
 import { Button } from 'react-native';
 import { useFocusEffect } from 'expo-router';
@@ -17,6 +17,11 @@ const PasskeyComponent: React.FC = () => {
     } else {
       CyberPasskeyModule.presentPasskeyViewController();
     }
+  }
+
+  const handleLogout = async () => {
+    CyberPasskeyModule.logout()
+    CyberPasskeyModule.presentPasskeyViewController();
   }
 
   useEffect(() => {
@@ -87,12 +92,12 @@ const PasskeyComponent: React.FC = () => {
     },[]));
 
   const handleScanQRCode = () => {
-    router.push('../camera/camera')
+    router.push('../camera')
   };
 
   return (
-    <SafeAreaView>
-      <ScrollView contentContainerStyle={styles.container} >
+    <SafeAreaView style={styles.safeArea}>
+      <ScrollView contentContainerStyle={styles.container}>
         {user && (
           <View style={styles.card}>
             <View style={styles.header}>
@@ -116,83 +121,104 @@ const PasskeyComponent: React.FC = () => {
             ))}
           </View>
         )}
-        <Button title="扫描二维码" onPress={handleScanQRCode} />
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.button} onPress={handleScanQRCode}>
+            <Text style={styles.buttonText}>Scan QR Code</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={handleLogout}>
+            <Text style={styles.buttonText}>Logout</Text>
+          </TouchableOpacity>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
 }
   
-  const styles = StyleSheet.create({
-    container: {
-      flexGrow: 1,
-      backgroundColor: '#FFFFFF',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    card: {
-      width: '80%',
-      backgroundColor: '#F0FFF0', // Light green background
-      borderRadius: 20,
-      padding: 20,
-      marginBottom: 20,
-    },
-    header: {
-      flexDirection: 'row',
-      alignItems: 'center',
-    },
-    avatar: {
-      width: 100,
-      height: 100,
-      borderRadius: 50,
-      marginRight: 20,
-    },
-    userInfo: {
-      flex: 1,
-    },
-    userName: {
-      fontSize: 24,
-      fontWeight: 'bold',
-      color: '#008000', // Green text
-      marginBottom: 5,
-    },
-    address: {
-      fontSize: 12,
-      color: '#808080', // Grey text
-    },
-    totalBalance: {
-      fontSize: 18,
-      color: '#808080', // Grey text
-    },
-    form: {
-      width: '80%',
-    },
-    title: {
-      fontSize: 20,
-      fontWeight: 'bold',
-      color: '#008000', // Green text
-      marginBottom: 10,
-    },
-    balanceItem: {
-      marginBottom: 10,
-    },
-    chainName: {
-      fontSize: 16,
-      fontWeight: 'bold',
-      color: '#000000', // Black text
-    },
-    balance: {
-      fontSize: 14,
-      color: '#808080', // Grey text
-    },
-    button: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: '#F5FCFF',
-    },
-    button_container: {
-      marginTop: 20,
-    },
-  });
+const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: '#FFFFFF',
+  },
+  container: {
+    flexGrow: 1,
+    backgroundColor: '#FFFFFF',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 20,
+  },
+  card: {
+    width: '80%',
+    backgroundColor: '#F0FFF0', // Light green background
+    borderRadius: 20,
+    padding: 20,
+    marginBottom: 20,
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  avatar: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    marginRight: 20,
+  },
+  userInfo: {
+    flex: 1,
+  },
+  userName: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#008000', // Green text
+    marginBottom: 5,
+  },
+  address: {
+    fontSize: 12,
+    color: '#808080', // Grey text
+  },
+  totalBalance: {
+    fontSize: 18,
+    color: '#808080', // Grey text
+  },
+  form: {
+    width: '80%',
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#008000', // Green text
+    marginBottom: 10,
+  },
+  balanceItem: {
+    marginBottom: 10,
+  },
+  chainName: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#000000', // Black text
+  },
+  balance: {
+    fontSize: 14,
+    color: '#808080', // Grey text
+  },
+  buttonContainer: {
+    width: '80%',
+    marginTop: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  button: {
+    backgroundColor: '#008000', // Green background
+    paddingVertical: 15,
+    paddingHorizontal: 20,
+    borderRadius: 10,
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: '#FFFFFF', // White text
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+});
 
 export default PasskeyComponent;
