@@ -6,6 +6,7 @@ import { TxData, RestakeData } from '../../components/dataType';
 import * as Linking from 'expo-linking';
 import { router } from 'expo-router';
 import Mocked from '@/components/Mocked';
+import GasFeeWidget from '@/components/GasFeeWidget';
 
 const screenWidth = Dimensions.get('window').width;
 
@@ -191,7 +192,8 @@ const LineChartComponent = () => {
             </View>
           </View>
         </View>
-        {/* <Mocked/> */}
+        <GasFeeWidget/>
+        <Mocked/>
       </ScrollView>
     </SafeAreaView>
   );

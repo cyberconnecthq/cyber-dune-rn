@@ -39,7 +39,7 @@ interface MockData {
 
 const mockData: MockData = {
   dashboard1: {
-    title: "Total Transactions",
+    title: "Total Transactions(Mocked)",
     value: 10234,
     description: "Number of transactions processed.",
     chartData: {
@@ -53,7 +53,7 @@ const mockData: MockData = {
     }
   },
   dashboard2: {
-    title: "Active Nodes",
+    title: "Active Nodes(Mocked)",
     value: 245,
     description: "Number of active nodes in the network.",
     chartData: [
@@ -64,7 +64,7 @@ const mockData: MockData = {
     ]
   },
   dashboard3: {
-    title: "Block Height",
+    title: "Block Height(Mocked)",
     value: 673234,
     description: "Current block height of the blockchain."
   }
@@ -114,10 +114,10 @@ const Dashboard: React.FC<DashboardProps> = ({ title, value, description, chartD
 );
 
 const chartConfig = {
-  backgroundGradientFrom: '#1E2923',
-  backgroundGradientTo: '#08130D',
-  color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
-  labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+  backgroundGradientFrom: '#ffffff',
+  backgroundGradientTo: '#ffffff',
+  color: (opacity = 1) => `rgba(46, 139, 87, ${opacity})`, // SeaGreen
+  labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
   strokeWidth: 2,
   barPercentage: 0.5,
 };
@@ -175,7 +175,7 @@ const Mocked: React.FC = () => {
 
   return (
     <SafeAreaView style={styles.mainContainer}>
-      <View >
+      <ScrollView contentContainerStyle={styles.container}>
         {data ? (
           <>
             <Dashboard 
@@ -204,7 +204,7 @@ const Mocked: React.FC = () => {
         ) : (
           <Text style={styles.errorText}>Failed to load data</Text>
         )}
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -213,23 +213,6 @@ const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     backgroundColor: '#f5f5f5',
-  },
-  topBar: {
-    width: '100%',
-    height: 80,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingTop: 20,
-    elevation: 5,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 3,
-  },
-  topBarTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#ffffff',
   },
   container: {
     flexGrow: 1,
@@ -244,7 +227,7 @@ const styles = StyleSheet.create({
   },
   dashboard: {
     width: screenWidth * 0.9,
-    backgroundColor: '#ffffff',
+    backgroundColor: '#f0fff0', // Honeydew
     padding: 20,
     borderRadius: 15,
     marginVertical: 10,
@@ -253,8 +236,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 8,
     elevation: 5,
-    borderWidth: 1,
-    borderColor: '#2ecc71',
+    borderWidth: 2,
+    borderColor: '#2E8B57', // SeaGreen
   },
   dashboardHeader: {
     flexDirection: 'row',
@@ -267,12 +250,12 @@ const styles = StyleSheet.create({
   dashboardTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#2ecc71',
+    color: '#2E8B57', // SeaGreen
   },
   dashboardValue: {
     fontSize: 36,
     fontWeight: 'bold',
-    color: '#2ecc71',
+    color: '#006400', // DarkGreen
     marginBottom: 10,
   },
   dashboardDescription: {
