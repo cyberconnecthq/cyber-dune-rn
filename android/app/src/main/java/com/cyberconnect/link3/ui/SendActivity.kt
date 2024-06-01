@@ -39,8 +39,10 @@ class SendActivity : SubBaseActivity() {
 
     private val scanLauncher = registerForActivityResult(ScanContract()) { scanResult ->
         Timber.tag("hercule").i("scan qr code: ${scanResult.contents}")
-
-        binding.address.setText(scanResult.contents.substring(scanResult.contents.indexOf("0x")))
+        scanResult.contents?.let {result ->
+            val index = scanResult.contents.indexOf("0x")
+            binding.address.setText(scanResult.contents.substring(if (index >= 0) index else 0))
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
