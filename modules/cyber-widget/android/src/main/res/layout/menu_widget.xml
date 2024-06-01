@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    android:background="@drawable/menu_background">
+
+    <!-- Weather Info Section -->
+    <LinearLayout
+        android:id="@+id/weather_info_section"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:layout_centerVertical="true"
+        android:paddingHorizontal="10dp"
+        android:orientation="vertical"
+        android:layout_alignParentStart="true">
+
+        <ImageView
+            android:id="@+id/logo_icon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/cyber_icon"
+            android:layout_marginVertical="5dp"/>
+
+        <TextView
+            android:id="@+id/gas_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fee: 6.43 Gwei"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:layout_marginBottom="4dp"/>
+
+        <TextView
+            android:id="@+id/token_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cyber Price: 9.5$"
+            android:textColor="@android:color/black"
+            android:textSize="14sp"/>
+
+    </LinearLayout>
+
+
+    <!-- Function Buttons Section -->
+    <GridLayout
+        android:id="@+id/function_buttons_section"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@id/weather_info_section"
+        android:layout_alignParentEnd="true"
+        android:columnCount="2"
+        android:rowCount="2"
+        android:layout_marginStart="16dp">
+
+        <TextView
+            android:id="@+id/collect_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:gravity="center"
+            android:text="Withdraw"
+            android:background="@drawable/button_background"
+            android:textColor="@android:color/black"
+            android:layout_margin="8dp"/>
+
+        <TextView
+            android:id="@+id/scan_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:gravity="center"
+            android:text="Scan"
+            android:background="@drawable/button_background"
+            android:textColor="@android:color/black"
+            android:layout_margin="8dp"/>
+
+        <TextView
+            android:id="@+id/health_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:gravity="center"
+            android:text="Address"
+            android:background="@drawable/button_background"
+            android:textColor="@android:color/black"
+            android:layout_margin="8dp"/>
+
+        <TextView
+            android:id="@+id/custom_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:gravity="center"
+            android:text="Customize"
+            android:background="@drawable/button_background"
+            android:textColor="@android:color/black"
+            android:layout_margin="8dp"/>
+    </GridLayout>
+
+
+</RelativeLayout>
