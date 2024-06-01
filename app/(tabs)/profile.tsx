@@ -34,15 +34,15 @@ const PasskeyComponent: React.FC = () => {
         const userData = {
           name: 'User',
           avatar: avatar,
-          totalBalance: 1000,
+          totalBalance: '$24004.7',
           address: eoa,
         };
         setUser(userData);
 
         const chainBalances = [
-          { chain: 'ETH', balance: 500 },
-          { chain: 'BTC', balance: 300 },
-          { chain: 'EOS', balance: 200 },
+          { chain: 'ETH', balance: 0.0005 },
+          { chain: 'OP', balance: 1.156 },
+          { chain: 'CYBER', balance: 3000 },
         ];
         setBalances(chainBalances);
       } else {

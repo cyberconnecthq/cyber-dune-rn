@@ -52,7 +52,7 @@ struct CyberDuneWidgetEntryView : View {
           .frame(maxWidth: .infinity, maxHeight: .infinity)
           .opacity(0.5)
         VStack() {
-          Text("9.8$")//↑↓
+          Text("8.92$")//↑↓
             .foregroundColor(Color.black)
             .font(Font.system(size: 18, weight: .semibold))
           +
@@ -80,7 +80,7 @@ struct CyberDuneWidgetEntryView : View {
             .foregroundColor(Color.black)
             .font(Font.system(size: 12))
           +
-          Text("9.5$")
+          Text("8.92$")
             .foregroundColor(Color.black)
             .font(Font.system(size: 14, weight: .bold))
         }
