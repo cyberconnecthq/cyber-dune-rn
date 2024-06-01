@@ -47,7 +47,14 @@
     </activity>
     <activity android:name=".ui.MyReactActivity"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
-      <activity android:name=".ui.CyberAccountActivity"/>
+    <activity android:name=".ui.CyberAccountActivity"
+        android:exported="true">
+      <intent-filter>
+        <action android:name="com.cyberconnect.link3.WALLET" />
+
+        <category android:name="android.intent.category.DEFAULT" />
+      </intent-filter>
+    </activity>
       <activity android:name=".ui.ReceiveActivity"/>
       <activity android:name=".ui.SendActivity"/>
     <activity
