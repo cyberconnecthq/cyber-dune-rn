@@ -13,6 +13,14 @@ export function presentPasskeyViewController() {
   return CyberPasskeyModule.presentPasskeyViewController();
 }
 
+export function getEOA() {
+  return CyberPasskeyModule.getEOA()
+}
+
+export function getAvatar() {
+  return CyberPasskeyModule.getAvatar()
+}
+
 export async function setValueAsync(value: string) {
   return await CyberPasskeyModule.setValueAsync(value);
 }

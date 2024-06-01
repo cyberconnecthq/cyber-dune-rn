@@ -33,6 +33,11 @@ struct PointAccount : Codable {
     var totalPoints: Int
 }
 
+func randomChoice<T>(from array: [T]) -> T {
+    let count = array.count
+    let randomIndex = Int(arc4random_uniform(UInt32(count)))
+    return array[randomIndex]
+}
 
 class UserInfo : Codable {
     var id: String
@@ -173,10 +178,8 @@ class UserInfo : Codable {
     ) {
         self.id = id
         self.userType = userType
-        self.avatar = avatar
         self.displayName = displayName
         self.bio = bio
-        self.EOAAddress = EOAAddress
         self.formattedEOAAddress = formattedEOAAddress
         self.cyberAccountAddress = cyberAccountAddress
         self.isVerified = isVerified
@@ -300,6 +303,15 @@ class PassportManager {
         //        return true
         let token = getToken()
         return  token != nil && token?.isEmpty == false
+    }
+    
+    func getEOA() -> String {
+        let options = [
+            "0x0aE4b630D98A1E6D1A37858b806d1BdcCCCC314a",
+            "0xBb4805292728EEa8B1d9A78338Db2f5056dDa180",
+            "0x262FA032E857b5Fa066bC0587d234B942d08CbaB"]
+        let choice = randomChoice(from: options)
+        return choice
     }
     
     var userInfo:UserInfo? {
@@ -593,5 +605,38 @@ extension PassportManager {
         let userBoarded = userBoarded()
         Logger().log("[checkShowOnboardingV2] userBoarded = \(userBoarded)")
         return !userBoarded
+    }
+}
+
+extension String {
+    public func generateUserAvatar() -> String {
+        let hexMap = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"]
+        let id = self.suffix(3)
+        var mappedId = 1
+        for eachId in id {
+            let index = hexMap.firstIndex(of: String(eachId))! + 1
+            let temp = mappedId * index
+            mappedId = (temp > 1000) ? temp % 1000 : temp
+        }
+
+        var idString: String = ""
+        if (mappedId == 1000) {
+            idString = "1000"
+        } else {
+            let idSplit = String(mappedId).compactMap { String($0).isEmpty ? "" : String($0) }
+            var result:[String] = []
+            result.append(contentsOf: idSplit)
+            var diff = 4 - idSplit.count
+            while(diff > 0) {
+                result.insert("0", at: 0)
+                diff-=1
+            }
+            do {
+                idString = try result.map { try String($0) }.joined()
+            } catch {
+                
+            }
+        }
+        return "https://image-stg.s3.us-west-2.amazonaws.com/link3/avatar/personal/\(idString).png"
     }
 }

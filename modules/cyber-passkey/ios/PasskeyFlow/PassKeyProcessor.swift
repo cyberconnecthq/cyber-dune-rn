@@ -37,10 +37,6 @@ enum PassKeyOnGoingType {
 }
 
 class PassKeyProcessor: NSObject, ASAuthorizationControllerPresentationContextProviding, ASAuthorizationControllerDelegate {
-    
-    func logHello() {
-        print("hello~~")
-    }
                             
     let domain = "link3.to"
     var authenticationAnchor: ASPresentationAnchor?

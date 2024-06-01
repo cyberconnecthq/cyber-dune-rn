@@ -30,7 +30,25 @@ public class CyberPasskeyModule: Module {
             }
         }
     }
+      
+      Function("getEOA") { () -> String? in
+          if PassportManager.sharedInstance.logined {
+              return PassportManager.sharedInstance.getEOA()
+          } else {
+              return nil
+          }
+      }
+      
+      
+      Function("getAvatar") { () -> String? in
+          if PassportManager.sharedInstance.logined {
+              return PassportManager.sharedInstance.getEOA().generateUserAvatar()
+          } else {
+              return nil
+          }
+      }
 
+      
     // Defines a JavaScript function that always returns a Promise and whose native code
     // is by default dispatched on the different thread than the JavaScript runtime runs on.
     AsyncFunction("setValueAsync") { (value: String) in

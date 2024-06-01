@@ -8,7 +8,7 @@ const App: React.FC = () => {
     if (Platform.OS === 'android') { 
         CyberPasskeyModule.startActivity();
     } else {
-        CyberPasskeyModule.presentPasskeyViewController()
+      CyberPasskeyModule.presentPasskeyViewController()
     }
 
   };

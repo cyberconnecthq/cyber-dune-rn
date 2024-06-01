@@ -434,7 +434,8 @@ extension PSPEntryViewController : PassPortManagerPassKeyDelegate {
 //                    self.makeToast(text: toastText ?? "Network error")
 //                }
 //            }
-        PassportManager.sharedInstance.processInfoAfterLogin(token:"")
+        let defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI4NTk0ZWViNC03OGU5LTQ2MzgtOThjZS05Y2RlOTNhMGZiNWIiLCJlb2EiOiIweGFlZTJhYTMwNTM4MzBlY2Q5MGQxNzYzZTE3NDRjMjk1ZWYwN2RlOTciLCJhYSI6IjB4MWQ5YTkyNmQwMGQ2ZWIyMzY4NjlkNTE2MjhlOWU1MzJiMmU3ZDQ0YiIsImV4cCI6MTcxNDU0NzE1MCwiaWF0IjoxNzEzOTQyMzUwLCJpc3MiOiJsaW5rMy50byJ9.6GArBEQ2xLWeXHnYKPEaG-SzqI9vcTqdLML-_zBhrRc"
+        PassportManager.sharedInstance.processInfoAfterLogin(token:defaultAccessToken)
         DispatchQueue.main.asyncAfter(deadline: .now()+1.0) {
             self.navigationController?.dismiss(animated: true)
         }
