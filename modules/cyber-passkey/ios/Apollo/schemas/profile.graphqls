@@ -1,0 +1,1494 @@
+interface Profile {
+  id: ID!
+  handle: String!
+  type: ProfileType!
+  blocks: [Block!]!
+  isCreator: Boolean!
+  creator: Creator
+}
+
+type OrgProfile implements Profile {
+  id: ID!
+  handle: String!
+  type: ProfileType!
+  organization: Organization!
+  displayName: String!
+  bio: String!
+  profilePicture: String!
+  backgroundPicture: String!
+  cmcTokenId: ID!
+  sector: String!
+  networks: [String!]!
+  isFollowing: Boolean!
+  blocks: [Block!]!
+  isCreator: Boolean!
+  creator: Creator
+}
+
+type PerProfile implements Profile {
+  id: ID!
+  handle: String!
+  owner: User!
+  type: ProfileType!
+  isFollowing: Boolean!
+  """
+  Display name of the personal profile, standard displayname or ENS, standard: 1-20 characters; letters, numbers, and blanks only.
+  """
+  displayName: PersonalDisplayName!
+  bio: String!
+  """
+  Profile avatar picture, hash of IPFS address or owned NFT.
+  """
+  profilePicture: PersonalPicture!
+  """
+  Profile avatar frame, ERC1155 token id.
+  """
+  avatarFrameTokenId: ID
+  """
+  Profile background picture, hash of IPFS address or collection of owned NFT.
+  """
+  backgroundPicture: PersonalPicture!
+  """
+  Personal headline, including Title and Organization.
+  """
+  headline: Twitter!
+  isVerified: Boolean!
+  isAdmin: Boolean!
+  blocks: [Block!]!
+  isPrimary: Boolean!
+  isCreator: Boolean!
+  creator: Creator
+  reputation: ReputationScore!
+  identities : [Identity!]
+
+  connectStatus: ConnectStatus!
+  connectionsCount: Int!
+  mutualConnectionCount: Int!
+  connections(first: Int, after: String): ProfilePage!
+  mutualConnections(first: Int, after: String): ProfilePage!
+  connecting(first: Int, after: String): ProfilePage!
+  countConnecting: Int!
+  pendingConnection(first: Int, after: String): ProfilePage!
+  countPendingConnection: Int!
+  connectionDegree: ConnectionDegree!
+  connectTime: Timestamp
+  languages: [String!]
+  region: String!
+}
+
+type ReputationScore {
+    total: Int!
+    base: Int
+    verify: Int
+    skill: Int
+    recommendation: Int
+}
+
+type Creator {
+  isSubscribing: Boolean!
+  posts(first: Int, after: String, filter: PostsRequest_PostsFilter): PostPage!
+  postsCount: Int!
+  # private
+  postDrafts(first: Int, after: String): PostDraftPage!
+  postDraftsCount: Int!
+  subscribers(first: Int, after: String): SubscriberPage!
+}
+
+enum ProfileType {
+  PERSONAL
+  ORGANIZATION
+}
+
+enum ProfileTag {
+  INVESTOR
+  INFLUENCER
+  FOUNDER
+  ENGINEER
+  CONTENT_CREATOR
+  COMMUNITY_MEMBER
+}
+
+type PersonalPicture {
+  picture: String
+  nfts: [NFT!]
+  type: PersonalPicture_Type!
+}
+
+enum PersonalPicture_Type {
+  GENERAL
+  NFT
+}
+
+type PersonalDisplayName {
+  displayName: String!
+  type: PersonalDisplayName_Type!
+}
+
+enum PersonalDisplayName_Type {
+  GENERAL
+  ENS
+  SID
+  CYBER
+}
+
+type ProfilePage {
+  pageInfo: PageInfo!
+  list: [Profile!]!
+}
+
+enum ConnectStatus {
+  UNCONNECTED
+  CONNECTING
+  CONNECTED
+  PENDING_CONNECTION
+}
+
+enum ConnectionDegree {
+  NO_CONNECTION
+  FIRST
+  SECOND
+}
+
+enum BlockType {
+  LINK
+  SUPERLINK
+  TWITTER
+  CREDENTIAL
+  NFT_GALLERY
+  W3ST_GALLERY
+  SNAPSHOT
+  NFT_COLLECTION
+  EVENT
+  POSTS
+  SKILL
+  WORK_EXPERIENCE
+  EDUCATION
+  CONTACT
+  RECOMMENDATION
+}
+
+interface Block {
+  id: ID!
+  profileId: ID!
+  type: BlockType!
+  displayName: String!
+  index: Int!
+  isPlaceHolder: Boolean!
+  visibility: BlockVisibility!
+}
+
+type LinkBlock implements Block {
+  id: ID!
+  profileId: ID!
+  type: BlockType!
+  displayName: String!
+  index: Int!
+  isPlaceHolder: Boolean!
+  visibility: BlockVisibility!
+
+  links: [Link!]!
+}
+
+type Link {
+  title: String!
+  link: Url!
+}
+
+type SuperLinkBlock implements Block {
+  id: ID!
+  profileId: ID!
+  type: BlockType!
+  displayName: String!
+  index: Int!
+  isPlaceHolder: Boolean!
+  visibility: BlockVisibility!
+
+  superLinks: [SuperLink!]!
+}
+
+enum SuperLinkType {
+  TWEET
+  MEDIUM
+  MIRROR
+  YOUTUBE
+  SUBSTACK
+  OTHER
+}
+
+type SuperLink {
+  type: SuperLinkType!
+  title: String!
+  link: Url!
+  description: String!
+  imageUrl: Url!
+}
+
+enum ShapeType {
+  ROUND
+  SQUARE
+}
+
+enum LayoutType {
+  HORIZONTAL
+  VERTICAL
+}
+
+type TwitterBlock implements Block {
+  id: ID!
+  profileId: ID!
+  type: BlockType!
+  displayName: String!
+  index: Int!
+  isPlaceHolder: Boolean!
+  visibility: BlockVisibility!
+
+  avatarShape: ShapeType!
+  layout: LayoutType!
+  twitters: [Twitter!]!
+}
+
+enum HeadlineType {
+  PROFESSIONAL
+  KOL
+  STUDENT
+}
+
+type Twitter {
+  twitterId: String!
+  twitterHandle: String!
+  displayName: String!
+  avatar: Url!
+  title: String!
+  description: String!
+  profileId: ID
+  followersCount: Int!
+  headlineType: HeadlineType!
+}
+
+type CredentialBlock implements Block {
+  id: ID!
+  profileId: ID!
+  type: BlockType!
+  displayName: String!
+  index: Int!
+  isPlaceHolder: Boolean!
+  visibility: BlockVisibility!
+
+  galaxyCreds: [GalaxyCred!]
+  poaps: [Poap!]
+}
+
+type GalaxyCred {
+  id: String!
+  name: String!
+}
+
+type Poap {
+  id: String!
+  imageUrl: Url!
+}
+
+type NFTBlock implements Block {
+  id: ID!
+  profileId: ID!
+  type: BlockType!
+  displayName: String!
+  index: Int!
+  isPlaceHolder: Boolean!
+  visibility: BlockVisibility!
+
+  nfts: [NFT!]
+}
+
+type NFT {
+  name: String!
+  contract: String!
+  tokenId: ID!
+  imageUrl: Url!
+  ercType: ERCType!
+  chainId: Int
+  owner: String!
+}
+
+type NFTWithCount {
+  nft: NFT!
+  count: Int!
+}
+
+enum ERCType {
+  ERC721
+  ERC1155
+  ERC20
+}
+
+type W3STBlock implements Block {
+  id: ID!
+  profileId: ID!
+  type: BlockType!
+  displayName: String!
+  index: Int!
+  isPlaceHolder: Boolean!
+  visibility: BlockVisibility!
+
+  tokenUris: [String!]!
+}
+
+type NFTCollectionBlock implements Block {
+  id: ID!
+  profileId: ID!
+  type: BlockType!
+  displayName: String!
+  index: Int!
+  isPlaceHolder: Boolean!
+  visibility: BlockVisibility!
+
+  slugs: [String!]!
+}
+
+type SnapshotBlock implements Block {
+  id: ID!
+  profileId: ID!
+  type: BlockType!
+  displayName: String!
+  index: Int!
+  isPlaceHolder: Boolean!
+  visibility: BlockVisibility!
+
+  spaceId: String!
+}
+
+type EventBlock implements Block {
+  id: ID!
+  profileId: ID!
+  type: BlockType!
+  displayName: String!
+  index: Int!
+  isPlaceHolder: Boolean!
+  visibility: BlockVisibility!
+
+  events: [Event!]!
+}
+
+type PostBlock implements Block {
+  id: ID!
+  profileId: ID!
+  type: BlockType!
+  displayName: String!
+  index: Int!
+  isPlaceHolder: Boolean!
+  visibility: BlockVisibility!
+
+  posts: [Post!]!
+  postPage(first: Int, after: String, filter: PostsRequest_PostsFilter): PostPage!
+}
+
+type SkillBlock implements Block {
+  id: ID!
+  profileId: ID!
+  type: BlockType!
+  displayName: String!
+  index: Int!
+  isPlaceHolder: Boolean!
+  visibility: BlockVisibility!
+
+  skills: [Skill!]!
+}
+
+type Skill {
+  id: ID!
+  name: String!
+  endorserCount: Int!
+  endorsed: Boolean!
+}
+
+type WorkExperienceBlock implements Block {
+  id: ID!
+  profileId: ID!
+  type: BlockType!
+  displayName: String!
+  index: Int!
+  isPlaceHolder: Boolean!
+  visibility: BlockVisibility!
+
+  workExperiences: [WorkExperience!]!
+}
+
+type WorkExperience {
+  id: ID!
+  organization: Twitter!
+  startDate: Int!
+  """
+  null means present
+  """
+  endDate: Int
+  description: String!
+}
+
+type EducationBlock implements Block {
+  id: ID!
+  profileId: ID!
+  type: BlockType!
+  displayName: String!
+  index: Int!
+  isPlaceHolder: Boolean!
+  visibility: BlockVisibility!
+
+  educations: [Education!]!
+}
+
+type Education {
+  id: ID!
+  school: Twitter!
+  startDate: Int!
+  endDate: Int
+  description: String!
+  degree: String
+  fieldOfStudy: String
+}
+
+type ContactBlock implements Block {
+  id: ID!
+  profileId: ID!
+  type: BlockType!
+  displayName: String!
+  index: Int!
+  isPlaceHolder: Boolean!
+  visibility: BlockVisibility!
+
+  contacts: [Contact!]!
+}
+
+type Contact {
+  contactType: ContactType!
+  name: String!
+  hidden: Boolean!
+}
+
+enum ContactType {
+  EMAIL
+  TWITTER
+  LINKEDIN
+  GITHUB
+}
+
+type RecommendationBlock implements Block {
+  id: ID!
+  profileId: ID!
+  type: BlockType!
+  displayName: String!
+  index: Int!
+  isPlaceHolder: Boolean!
+  visibility: BlockVisibility!
+
+  received: [Recommendation!]!
+  given: [Recommendation!]!
+  my: Recommendation
+}
+
+type Recommendation {
+  user: User!
+  content: String!
+  hidden: Boolean!
+}
+
+enum PostsRequest_PostsFilter {
+  ALL
+  PINNED
+}
+
+enum ProfileResponse_Status {
+  SUCCESS
+  INVALID_PARAMETER
+  PROFILE_NOT_FOUND
+  DELETED_PROFILE
+}
+
+type ProfileResponse {
+  status: ProfileResponse_Status!
+  message: String!
+  data: Profile
+}
+
+enum RegisterProfileResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  EXCEED_LIMIT
+  INVALID_CODE
+  INVALID_PARAMETER
+  NOT_ELIGIBLE
+  DUPLICATE_TWITTER
+  GNOSIS_FORBID_PERSONAL
+  TWITTER_NOT_LINKED
+  TRY_AGAIN_LATER
+}
+
+type RegisterProfileResponse {
+  status: RegisterProfileResponse_Status!
+  message: String!
+  data: Profile
+}
+
+"""
+Full update. If you don't want to modify a certain field, pass in its original value.
+"""
+input UpdateOrgProfileInput {
+  displayName: String
+  bio: String
+  profilePicture: Url
+  backgroundPicture: Url
+  cmcTokenId: ID
+  sector: String
+  networks: [String!]
+}
+
+"""
+Full update. If you don't want to modify a certain field, pass in its original value.
+"""
+input UpdatePersonalInput {
+  bio: String
+  displayName: PersonalDisplayNameInput
+  profilePicture: PersonalPictureInput
+  backgroundPicture: PersonalPictureInput
+  headline: TwitterInput
+  avatarFrameTokenId: ID
+  languages: [String!]
+  region: String
+}
+
+input PersonalDisplayNameInput {
+  displayName: String!
+  type: PersonalDisplayName_Type!
+}
+
+input PersonalPictureInput {
+  picture: String!
+  nfts: [NFTInput!]
+  type: PersonalPicture_Type!
+}
+
+enum UpdateProfileResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  PROFILE_NOT_FOUND
+  PERMISSION_DENIED
+  INVALID_PARAMETER
+}
+
+type UpdateProfileResponse {
+  status: UpdateProfileResponse_Status!
+  message: String!
+}
+
+enum SubmitOrgProfileHandleResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  PROFILE_NOT_FOUND
+  PERMISSION_DENIED
+  INVALID_PARAMETER
+  REGISTERED_HANDLE
+  WRONG_VERIFICATION_STATUS
+  RESERVED_HANDLE
+  TWITTER_NOT_LINKED
+  EMAIL_NOT_LINKED
+  INVALID_EMAIL
+  INVALID_TOKEN
+}
+
+type SubmitOrgProfileHandleResponse {
+  status: SubmitOrgProfileHandleResponse_Status!
+  message: String!
+}
+
+enum UpdateOrgProfileFromTwitterResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  PROFILE_NOT_FOUND
+  ORGANIZATION_NOT_FOUND
+  PERMISSION_DENIED
+  TWITTER_NOT_LINKED
+  TWITTER_NOT_FOUND
+  FAILED_TWITTER_AUTH
+  TOO_FREQUENT_AUTH
+}
+
+type UpdateOrgProfileFromTwitterResponse {
+  status: UpdateOrgProfileFromTwitterResponse_Status!
+  message: String!
+}
+
+"""
+Should only exist one, link | SuperLink | Twitter
+"""
+input CreateBlockInput {
+  displayName: String!
+
+  link: LinkCreation
+  superLink: SuperLinkCreation
+  twitter: TwitterCreation
+  credential: CredentialCreation
+  nft: NFTCreation
+  w3st: W3STCreation
+  snapshot: SnapshotCreation
+  nftCollection: NFTCollectionCreation
+  event: EventCreation
+  post: PostCreation
+  contact: ContactCreation
+}
+
+enum CreateBlockResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  PROFILE_NOT_FOUND
+  PERMISSION_DENIED
+  INVALID_PARAMETER
+  EXCEED_LIMIT
+}
+
+type CreateBlockResponse {
+  status: CreateBlockResponse_Status!
+  message: String!
+}
+
+"""
+Should only exist one, link | superLink | twitter, according to the block's type.
+"""
+input UpdateBlockInput {
+  """
+  Block display name. If you don't want to modify it, pass in its original value.
+  """
+  displayName: String!
+  """
+  Block index，start from 0. If you don't want to modify it, pass in its original value.
+  """
+  index: Int!
+
+  link: LinkCreation
+  superLink: SuperLinkCreation
+  twitter: TwitterCreation
+  credential: CredentialCreation
+  nft: NFTCreation
+  w3st: W3STCreation
+  snapshot: SnapshotCreation
+  nftCollection: NFTCollectionCreation
+  contact: ContactCreation
+}
+
+enum UpdateBlockResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  BLOCK_NOT_FOUND
+  PROFILE_NOT_FOUND
+  PERMISSION_DENIED
+  INVALID_PARAMETER
+  EXCEED_LIMIT
+}
+
+type UpdateBlockResponse {
+  status: UpdateBlockResponse_Status!
+  message: String!
+}
+
+enum DeleteBlockResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  BLOCK_NOT_FOUND
+  PROFILE_NOT_FOUND
+  PERMISSION_DENIED
+}
+
+type DeleteBlockResponse {
+  status: DeleteBlockResponse_Status!
+  message: String!
+}
+
+enum BlockVisibility {
+  BLOCK_VISIBILITY_PUBLIC
+  BLOCK_VISIBILITY_PRIVATE
+}
+
+input UpdateBlockVisibilityInput {
+  id: ID!
+  visibility: BlockVisibility!
+}
+
+enum UpdateBlockVisibilityResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  BLOCK_NOT_FOUND
+  PROFILE_NOT_FOUND
+  PERMISSION_DENIED
+}
+
+type UpdateBlockVisibilityResponse {
+  status: UpdateBlockVisibilityResponse_Status!
+}
+
+input LinkCreation {
+  links: [LinkInput!]!
+}
+
+input LinkInput {
+  title: String!
+  link: Url!
+}
+
+input SuperLinkCreation {
+  superLinks: [SuperLinkInput!]!
+}
+
+input SuperLinkInput {
+  type: SuperLinkType!
+  link: String!
+  title: String!
+  description: String!
+  imageUrl: Url!
+}
+
+input TwitterCreation {
+  avatarShape: ShapeType!
+  layout: LayoutType!
+  twitters: [TwitterInput!]!
+}
+
+input TwitterInput {
+  twitterId: String!
+  twitterHandle: String!
+  displayName: String!
+  avatar: Url!
+  title: String!
+  description: String!
+  followersCount: Int
+  headlineType: HeadlineType
+}
+
+input CredentialCreation {
+  galaxyCreds: [GalaxyCredInput!]
+  poaps: [PoapInput!]
+}
+
+input GalaxyCredInput {
+  id: String!
+  name: String!
+}
+
+input PoapInput {
+  id: String!
+  imageUrl: Url!
+}
+
+input NFTCreation {
+  nfts: [NFTInput!]!
+}
+
+input NFTInput {
+  name: String!
+  contract: String!
+  ercType: ERCType!
+  tokenId: ID!
+  imageUrl: Url!
+  owner: String!
+}
+
+input W3STCreation {
+  tokenUris: [String!]!
+}
+
+input SnapshotCreation {
+  spaceId: String!
+}
+
+input NFTCollectionCreation {
+  slugs: [String!]!
+}
+
+input EventCreation {
+  enable: Boolean!
+}
+
+input PostCreation {
+  enable: Boolean!
+}
+
+input ContactCreation {
+  enable: Boolean!
+  hideEmail: Boolean!
+  hideTwitter: Boolean!
+  hideLinkedin: Boolean!
+  hideGithub: Boolean!
+}
+
+enum EligibilityType {
+  WHITE_LIST
+  INVITATION_CODE
+  TWITTER_VERIFY
+  HOLD_CYBER_PROFILE
+}
+
+input Eligibility {
+  type: EligibilityType!
+  invitationCode: String
+  handle: String
+}
+
+enum CheckEligibilityResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  NOT_ELIGIBLE
+  INVALID_CODE
+  DUPLICATE_TWITTER
+  INVALID_PARAMETER
+  TWITTER_NOT_LINKED
+  INVALID_ELIGIBILITY_TYPE
+}
+
+type CheckEligibilityResponse {
+  status: CheckEligibilityResponse_Status!
+  message: String!
+}
+
+enum CheckHandleEligibilityResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  PROFILE_NOT_FOUND
+  PERMISSION_DENIED
+  INVALID_HANDLE_FORMAT
+  DUPLICATE_HANDLE
+}
+
+type CheckHandleEligibilityResponse {
+  status: CheckHandleEligibilityResponse_Status!
+}
+
+input ReviewingProfileSurveyInput {
+  options: [ReviewingProfileSurvey_Option!]!
+  source: String
+}
+
+input SetPrimaryCyberIdInput {
+  handle: String!
+}
+
+type SetPrimaryCyberIdResponse {
+  status: SetPrimaryCyberIdResponse_Status!
+}
+
+enum SetPrimaryCyberIdResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  INVALID_HANDLE
+  PROFILE_NOT_FOUND
+}
+
+type SkillEndorsementsResponse {
+  users: [User!]!
+  endorsed: Boolean!
+}
+
+input CreateSkillInput {
+  profileId: ID!
+  name: String!
+}
+
+type CreateSkillResponse {
+  status: CreateSkillResponse_Status!
+}
+
+enum CreateSkillResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  PROFILE_NOT_FOUND
+  PERMISSION_DENIED
+  DUPLICATE_SKILL
+}
+
+input DeleteSkillInput {
+  skillId: ID!
+}
+
+type DeleteSkillResponse {
+  status: DeleteSkillResponse_Status!
+}
+
+enum DeleteSkillResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  SKILL_NOT_FOUND
+  PERMISSION_DENIED
+}
+
+input AddSkillEndorsementInput {
+  skillId: ID!
+}
+
+type AddSkillEndorsementResponse {
+  status: AddSkillEndorsementResponse_Status!
+}
+
+enum AddSkillEndorsementResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  SKILL_NOT_FOUND
+  PERMISSION_DENIED
+  DUPLICATE_ENDORSEMENT
+  UNCONNECTED_PROFILE
+}
+
+input RemoveSkillEndorsementInput {
+  skillId: ID!
+}
+
+type RemoveSkillEndorsementResponse {
+  status: RemoveSkillEndorsementResponse_Status!
+}
+
+enum RemoveSkillEndorsementResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  SKILL_NOT_FOUND
+  PERMISSION_DENIED
+  ENDORSEMENT_NOT_FOUND
+}
+
+input CreateWorkExperienceInput {
+  profileId: ID!
+  title: String!
+  orgName: String!
+  orgTwitterId: String!
+  orgTwitterHandle: String!
+  orgAvatar: Url!
+  startDate: Int!
+  """
+  null means present
+  """
+  endDate: Int
+  description: String!
+}
+
+type CreateWorkExperienceResponse {
+  status: CreateWorkExperienceResponse_Status!
+}
+
+enum CreateWorkExperienceResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  PROFILE_NOT_FOUND
+  PERMISSION_DENIED
+}
+
+input UpdateWorkExperienceInput {
+  workExperienceId: ID!
+  title: String!
+  orgName: String!
+  orgTwitterId: String!
+  orgTwitterHandle: String!
+  orgAvatar: Url!
+  startDate: Int!
+  endDate: Int
+  description: String!
+}
+
+type UpdateWorkExperienceResponse {
+  status: UpdateWorkExperienceResponse_Status!
+}
+
+enum UpdateWorkExperienceResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  WORK_EXPERIENCE_NOT_FOUND
+  PERMISSION_DENIED
+}
+
+input DeleteWorkExperienceInput {
+  workExperienceId: ID!
+}
+
+type DeleteWorkExperienceResponse {
+  status: DeleteWorkExperienceResponse_Status!
+}
+
+enum DeleteWorkExperienceResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  WORK_EXPERIENCE_NOT_FOUND
+  PERMISSION_DENIED
+}
+
+input CreateEducationInput {
+  profileId: ID!
+  title: String!
+  orgName: String!
+  orgTwitterId: String!
+  orgTwitterHandle: String!
+  orgAvatar: Url!
+  startDate: Int!
+  endDate: Int
+  description: String!
+  degree: String
+  fieldOfStudy: String
+}
+
+type CreateEducationResponse {
+  status: CreateEducationResponse_Status!
+}
+
+enum CreateEducationResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  PROFILE_NOT_FOUND
+  PERMISSION_DENIED
+}
+
+input UpdateEducationInput {
+  educationId: ID!
+  title: String!
+  orgName: String!
+  orgTwitterId: String!
+  orgTwitterHandle: String!
+  orgAvatar: Url!
+  startDate: Int!
+  endDate: Int
+  description: String!
+  degree: String
+  fieldOfStudy: String
+}
+
+type UpdateEducationResponse {
+  status: UpdateEducationResponse_Status!
+}
+
+enum UpdateEducationResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  EDUCATION_NOT_FOUND
+  PERMISSION_DENIED
+}
+
+input DeleteEducationInput {
+  educationId: ID!
+}
+
+type DeleteEducationResponse {
+  status: DeleteEducationResponse_Status!
+}
+
+enum DeleteEducationResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  EDUCATION_NOT_FOUND
+  PERMISSION_DENIED
+}
+
+input GiveRecommendationInput {
+  profileId: ID!
+  content: String!
+}
+
+type GiveRecommendationResponse {
+  status: GiveRecommendationResponse_Status!
+}
+
+enum GiveRecommendationResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  PROFILE_NOT_FOUND
+  PERMISSION_DENIED
+  UNCONNECTED_PROFILE
+  ALREADY_RECOMMENDED
+  INVALID_CONTENT
+}
+
+input UpdateReceivedRecommendationsInput {
+  updates: [UpdateRecommendationInput!]!
+}
+
+input UpdateRecommendationInput {
+  giverUserId: ID!
+  visibility: RecommendationVisibility!
+}
+
+enum RecommendationVisibility {
+  VISIBLE
+  HIDDEN
+}
+
+type UpdateReceivedRecommendationsResponse {
+  status: UpdateReceivedRecommendationsResponse_Status!
+}
+
+enum UpdateReceivedRecommendationsResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  INVALID_PARAMETER
+  RECOMMENDATION_NOT_FOUND
+  PERMISSION_DENIED
+}
+
+input UpdateGivenRecommendationsInput {
+  updates: [UpdateGivenRecommendationInput!]!
+}
+
+input UpdateGivenRecommendationInput {
+  receivedProfileId: ID!
+  visibility: RecommendationVisibility!
+}
+
+enum UpdateGivenRecommendationsResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  INVALID_PARAMETER
+  RECOMMENDATION_NOT_FOUND
+  PERMISSION_DENIED
+}
+
+type UpdateGivenRecommendationsResponse {
+  status: UpdateGivenRecommendationsResponse_Status!
+}
+
+type DeleteRecommendationResponse {
+  status: DeleteRecommendationResponse_Status!
+}
+
+enum DeleteRecommendationResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  RECOMMENDATION_NOT_FOUND
+}
+
+type PerProfileWithOrg {
+  profile: PerProfile!
+  orgList: [PerProfileOrg!]!
+}
+
+type PerProfileOrg {
+  name: String!
+  avatar: Url!
+}
+
+type MyRecommendationsResponse {
+  received: [Recommendation!]!
+  given: [Recommendation!]!
+}
+
+input SearchProfilesInput {
+  query: String!
+  limit: Int!
+  after: String
+  includeMember: Boolean
+}
+
+type SearchProfilesResponse {
+  status: SearchProfilesResponse_Status!
+  pageInfo: PageInfo!
+  profiles: [Profile!]!
+  orgProfiles: [Profile!]!
+}
+
+input SearchProfilesV2Input {
+  query: String!
+  first: Int
+  after: String
+  filter: SearchProfilesV2Request_Filter!
+  personalFilter: SearchProfilesV2Request_PersonalFilter
+}
+
+enum SearchProfilesV2Request_Filter {
+  ALL
+  ORG
+  PERSONAL
+}
+
+enum SearchProfilesV2Request_PersonalFilter {
+  DISPLAY_NAME
+  TITLE
+}
+
+type SearchProfilesV2Page {
+  pageInfo: PageInfo!
+  profiles: [Profile!]!
+  orgProfiles: [Profile!]!
+  personalProfiles: [Profile!]!
+}
+
+enum SearchProfilesResponse_Status {
+  SUCCESS
+  INVALID_PARAMETER
+}
+
+input SubmitEasWhitelistInput {
+  headline: TwitterInput!
+  email: String!
+  token: String!
+}
+
+enum SubmitEasWhitelistResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  INVALID_TOKEN
+  EMAIL_NOT_QUALIFIED
+  EMAIL_USED
+  INVALID_TWITTER
+  PROFILE_NOT_FOUND
+  RATE_LIMITED
+  NOT_QUALIFIED
+  EMAIL_NOT_LINKED
+}
+
+enum EasWhitelistVerifyStatus {
+  WHITELIST_PENDING
+  WHITELIST_APPROVED
+  WHITELIST_REJECTED
+}
+
+type SubmitEasWhitelistResponse {
+  status: SubmitEasWhitelistResponse_Status!
+  verifyStatus: EasWhitelistVerifyStatus!
+}
+
+enum EasWhitelistVerifyStatusResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  EMAIL_NOT_LINKED
+  EMAIL_NOT_QUALIFIED
+  NOT_FOUND
+  TWITTER_MISMATCH
+}
+
+type EasWhitelistVerifyStatusResponse {
+  status: EasWhitelistVerifyStatusResponse_Status!
+  verifyStatus: EasWhitelistVerifyStatus!
+}
+
+type Identity {
+  headline: Twitter!
+  attestation: Attestation
+}
+
+
+enum ClaimCyberIDByCouponResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  INVALID_CODE
+  CODE_USED
+  CLAIMED_HANDLE
+  INVALID_HANDLE
+  TRY_AGAIN_LATER
+}
+
+type ClaimCyberIDByCouponResponse {
+  status: ClaimCyberIDByCouponResponse_Status!
+}
+
+enum CyberIDClaimStatusResponse_Status {
+  SUCCESS
+  INVALID_CODE
+  CODE_NOT_USED
+  CLAIMED_HANDLE
+  INVALID_HANDLE
+}
+
+enum TxStatus {
+  TX_PENDING
+  TX_ON_CHAIN_PENDING
+  TX_CONFIRMED
+  TX_RESENT
+  TX_FAILED
+  TX_LOST
+  TX_ACKED
+  TX_DELEGATED
+}
+
+type CyberIDClaimStatusResponse {
+  status: CyberIDClaimStatusResponse_Status!
+  txStatus: TxStatus!
+  txHash: String!
+}
+
+enum UploadCyberIDMetadataResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  INVALID_HANDLE
+}
+
+type UploadCyberIDMetadataResponse {
+  status: UploadCyberIDMetadataResponse_Status!
+}
+
+extend type Query {
+  """
+  Query a profile by a identifier. Choose one of the two parameters `id` and `handle`. If both are filled in, subject to `id`.
+  """
+  profile(id: ID, handle: String): ProfileResponse!
+  """
+  Check eligibility for creating profile.
+  Personal: address in the whitelist or invitation code or twitter mentioned in existing Link3 pages.
+  Organization: invitation code.
+  """
+  checkEligibility(
+    type: ProfileType!
+    eligibility: Eligibility!
+  ): CheckEligibilityResponse!
+  """
+  Check eligibility for claiming handle.
+  """
+  checkHandleEligibility(
+    id: ID!
+    handle: String!
+  ): CheckHandleEligibilityResponse!
+  featuredProfiles(
+    filter: ProfileType!
+    tag: ProfileTag
+    first: Int
+    after: String
+  ): ProfilePage!
+  searchProfiles(input: SearchProfilesInput!): SearchProfilesResponse!
+  searchProfilesV2(input: SearchProfilesV2Input!): SearchProfilesV2Page!
+  recentVerifiedProfiles(first: Int, after: String): ProfilePage!
+  endorsements(skillId: ID!): SkillEndorsementsResponse!
+  easWhitelistVerifyStatus(twitterId: String!, headlineType: HeadlineType!): EasWhitelistVerifyStatusResponse!
+  cyberIDClaimStatus(handle: String!, code: String!): CyberIDClaimStatusResponse!
+  SearchConnections(query: String!, first: Int, after: String, connectStatus: ConnectStatus!): ProfilePage!
+  kolProfiles(first: Int): [Profile!]!
+}
+
+enum RefreshReputationScoreResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  PROFILE_NOT_FOUND
+  PERMISSION_DENIED
+}
+
+type RefreshReputationScoreResponse {
+  status: RefreshReputationScoreResponse_Status!
+  score: ReputationScore!
+}
+
+enum Attestation_Status {
+  NOT_VERIFIED
+  UNCLAIMED
+  CLAIMING
+  CLAIMED
+  CLAIMED_BY_OTHER
+}
+
+enum Attestation_Type {
+  NONE
+  ORG
+  MEMBER
+  EMAIL
+  KOL
+  STUDENT
+}
+
+type Attestation {
+  status: Attestation_Status!
+  uid: String!
+  type: Attestation_Type!
+}
+
+enum ClaimEasAttestationResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  PERSONAL_NOT_VERIFIED
+  ORG_EAS_NOT_FOUND
+  ALREADY_ATTESTED
+}
+
+type ClaimEasAttestationResponse {
+  Status: ClaimEasAttestationResponse_Status!
+}
+
+input UpdateEasWhitelistStatusRequestInput {
+  twitterId: String!
+  emailSuffix: String!
+  headlineType: HeadlineType!
+  verifyStatus: EasWhitelistVerifyStatus!
+  operator: String!
+}
+
+enum UpdateEasWhitelistStatusResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  NOT_FOUND
+  ALREADY_ATTESTED
+  ALREADY_UPDATED
+}
+
+type UpdateEasWhitelistStatusResponse {
+  status: UpdateEasWhitelistStatusResponse_Status!
+}
+
+input EmailVerify {
+  email: String!
+  token: String!
+}
+
+input UpdateEasBlacklistRequestInput {
+  emailSuffix: String!
+  headlineType: HeadlineType!
+  enable: Boolean!
+  operator: String!
+}
+
+enum UpdateEasBlacklistResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  NOT_SUPPORTED
+}
+
+type UpdateEasBlacklistResponse {
+  status: UpdateEasBlacklistResponse_Status!
+}
+
+extend type Mutation {
+  registerProfile(
+    type: ProfileType!
+    eligibility: Eligibility!
+  ): RegisterProfileResponse!
+  updateOrgProfile(
+    id: ID!
+    input: UpdateOrgProfileInput!
+  ): UpdateProfileResponse!
+  updatePersonal(id: ID!, input: UpdatePersonalInput!): UpdateProfileResponse!
+  """
+  Submit organization's profile handle application.
+  """
+  submitOrgProfileHandle(
+    id: ID!
+    handle: String!
+    survey: ReviewingProfileSurveyInput
+    website: String
+    emailVerifyList: [EmailVerify!]
+  ): SubmitOrgProfileHandleResponse!
+  """
+  Update avatar, displayName, and description for organization's profile from twitter.
+  """
+  updateOrgProfileFromTwitter(
+    id: ID!
+  ): UpdateOrgProfileFromTwitterResponse!
+  createBlock(profileId: ID!, input: CreateBlockInput!): CreateBlockResponse!
+  updateBlock(id: ID!, input: UpdateBlockInput!): UpdateBlockResponse!
+  deleteBlock(id: ID!): DeleteBlockResponse!
+  updateBlockVisibility(input: UpdateBlockVisibilityInput!): UpdateBlockVisibilityResponse!
+  setPrimaryCyberId(input: SetPrimaryCyberIdInput!): SetPrimaryCyberIdResponse!
+  createSkill(input: CreateSkillInput!): CreateSkillResponse!
+  deleteSkill(skillId: ID!): DeleteSkillResponse!
+  addSkillEndorsement(skillId: ID!): AddSkillEndorsementResponse!
+  removeSkillEndorsement(skillId: ID!): RemoveSkillEndorsementResponse!
+  createWorkExperience(input: CreateWorkExperienceInput!): CreateWorkExperienceResponse!
+  updateWorkExperience(input: UpdateWorkExperienceInput!): UpdateWorkExperienceResponse!
+  deleteWorkExperience(workExperienceId: ID!): DeleteWorkExperienceResponse!
+  createEducation(input: CreateEducationInput!): CreateEducationResponse!
+  updateEducation(input: UpdateEducationInput!): UpdateEducationResponse!
+  deleteEducation(educationId: ID!): DeleteEducationResponse!
+  giveRecommendation(input: GiveRecommendationInput!): GiveRecommendationResponse!
+  updateReceivedRecommendations(input: UpdateReceivedRecommendationsInput!): UpdateReceivedRecommendationsResponse!
+  updateGivenRecommendations(input: UpdateGivenRecommendationsInput!): UpdateGivenRecommendationsResponse!
+  deleteRecommendation(profileId: ID!): DeleteRecommendationResponse!
+  refreshReputationScore(profileId: ID!): RefreshReputationScoreResponse!
+  submitEasWhitelist(input: SubmitEasWhitelistInput!): SubmitEasWhitelistResponse!
+  ClaimEasAttestation: ClaimEasAttestationResponse!
+  uploadCyberIDMetadata(handle: String!): UploadCyberIDMetadataResponse!
+  claimCyberIDByCoupon(handle: String!, code: String!): ClaimCyberIDByCouponResponse!
+  updateEasWhitelistStatus(input: UpdateEasWhitelistStatusRequestInput!): UpdateEasWhitelistStatusResponse! @admin
+  updateEasBlacklist(input: UpdateEasBlacklistRequestInput!): UpdateEasBlacklistResponse! @admin
+}

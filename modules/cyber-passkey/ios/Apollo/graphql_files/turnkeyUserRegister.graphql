@@ -1,0 +1,7 @@
+
+    mutation turnkeyUserRegister($request: RegisterTurnkeyUserRequest!) {
+  turnkeyUserRegister(request: $request) {
+    status
+  }
+}
+    

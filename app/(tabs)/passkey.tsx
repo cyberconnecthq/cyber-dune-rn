@@ -7,6 +7,8 @@ const App: React.FC = () => {
     console.log('Button was pressed!');
     if (Platform.OS === 'android') { 
         CyberPasskeyModule.startActivity();
+    } else {
+        CyberPasskeyModule.presentPasskeyViewController()
     }
 
   };

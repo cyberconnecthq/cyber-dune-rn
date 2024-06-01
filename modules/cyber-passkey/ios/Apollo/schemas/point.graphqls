@@ -1,0 +1,101 @@
+type PointAccount {
+  totalPoints: Int!
+  completedTasksCount: Int!
+}
+
+type PointTask {
+  id: ID!
+  name: String!
+  phase: PointTaskPhase!
+  points: Int!
+  status: PointTaskStatus!
+  taskType: PointTaskType!
+  subtitle: String!
+}
+
+enum PointTaskPhase {
+  POINT_TASK_ONBOARDING
+  POINT_TASK_REFER
+}
+
+enum PointTaskStatus {
+  POINT_TASK_UNCOMPLETED
+  POINT_TASK_COMPLETED
+  POINT_TASK_UNVERIFIED_USER
+}
+
+enum PointTaskType {
+  POINT_TASK_PROFILE_COMPLETENESS
+  POINT_TASK_ORG_MEMBER_VERIFIED
+  POINT_TASK_CONNECTION_PROFILE
+  POINT_TASK_PAID_DM
+  POINT_TASK_TWITTER_IN_BIO
+  POINT_TASK_REFERRED
+  POINT_TASK_REFERRAL
+  POINT_TASK_PARTNER
+}
+
+type CheckPointTaskResponse {
+  status: CheckPointTaskResponse_Status!
+}
+
+enum CheckPointTaskResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  TASK_NOT_FOUND
+  TASK_COMPLETED
+  TASK_UNCOMPLETED
+  INVALID_TASK
+  INVALID_CODE
+  UNVERIFIED_USER
+  FAILED_TWITTER_AUTH
+  TOO_FREQUENT_AUTH
+}
+
+type InviteHistory {
+  user: User!
+  isVerificationCompleted: Boolean!
+  invitedAt: Timestamp!
+}
+
+enum InviteHistoryResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  UNVERIFIED_USER
+}
+
+type InviteHistoryPage {
+  pageInfo: PageInfo!
+  list: [InviteHistory!]
+  invitedCount: Int!
+  verifiedCount: Int!
+}
+
+type PointHistory {
+  task: PointTask!
+  createdAt: Timestamp!
+}
+
+enum PointHistoryResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+}
+
+type PointHistoryPage {
+  pageInfo: PageInfo!
+  list: [PointHistory!]
+}
+
+extend type User {
+  pointAccount: PointAccount!
+  pointTasks: [PointTask!]!
+}
+
+extend type Query {
+  inviteHistory(first: Int, after: String): InviteHistoryPage
+  pointHistory(first: Int, after: String): PointHistoryPage
+}
+
+extend type Mutation {
+  checkPointTask(taskId: String!, referralCode: String!): CheckPointTaskResponse!
+}

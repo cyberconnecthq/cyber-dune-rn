@@ -1,0 +1,72 @@
+input FollowRequest {
+  profileId: String!
+}
+
+enum FollowResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  INVALID_PARAMS
+  PROFILE_NOT_FOUND
+  RATE_LIMITED
+  ALREADY_DONE
+}
+
+type FollowResponse {
+  status: FollowResponse_Status!
+  tsInServer: Timestamp
+}
+
+input UnFollowRequest {
+  profileId: String!
+}
+
+enum UnFollowResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  INVALID_PARAMS
+  PROFILE_NOT_FOUND
+  RATE_LIMITED
+  ALREADY_DONE
+}
+
+type UnFollowResponse {
+  status: UnFollowResponse_Status!
+  tsInServer: Timestamp
+}
+
+input ConnectRequest {
+  profileId: String!
+}
+
+enum ConnectResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  INVALID_PARAMS
+  PROFILE_NOT_FOUND
+}
+
+type ConnectResponse {
+  status: ConnectResponse_Status!
+}
+
+input DisconnectRequest {
+  profileId: String!
+}
+
+enum DisconnectResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  INVALID_PARAMS
+  PROFILE_NOT_FOUND
+}
+
+type DisconnectResponse {
+  status: DisconnectResponse_Status!
+}
+
+extend type Mutation {
+  follow(input: FollowRequest!): FollowResponse!
+  unfollow(input: UnFollowRequest!): UnFollowResponse!
+  connect(input: ConnectRequest!): ConnectResponse!
+  disconnect(input: DisconnectRequest!): DisconnectResponse!
+}

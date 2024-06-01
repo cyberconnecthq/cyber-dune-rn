@@ -1,0 +1,619 @@
+type Post {
+  id: ID!
+  author: Author!
+  profile: Profile!
+  title: String!
+  body: String!
+  cover: Url!
+  description: String!
+  tag: String!
+  arweaveTxHash: String!
+  publishedAt: DateTime!
+  lastUpdatedAt: DateTime!
+  readTime: Int!
+  essence: PostEssence
+  comments(first: Int, after: String): CommentPage!
+  commentCount: Int!
+  likeCount: Int!
+  dislikeCount: Int!
+  commentVisible: Boolean!
+  viewCount: Int!
+  trendingComments: CommentPage!
+  pinned: Boolean!
+  # private fields
+  likedStatus: ContentLikeStatus!
+  draft: PostDraft
+}
+
+union Author = User | Organization
+
+type Subscriber {
+  user: User!
+  subscribedAt: Int!
+  email: String!
+}
+
+type SubscriberPage {
+  pageInfo: PageInfo!
+  list: [Subscriber!]!
+}
+
+enum PostEssenceDeployStatus {
+  CONTENT_NOT_DEPLOYED
+  DEPLOYING_CONTENT
+  CONTENT_DEPLOYED
+  CONTENT_DEPLOY_FAILED
+  ACCOUNT_NOT_DEPLOYED
+  DEPLOYING_ACCOUNT
+  ACCOUNT_DEPLOYED
+  ACCOUNT_DEPLOY_FAILED
+}
+
+type PostEssence {
+  contract: String
+  chainId: Int!
+  profileId: Int
+  essenceId: Int
+  tokenUri: String
+  imageUrl: Url!
+  totalSupply: Int!
+  mwType: EssenceMwType!
+  mwInfo: EssenceMwInfo!
+  deployStatus: PostEssenceDeployStatus!
+  postQuestion: PostQuestion
+  totalCollected: Int!
+  cyberAccount: EVMAddress!
+  tokenId: Int!
+  version: Int!
+  # private fields
+  userBalance: Int!
+}
+
+type PostQuestion {
+  questions: [String!]!
+  options: [String!]!
+}
+
+type Comment {
+  id: ID!
+  author: User!
+  body: String!
+  arweaveTxHash: String!
+  publishedAt: DateTime!
+  target: String!
+
+  trendingComments: CommentPage!
+  comments(first: Int, after: String): CommentPage!
+  commentCount: Int!
+  likeCount: Int!
+  dislikeCount: Int!
+  # private fields
+  likedStatus: ContentLikeStatus!
+}
+
+type CommentPage {
+  pageInfo: PageInfo!
+  list: [Comment!]!
+}
+
+type PostPage {
+  pageInfo: PageInfo!
+  list: [Post!]!
+}
+
+type PostDraftPage {
+  pageInfo: PageInfo!
+  list: [PostDraft!]!
+}
+
+type ContentLikeStatus {
+  liked: Boolean!
+  disliked: Boolean!
+}
+
+input PublishPostCommentRequest {
+  postId: String!
+  body: String!
+}
+
+enum PublishPostCommentResponse_Status {
+  SUCCESS
+  INVALID_PARAMS
+  RATE_LIMITED
+  CONTENT_NOT_FOUND
+  TARGET_NOT_FOUND
+  NOT_PROFILE_OWNER
+  ALREADY_EXISTED
+  NOT_LOGIN
+  NOT_SUPPORTED_EOA
+}
+
+type PublishPostCommentResponse {
+  status: PublishPostCommentResponse_Status!
+  contentID: String!
+}
+
+input LikePostRequest {
+  postId: String!
+}
+
+enum LikePostResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  INVALID_PARAMS
+  RATE_LIMITED
+  CONTENT_NOT_FOUND
+  ALREADY_DONE
+  NOT_SUPPORTED_EOA
+}
+
+type LikePostResponse {
+  status: LikePostResponse_Status!
+}
+
+input DislikePostRequest {
+  postId: String!
+}
+
+enum DislikePostResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  INVALID_PARAMS
+  RATE_LIMITED
+  CONTENT_NOT_FOUND
+  ALREADY_DONE
+  NOT_SUPPORTED_EOA
+}
+
+type DislikePostResponse {
+  status: DislikePostResponse_Status!
+}
+
+input CancelLikeRequest {
+  postId: String!
+}
+
+enum CancelLikeResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  INVALID_PARAMS
+  RATE_LIMITED
+  CONTENT_NOT_FOUND
+  ALREADY_DONE
+  NOT_SUPPORTED_EOA
+}
+
+type CancelLikeResponse {
+  status: CancelLikeResponse_Status!
+}
+
+type PostDraft {
+  draftId: ID!
+  publishedPost: Post
+  title: String!
+  body: String!
+  cover: Url!
+  tag: String
+  synced: Boolean!
+  commentVisible: Boolean!
+  updatedAt: Timestamp!
+  canGenerateQA: Boolean!
+}
+
+input CreatePostDraftRequest {
+  title: String!
+  body: String!
+  cover: Url!
+  tag: String
+  handle: String!
+}
+
+enum CreatePostDraftResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  PERMISSION_DENIED
+  HANDLE_NOT_FOUND
+}
+
+type CreatePostDraftResponse {
+  status: CreatePostDraftResponse_Status!
+  draftId: String!
+}
+
+input UpdatePostDraftRequest {
+  draftId: String!
+  title: String!
+  body: String!
+  cover: Url!
+  tag: String
+  commentVisible: Boolean!
+}
+
+enum UpdatePostDraftResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  DRAFT_NOT_FOUND
+  PERMISSION_DENIED
+  TRY_AGAIN_LATER
+}
+
+type UpdatePostDraftResponse {
+  status: UpdatePostDraftResponse_Status!
+}
+
+input PublishPostDraftRequest {
+  draftId: String!
+}
+
+enum PublishPostDraftResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  DRAFT_NOT_FOUND
+  PERMISSION_DENIED
+  TRY_AGAIN_LATER
+  PUBLISH_FAILED
+  TAG_REQUIRED
+}
+
+type PublishPostDraftResponse {
+  status: PublishPostDraftResponse_Status!
+  postId: String!
+}
+
+enum EssenceMwType {
+  ESSENCE_MW_NONE
+  ESSENCE_MW_LIMITED_TIME_PAID
+  ESSENCE_MW_PERMISSION
+  ESSENCE_MW_ONLY_SUBSCRIBED
+  ESSENCE_MW_PAID
+  ESSENCE_MW_PERMISSION_PAID
+  ESSENCE_MW_FLEX_PAID
+  V3_ESSENCE_MW_PERMISSION
+  V3_ESSENCE_MW_LIMITED
+}
+
+type EssenceMwInfo {
+  totalSupply: Int!
+  mwAddress: String
+  currencyAddress: String
+  recipientAddress: String
+  price: String
+  startTime: Timestamp
+  endTime: Timestamp
+  profileRequired: Boolean
+  subscribeRequired: Boolean
+  transferable: Boolean!
+}
+
+input EssenceMwInfoInput {
+  totalSupply: Int!
+  mwAddress: String
+  currencyAddress: String
+  recipientAddress: String
+  price: String
+  startTime: Timestamp
+  endTime: Timestamp
+  profileRequired: Boolean
+  subscribeRequired: Boolean
+  transferable: Boolean!
+}
+
+input CollectPermissionPostRequest {
+  postId: String!
+  token: String
+}
+
+enum CollectPermissionPostResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  ALREADY_COLLECTED
+  NOT_ELIGIBLE
+  ESSENCE_NOT_FOUND
+  COLLECT_NOT_START
+  COLLECT_ENDED
+  NOT_SUPPORT_MW
+  TOKEN_EXPIRED
+  INVALID_TOKEN
+}
+
+type CollectPermissionPostResponse {
+  status: CollectPermissionPostResponse_Status!
+  collector: String!
+  profileId: Int!
+  essenceId: Int!
+  preData: String!
+  collectId: String!
+  chainId: Int!
+}
+
+input VerifyPostAnswersRequest {
+  postId: String!
+  answers: [Int!]!
+}
+
+enum VerifyPostAnswersResponse_Status {
+  SUCCESS
+  NOT_FOUND
+  NOT_LOGIN
+}
+
+type VerifyPostAnswersResponse {
+  status: VerifyPostAnswersResponse_Status!
+  correct: [Boolean!]
+  token: String
+}
+
+enum DeletePostResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  POST_NOT_FOUND
+  PERMISSION_DENIED
+  CANNOT_DELETE_POST
+  INVALID_PARAMETER
+  TRY_AGAIN_LATER
+}
+
+type DeletePostResponse {
+  status: DeletePostResponse_Status!
+}
+
+enum DeletePostDraftResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  DRAFT_NOT_FOUND
+  PERMISSION_DENIED
+  INVALID_PARAMETER
+  TRY_AGAIN_LATER
+}
+
+type DeletePostDraftResponse {
+  status: DeletePostDraftResponse_Status!
+}
+
+enum ExplorePostsRequest_Type {
+  FEATURED
+  NEWLY_ADDED
+}
+
+input ExplorePostsRequest {
+  type: ExplorePostsRequest_Type!
+  tag: String
+}
+
+enum TrendingPostsRequest_PostOrder {
+  CREATE_TIME_DESC
+}
+
+input ViewPostRequest {
+  postId: String!
+}
+
+enum ViewPostResponse_Status {
+  SUCCESS
+}
+
+type ViewPostResponse {
+  status: ViewPostResponse_Status!
+}
+
+input PublishReplyRequest {
+  postId: String!
+  commentId: String!
+  body: String!
+}
+
+enum PublishReplyResponse_Status {
+  SUCCESS
+  INVALID_PARAMS
+  RATE_LIMITED
+  CONTENT_NOT_FOUND
+  TARGET_NOT_FOUND
+  NOT_PROFILE_OWNER
+  ALREADY_EXISTED
+  NOT_LOGIN
+  NOT_SUPPORTED_COMMENT
+  NOT_SUPPORTED_EOA
+}
+
+type PublishReplyResponse {
+  status: PublishReplyResponse_Status!
+  contentId: String!
+}
+
+input LikeCommentRequest {
+  commentId: String!
+}
+
+enum LikeCommentResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  INVALID_PARAMS
+  RATE_LIMITED
+  CONTENT_NOT_FOUND
+  ALREADY_DONE
+  NOT_SUPPORTED_COMMENT
+  NOT_SUPPORTED_EOA
+}
+
+type LikeCommentResponse {
+  status: LikeCommentResponse_Status!
+}
+
+input DislikeCommentRequest {
+  commentId: String!
+}
+
+enum DislikeCommentResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  INVALID_PARAMS
+  RATE_LIMITED
+  CONTENT_NOT_FOUND
+  ALREADY_DONE
+  NOT_SUPPORTED_COMMENT
+  NOT_SUPPORTED_EOA
+}
+
+type DislikeCommentResponse {
+  status: DislikeCommentResponse_Status!
+}
+
+input CancelLikeCommentRequest {
+  commentId: String!
+}
+
+enum CancelLikeCommentResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  INVALID_PARAMS
+  RATE_LIMITED
+  CONTENT_NOT_FOUND
+  ALREADY_DONE
+  NOT_SUPPORTED_COMMENT
+  NOT_SUPPORTED_EOA
+}
+
+type CancelLikeCommentResponse {
+  status: CancelLikeCommentResponse_Status!
+}
+
+
+input TrendingPostsRequest_PostFilter {
+  tag: String
+}
+
+input SubscribeRequest {
+  profileId: String!
+  """
+  `follow` is required if the user is not following the profile.
+  """
+  follow: FollowRequest
+}
+
+type SubscribeResponse {
+  status: SubscribeResponse_Status!
+}
+
+enum SubscribeResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  INVALID_PARAMS
+  HANDLE_NOT_FOUND
+  NO_EMAIL
+  INVALID_MESSAGE
+  MESSAGE_EXPIRED
+  INVALID_SIGNATURE
+  RATE_LIMITED
+  ALREADY_DONE
+  EXPIRED_SIGNING_KEY
+}
+
+input UnsubscribeRequest {
+  profileId: String!
+}
+
+type UnsubscribeResponse {
+  status: UnsubscribeResponse_Status!
+}
+
+enum UnsubscribeResponse_Status {
+  SUCCESS
+  INVALID_PARAMS
+  HANDLE_NOT_FOUND
+  ALREADY_DONE
+}
+
+input UnsubscribeFromEmailRequest {
+  token: String!
+}
+
+type UnsubscribeFromEmailResponse {
+  status: UnsubscribeFromEmailResponse_Status!
+}
+
+enum UnsubscribeFromEmailResponse_Status {
+  SUCCESS
+  INVALID_TOKEN
+  TOKEN_EXPIRED
+}
+
+type PinPostResponse {
+  status: PinPostResponse_Status!
+}
+
+enum PinPostResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  CONTENT_NOT_FOUND
+  PERMISSION_DENIED
+}
+
+type UnpinPostResponse {
+  status: UnpinPostResponse_Status!
+}
+
+enum UnpinPostResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  CONTENT_NOT_FOUND
+  PERMISSION_DENIED
+}
+
+input CreatePostEssenceRequest {
+  postId: String!
+  imageUrl: Url!
+  mwType: EssenceMwType!
+  mwInfo: EssenceMwInfoInput!
+}
+
+enum CreatePostEssenceResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  PERMISSION_DENIED
+  INVALID_PARAMS
+  NOT_SUPPORTED_CHAIN
+  POST_NOT_FOUND
+  ALREADY_DEPLOYED
+  TRY_AGAIN_LATER
+  TITLE_CANNOT_BE_EMPTY
+}
+
+type CreatePostEssenceResponse {
+  status: CreatePostEssenceResponse_Status!
+}
+
+extend type Query {
+  post(id: String!): Post
+  postDraft(draftId: String!): PostDraft
+  weeklyThemedPosts: [Post!]
+  explorePosts(input: ExplorePostsRequest!): [Post!]
+  trendingPosts(first: Int, after: String, order: TrendingPostsRequest_PostOrder, filter: TrendingPostsRequest_PostFilter): PostPage!
+  comment(commentId: String!): Comment
+}
+
+extend type Mutation {
+  createPostDraft(input: CreatePostDraftRequest!): CreatePostDraftResponse!
+  updatePostDraft(input: UpdatePostDraftRequest!): UpdatePostDraftResponse!
+  publishPostDraft(input: PublishPostDraftRequest!): PublishPostDraftResponse!
+  createPostEssence(input: CreatePostEssenceRequest!): CreatePostEssenceResponse!
+  collectPermissionPost(input: CollectPermissionPostRequest!): CollectPermissionPostResponse!
+  verifyPostAnswers(input: VerifyPostAnswersRequest!): VerifyPostAnswersResponse!
+  deletePost(id: String!): DeletePostResponse!
+  deletePostDraft(draftId: String!): DeletePostDraftResponse!
+  pinPost(postId: String!): PinPostResponse!
+  unpinPost(postId: String!): UnpinPostResponse!
+
+  publishComment(input: PublishPostCommentRequest!): PublishPostCommentResponse!
+  like(input: LikePostRequest!): LikePostResponse!
+  dislike(input: DislikePostRequest!): DislikePostResponse!
+  cancelLike(input: CancelLikeRequest!): CancelLikeResponse!
+  viewPost(input: ViewPostRequest!): ViewPostResponse!
+  likeComment(input: LikeCommentRequest!): LikeCommentResponse!
+  dislikeComment(input: DislikeCommentRequest!): DislikeCommentResponse!
+  cancelLikeComment(input: CancelLikeCommentRequest!): CancelLikeCommentResponse!
+  publishReply(input: PublishReplyRequest!): PublishReplyResponse!
+
+  subscribe(input: SubscribeRequest!): SubscribeResponse!
+  unsubscribe(input: UnsubscribeRequest!): UnsubscribeResponse!
+  unsubscribeFromEmail(input: UnsubscribeFromEmailRequest!): UnsubscribeFromEmailResponse!
+}

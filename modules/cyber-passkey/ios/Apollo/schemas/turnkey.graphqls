@@ -1,0 +1,143 @@
+extend type User {
+  turnkeyUserInfo: TurnkeyUserInfo
+}
+
+type TurnkeyUserInfo {
+  turnkeyUserId: String!
+  username: String!
+  walletId: String!
+  subOrgId: String!
+  recoveryEmail: String
+  authenticators: [Authenticator!]
+}
+
+enum PasskeyTransport {
+  AUTHENTICATOR_TRANSPORT_BLE
+  AUTHENTICATOR_TRANSPORT_INTERNAL
+  AUTHENTICATOR_TRANSPORT_NFC
+  AUTHENTICATOR_TRANSPORT_USB
+  AUTHENTICATOR_TRANSPORT_HYBRID
+}
+
+enum Authenticator_Status {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+type Authenticator {
+  authenticator_name: String!
+  credential_id: String!
+  origin: Url!
+  device_name: String!
+  model: String!
+  transports: [PasskeyTransport]
+  createdAt: Timestamp!
+  status: Authenticator_Status!
+}
+
+input PasskeyAttestation {
+  attestationObject: String!
+  clientDataJson: String!
+  credentialId: String!
+  transports: [PasskeyTransport]
+}
+
+input TurnkeyStamp {
+  stampHeaderName: String!
+  stampHeaderValue: String!
+}
+
+enum TurnkeyRequestType {
+  WHO_AM_I
+  UPDATE_USER
+  EXPORT_WALLET
+}
+
+input ForwardTurnkeyRequest {
+  type: TurnkeyRequestType!
+  url: Url!
+  body: String!
+  stamp: TurnkeyStamp!
+}
+
+input TurnkeyUserLoginRequest {
+  forwardRequest: ForwardTurnkeyRequest!
+}
+
+enum TurnkeyUserLoginResponse_Status {
+  SUCCESS
+  INVALID_PARAMS
+  USER_NOT_FOUND
+}
+
+type TurnkeyUserLoginResponse {
+  status: TurnkeyUserLoginResponse_Status!
+  user: User
+}
+
+input RegisterTurnkeyUserRequest {
+  challenge: String!
+  attestation: PasskeyAttestation!
+  authenticatorName: String!
+}
+
+enum RegisterTurnkeyUserResponse_Status {
+  SUCCESS
+  INVALID_PARAMS
+  TRY_AGAIN_LATER
+}
+
+type RegisterTurnkeyUserResponse {
+  status: RegisterTurnkeyUserResponse_Status!
+}
+
+enum GetRandomMnemonicUsernameResponse_Result {
+  SUCCESS
+  TRY_AGAIN_LATER
+}
+
+type GetRandomMnemonicUsernameResponse {
+  result: GetRandomMnemonicUsernameResponse_Result!
+  username: String!
+}
+
+enum ReserveMnemonicUsernameResponse_Result {
+  SUCCESS
+  INVALID_PARAMS
+  USERNAME_NOT_AVAILABLE
+  TRY_AGAIN_LATER
+}
+
+type ReserveMnemonicUsernameResponse {
+  result: ReserveMnemonicUsernameResponse_Result!
+  username: String!
+  challenge: String!
+}
+
+input TurnkeyExportWalletRequest {
+  forwardRequest: ForwardTurnkeyRequest!
+}
+
+enum TurnkeyExportWalletResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  INVALID_PARAMS
+}
+
+type TurnkeyExportWalletResponse {
+  status: TurnkeyExportWalletResponse_Status!
+  walletId: String!
+  exportBundle: String!
+}
+
+extend type Query {
+  getRandomMnemonicUsername: GetRandomMnemonicUsernameResponse!
+  turnkeyUserLogin(request: TurnkeyUserLoginRequest!): TurnkeyUserLoginResponse!
+}
+
+extend type Mutation {
+  reserveMnemonicUsername(username: String!): ReserveMnemonicUsernameResponse!
+  turnkeyUserRegister(request: RegisterTurnkeyUserRequest!): RegisterTurnkeyUserResponse!
+  turnkeyExportWallet(request: TurnkeyExportWalletRequest!): TurnkeyExportWalletResponse!
+}

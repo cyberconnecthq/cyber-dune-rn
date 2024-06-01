@@ -1,0 +1,22 @@
+enum Upload_Status {
+    SUCCESS
+    NOT_LOGIN
+    PERMISSION_DENIED
+    SIZE_EXCEEDED
+    TYPE_UNSUPPORTED
+}
+
+type UploadResponse {
+    status: Upload_Status!
+    url: Url!
+}
+
+enum ImageUsage {
+    BACKGROUND
+    AVATAR
+}
+
+extend type Mutation {
+    uploadEventImage(file: Upload!, orgId: ID!): UploadResponse!
+    uploadProfileImage(imageUsage: ImageUsage!, file: Upload!, profileId: ID!): UploadResponse!
+}

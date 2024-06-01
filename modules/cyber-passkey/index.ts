@@ -9,8 +9,8 @@ import { ChangeEventPayload, CyberPasskeyViewProps } from './src/CyberPasskey.ty
 // Get the native constant value.
 export const PI = CyberPasskeyModule.PI;
 
-export function hello(): string {
-  return CyberPasskeyModule.hello();
+export function presentPasskeyViewController() {
+  return CyberPasskeyModule.presentPasskeyViewController();
 }
 
 export async function setValueAsync(value: string) {

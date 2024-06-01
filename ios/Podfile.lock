@@ -1,7 +1,32 @@
 PODS:
+  - ActiveLabel (1.1.0)
+  - AFNetworking (4.0.1):
+    - AFNetworking/NSURLSession (= 4.0.1)
+    - AFNetworking/Reachability (= 4.0.1)
+    - AFNetworking/Security (= 4.0.1)
+    - AFNetworking/Serialization (= 4.0.1)
+    - AFNetworking/UIKit (= 4.0.1)
+  - AFNetworking/NSURLSession (4.0.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (4.0.1)
+  - AFNetworking/Security (4.0.1)
+  - AFNetworking/Serialization (4.0.1)
+  - AFNetworking/UIKit (4.0.1):
+    - AFNetworking/NSURLSession
+  - Apollo (1.7.1):
+    - Apollo/Core (= 1.7.1)
+  - Apollo/Core (1.7.1)
   - boost (1.83.0)
   - CyberPasskey (1.0.0):
+    - ActiveLabel
+    - AFNetworking
+    - Apollo (~> 1.7.1)
     - ExpoModulesCore
+    - ProgressHUD (~> 13.8.6)
+    - SnapKit (~> 5.6.0)
+    - SwiftMessages (~> 9.0.9)
   - CyberWidget (1.0.0):
     - ExpoModulesCore
   - DoubleConversion (1.1.6)
@@ -81,6 +106,7 @@ PODS:
   - hermes-engine (0.74.1):
     - hermes-engine/Pre-built (= 0.74.1)
   - hermes-engine/Pre-built (0.74.1)
+  - ProgressHUD (13.8.6)
   - RCT-Folly (2024.01.01.00):
     - boost
     - DoubleConversion
@@ -1306,7 +1332,11 @@ PODS:
     - Yoga
   - RNSVG (15.2.0):
     - React-Core
+  - SnapKit (5.6.0)
   - SocketRocket (0.7.0)
+  - SwiftMessages (9.0.9):
+    - SwiftMessages/App (= 9.0.9)
+  - SwiftMessages/App (9.0.9)
   - Yoga (0.0.0)
 
 DEPENDENCIES:
@@ -1390,7 +1420,13 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - ActiveLabel
+    - AFNetworking
+    - Apollo
+    - ProgressHUD
+    - SnapKit
     - SocketRocket
+    - SwiftMessages
 
 EXTERNAL SOURCES:
   boost:
@@ -1546,8 +1582,11 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
+  ActiveLabel: 5e3f4de79a1952d4604b845a0610d4776e4b82b3
+  AFNetworking: 3bd23d814e976cd148d7d44c3ab78017b744cd58
+  Apollo: 419a0a42ae64979345bed12bae3a0d3e39fcf30c
   boost: d3f49c53809116a5d38da093a8aa78bf551aed09
-  CyberPasskey: 74ff221abc1b8b4792d9ff89b1b2f253a4a63859
+  CyberPasskey: 3d1a6bf3ec1c486db91c49a59c1648a199488659
   CyberWidget: 6cf9af60a409a3c6fce98db9bfb4bf6500d14832
   DoubleConversion: 76ab83afb40bddeeee456813d9c04f67f78771b5
   EXConstants: 409690fbfd5afea964e5e9d6c4eb2c2b59222c59
@@ -1568,6 +1607,7 @@ SPEC CHECKSUMS:
   fmt: 4c2741a687cc09f0634a2e2c72a838b99f1ff120
   glog: c5d68082e772fa1c511173d6b30a9de2c05a69a2
   hermes-engine: 16b8530de1b383cdada1476cf52d1b52f0692cbc
+  ProgressHUD: ee8924300accca88bfa39f6350f757c1c869a69c
   RCT-Folly: 02617c592a293bd6d418e0a88ff4ee1f88329b47
   RCTDeprecation: efb313d8126259e9294dc4ee0002f44a6f676aba
   RCTRequired: f49ea29cece52aee20db633ae7edc4b271435562
@@ -1620,9 +1660,11 @@ SPEC CHECKSUMS:
   RNReanimated: 35f9ac9c3ac42d0497ebd1cce5c39d7687a8493e
   RNScreens: b32a9ff15bea7fcdbe5dff6477bc503f792b1208
   RNSVG: 43b64ed39c14ce830d840903774154ca0c1f27ec
+  SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
   SocketRocket: abac6f5de4d4d62d24e11868d7a2f427e0ef940d
+  SwiftMessages: 1a23aef303fa7bb26ad802880746cf8358e378fe
   Yoga: 348f8b538c3ed4423eb58a8e5730feec50bce372
 
 PODFILE CHECKSUM: 1c2af3f8b00493f674bd96f80a2ddcf021a91deb
 
-COCOAPODS: 1.15.2
+COCOAPODS: 1.14.3

@@ -19,8 +19,16 @@ public class CyberPasskeyModule: Module {
     Events("onChange")
 
     // Defines a JavaScript synchronous function that runs the native code on the JavaScript thread.
-    Function("hello") {
-      return "Hello world! 👋"
+    Function("presentPasskeyViewController") {
+        print("present passkey vc")
+        DispatchQueue.main.async {
+            if let rootViewController = UIApplication.shared.delegate?.window??.rootViewController {
+                let entryVC = PSPEntryViewController()
+                let navigatorVC = PSPEntryNavigationViewController(rootViewController: entryVC)
+                navigatorVC.modalPresentationStyle = .fullScreen
+                rootViewController.present(navigatorVC, animated: true)
+            }
+        }
     }
 
     // Defines a JavaScript function that always returns a Promise and whose native code
