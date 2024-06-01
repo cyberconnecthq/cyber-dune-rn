@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:gravity="center"
-        android:text="Gas Price"
+        android:text="Gas Fee"
         android:textSize="15sp"
         android:textColor="#58353C"
         android:background="@drawable/title_background_green"/>

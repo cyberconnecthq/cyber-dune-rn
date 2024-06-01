@@ -8,7 +8,7 @@ import android.widget.RemoteViews
 /**
  * Implementation of App Widget functionality.
  */
-class StakerCountWidget : AppWidgetProvider() {
+class GasFeeWidget : AppWidgetProvider() {
     override fun onUpdate(
         context: Context,
         appWidgetManager: AppWidgetManager,
@@ -29,16 +29,15 @@ class StakerCountWidget : AppWidgetProvider() {
     }
 
     companion object {
-
-        internal fun updateAppWidget(
+        fun updateAppWidget(
             context: Context,
             appWidgetManager: AppWidgetManager,
             appWidgetId: Int
         ) {
-            val title = "Staker Count"
-            val content = "38888"
+            val title = "Gas Fee"
+            val content = "5.4 Gwei"
 
-            val views = RemoteViews(context.packageName, R.layout.pink_widget)
+            val views = RemoteViews(context.packageName, R.layout.green_widget)
 
 
             views.setTextViewText(R.id.title, title)
@@ -48,3 +47,4 @@ class StakerCountWidget : AppWidgetProvider() {
         }
     }
 }
+

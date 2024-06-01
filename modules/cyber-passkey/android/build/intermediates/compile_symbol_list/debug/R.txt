@@ -1,1 +1,0 @@
-int layout passkey_layout 0x0

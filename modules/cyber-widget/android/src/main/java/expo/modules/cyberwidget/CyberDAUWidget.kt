@@ -38,7 +38,7 @@ class CyberDAUWidget : AppWidgetProvider() {
             val title = "DUA"
             val content = "976"
 
-            val views = RemoteViews(context.packageName, LayoutSelector.selectLayout())
+            val views = RemoteViews(context.packageName, R.layout.blue_widget)
 
 
             views.setTextViewText(R.id.title, title)

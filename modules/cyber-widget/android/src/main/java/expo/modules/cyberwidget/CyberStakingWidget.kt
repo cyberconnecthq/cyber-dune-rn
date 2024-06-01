@@ -38,7 +38,7 @@ class CyberStakingWidget : AppWidgetProvider() {
             val title = "Staking Cyber"
             val content = "38940"
 
-            val views = RemoteViews(context.packageName, LayoutSelector.selectLayout())
+            val views = RemoteViews(context.packageName, R.layout.orange_widget)
 
 
             views.setTextViewText(R.id.title, title)
