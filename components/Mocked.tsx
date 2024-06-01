@@ -138,29 +138,6 @@ const Mocked: React.FC = () => {
       }
     };
     fetchData();
-
-    const getInitialUrl = async () => {
-      const initialUrl = await Linking.getInitialURL();
-      handleUrl({ url: initialUrl });
-    };
-    getInitialUrl();
-
-    const handleUrl = async (event: any) => {
-      console.log('Received URL:', event);
-      const { url } = event;
-      if (url) {
-        console.log('Received URL:', url);
-        if (url.includes('cyberDune://login')) {
-          router.replace('./explore');
-        } else if (url.includes('cyberDune://dashboard')) {
-          router.replace('./index');
-        } else {
-          console.log('invalid url', url);
-        }
-      }
-    }
-
-    Linking.addEventListener('url', handleUrl);
   }, []);
 
   if (loading) {

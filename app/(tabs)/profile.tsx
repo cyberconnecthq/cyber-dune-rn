@@ -21,24 +21,6 @@ const PasskeyComponent: React.FC = () => {
 
   useEffect(() => {
 
-  
-    const handleUrl = async (event: any) => {
-      console.log('Received URL:', event);
-      const { url } = event;
-      if (url) {
-        console.log('Received URL:', url);
-        if (url.includes('cyberDune://login')) {
-          router.replace('./profile');
-        } else if (url.includes('cyberDune://dashboard')) {
-          router.replace('./index');
-        } else {
-          console.log('invalid url', url);
-        }
-      }
-    }
-  
-    Linking.addEventListener('url', handleUrl);
-
     const fetchData = async () => {
       const eoa = CyberPasskeyModule.getEOA();
       const avatar = CyberPasskeyModule.getAvatar();
@@ -72,11 +54,22 @@ const PasskeyComponent: React.FC = () => {
       fetchData();
     });
 
-    // 组件卸载时移除监听器
+    const handleUrl = async (event: any) => {
+      const { url } = event;
+      if (url) {
+        if (url.includes('cyberdune://scan')) {
+          router.replace('../camera');
+        }
+      }
+    }
+  
+    const listenerUrl = Linking.addEventListener('url', handleUrl);
+
     return () => {
       if (listener && typeof listener.remove === 'function') {
         listener.remove();
       }
+      listenerUrl.remove();
     };
   }, []);
 

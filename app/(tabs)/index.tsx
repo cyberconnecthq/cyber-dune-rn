@@ -48,28 +48,32 @@ const LineChartComponent = () => {
     };
     fetchData();
 
-    const getInitialUrl = async () => {
-      const initialUrl = await Linking.getInitialURL();
-      handleUrl({ url: initialUrl });
-    };
-    getInitialUrl();
+    // const getInitialUrl = async () => {
+    //   const initialUrl = await Linking.getInitialURL();
+    //   handleUrl({ url: initialUrl });
+    // };
+    // getInitialUrl();
   
     const handleUrl = async (event: any) => {
-      console.log('Received URL:', event);
       const { url } = event;
       if (url) {
-        console.log('Received URL:', url);
-        if (url.includes('cyberDune://login')) {
-          router.replace('./explore');
-        } else if (url.includes('cyberDune://dashboard')) {
-          router.replace('./index');
-        } else {
-          console.log('invalid url', url);
+        if (url.includes('cyberdune://profile')) {
+          router.replace('./profile');
+        } else if (url.includes('cyberdune://scan')) {
+          router.replace('../camera');
+        } else if (url.includes('cyberdune://qrCode')) {
+          router.replace('../scan');
+        } else if (url.includes('cyberdune://transfer')) {
+          router.replace('../soon');
         }
       }
     }
   
-    Linking.addEventListener('url', handleUrl);
+    const listener = Linking.addEventListener('url', handleUrl);
+
+    return () => {
+      listener.remove();
+    };
   }, []);
 
   if (loading) {
