@@ -31,7 +31,7 @@ class CyberPasskeyModule : Module() {
     Function("startActivity") {
       appContext.currentActivity?.let {
 //        it.startActivity(Intent(it, PasskeyActivity::class.java))
-        it.startActivity(Intent(it, PasskeyActivity::class.java))
+        it.startActivity(Intent("com.cyberconnect.link3.PASSKEY"))
       }
     }
 
