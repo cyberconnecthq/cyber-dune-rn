@@ -1,10 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Image, ScrollView, Platform } from 'react-native';
 import CyberPasskeyModule from '@/modules/cyber-passkey/src/CyberPasskeyModule';
+import { Button } from 'react-native';
+import { useFocusEffect } from 'expo-router';
+
 
 const App: React.FC = () => {
   const [user, setUser] = useState<any>(null);
   const [balances, setBalances] = useState<any[]>([]);
+
+  const enterNativeControl = () => {
+    if (Platform.OS === 'android') {
+      console.log('Start activity');
+      CyberPasskeyModule.startActivity();
+    } else {
+      CyberPasskeyModule.presentPasskeyViewController();
+    }
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,17 +39,25 @@ const App: React.FC = () => {
         ];
         setBalances(chainBalances);
       } else {
-        if (Platform.OS === 'android') {
-          console.log('Start activity');
-          CyberPasskeyModule.startActivity();
-        } else {
-          CyberPasskeyModule.presentPasskeyViewController();
-        }
+        enterNativeControl();
       }
     };
 
     fetchData();
   }, []);
+
+  useFocusEffect(
+    useCallback(() => {
+      const eoa = CyberPasskeyModule.getEOA();
+      const avatar = CyberPasskeyModule.getAvatar();
+      if (typeof eoa !== 'string' || typeof avatar !== 'string') {
+        if (Platform.OS === 'android') {
+          console.log('Start activity');
+          CyberPasskeyModule.startActivity();
+        }
+      }
+
+    },[]));
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -64,6 +84,9 @@ const App: React.FC = () => {
           ))}
         </View>
       )}
+      {
+    <View style={styles.button}>
+  </View>}
     </ScrollView>
   );
 }
@@ -129,6 +152,15 @@ const App: React.FC = () => {
     balance: {
       fontSize: 14,
       color: '#808080', // Grey text
+    },
+    button: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: '#F5FCFF',
+    },
+    button_container: {
+      marginTop: 20,
     },
   });
 

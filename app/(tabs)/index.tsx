@@ -1,138 +1,46 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, ScrollView, ActivityIndicator, SafeAreaView, StatusBar, Dimensions } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
-import { MaterialIcons, FontAwesome5 } from '@expo/vector-icons';
-import { LineChart, PieChart } from 'react-native-chart-kit';
+import { View, Text, Dimensions, StyleSheet, ActivityIndicator, SafeAreaView, ScrollView } from 'react-native';
+import { PieChart, LineChart } from 'react-native-chart-kit';
+import { axiosGetRtxNumber, axiosGetTxNumber } from '../../components/network';
+import { TxData, RestakeData } from '../../components/dataType';
 import * as Linking from 'expo-linking';
-import { Link, router, Navigator, Tabs } from 'expo-router';
+import { router } from 'expo-router';
+import Mocked from '@/components/Mocked';
 
 const screenWidth = Dimensions.get('window').width;
 
-interface ChartData {
-  labels?: string[];
-  datasets?: {
-    data: number[];
-    color: (opacity?: number) => string;
-  }[];
-}
-
-interface PieChartData {
-  name: string;
-  population: number;
-  color: string;
-  legendFontColor: string;
-  legendFontSize: number;
-}
-
-interface DashboardData {
-  title: string;
-  value: number;
-  description: string;
-  chartData?: ChartData | PieChartData[];
-}
-
-interface MockData {
-  dashboard1: DashboardData;
-  dashboard2: DashboardData;
-  dashboard3: DashboardData;
-}
-
-const mockData: MockData = {
-  dashboard1: {
-    title: "Total Transactions",
-    value: 10234,
-    description: "Number of transactions processed.",
-    chartData: {
-      labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
-      datasets: [
-        {
-          data: [20, 45, 28, 80, 99, 43],
-          color: (opacity = 1) => `rgba(134, 65, 244, ${opacity})`,
-        }
-      ]
-    }
-  },
-  dashboard2: {
-    title: "Active Nodes",
-    value: 245,
-    description: "Number of active nodes in the network.",
-    chartData: [
-      { name: 'Node A', population: 40, color: 'rgba(131, 167, 234, 1)', legendFontColor: '#7F7F7F', legendFontSize: 15 },
-      { name: 'Node B', population: 30, color: '#F00', legendFontColor: '#7F7F7F', legendFontSize: 15 },
-      { name: 'Node C', population: 20, color: 'rgb(0, 0, 255)', legendFontColor: '#7F7F7F', legendFontSize: 15 },
-      { name: 'Node D', population: 10, color: '#0f0', legendFontColor: '#7F7F7F', legendFontSize: 15 },
-    ]
-  },
-  dashboard3: {
-    title: "Block Height",
-    value: 673234,
-    description: "Current block height of the blockchain."
-  }
+const convertUTCToTime = (dateString: string) => {
+  const trimmedDateString = dateString.split('.')[0].replace(' UTC', '');
+  const date = new Date(trimmedDateString);
+  const hours = date.getUTCHours().toString().padStart(2, '0');
+  const minutes = date.getUTCMinutes().toString().padStart(2, '0');
+  return `${hours}:${minutes}`;
 };
 
-interface DashboardProps {
-  title: string;
-  value: number;
-  description: string;
-  chartData?: ChartData | PieChartData[];
-  chartType?: 'line' | 'pie';
-  icon: React.ReactNode;
-}
-
-const Dashboard: React.FC<DashboardProps> = ({ title, value, description, chartData, chartType, icon }) => (
-  <View style={styles.dashboard}>
-    <View style={styles.dashboardHeader}>
-      {icon}
-      <Text style={styles.dashboardTitle}>{title}</Text>
-    </View>
-    <Text style={styles.dashboardValue}>{value}</Text>
-    <Text style={styles.dashboardDescription}>{description}</Text>
-    {chartData && chartType === 'line' && (
-      <LineChart
-        data={chartData as ChartData}
-        width={screenWidth * 0.8}
-        height={220}
-        chartConfig={chartConfig}
-        bezier
-        style={styles.chart}
-      />
-    )}
-    {chartData && chartType === 'pie' && (
-      <PieChart
-        data={chartData as PieChartData[]}
-        width={screenWidth * 0.8}
-        height={220}
-        chartConfig={chartConfig}
-        accessor="population"
-        backgroundColor="transparent"
-        paddingLeft="15"
-        absolute
-        style={styles.chart}
-      />
-    )}
-  </View>
-);
-
-const chartConfig = {
-  backgroundGradientFrom: '#1E2923',
-  backgroundGradientTo: '#08130D',
-  color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
-  labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-  strokeWidth: 2,
-  barPercentage: 0.5,
+const timeStringToMinutes = (timeString: string) => {
+  const [hours, minutes] = timeString.split(':').map(Number);
+  return hours * 60 + minutes;
 };
 
-const App: React.FC = () => {
-  const [data, setData] = useState<MockData | null>(null);
+const LineChartComponent = () => {
+  const [txData, setTxData] = useState<TxData[]>([]);
+  const [rstData, setRstData] = useState<RestakeData[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        setData(mockData);
+        const [stRes, rstRes] = await Promise.all([
+          axiosGetTxNumber(),
+          axiosGetRtxNumber()
+        ]);
+        const sortedStRes = stRes.sort((a: TxData, b: TxData) => 
+          timeStringToMinutes(convertUTCToTime(a.block_hour)) - timeStringToMinutes(convertUTCToTime(b.block_hour)));
+        setTxData(sortedStRes);
+        setRstData(rstRes);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        setError('');
       } finally {
         setLoading(false);
       }
@@ -144,7 +52,7 @@ const App: React.FC = () => {
       handleUrl({ url: initialUrl });
     };
     getInitialUrl();
-
+  
     const handleUrl = async (event: any) => {
       console.log('Received URL:', event);
       const { url } = event;
@@ -159,141 +67,224 @@ const App: React.FC = () => {
         }
       }
     }
-
+  
     Linking.addEventListener('url', handleUrl);
   }, []);
 
   if (loading) {
     return (
-      <SafeAreaView style={styles.mainContainer}>
-        <View style={styles.loadingContainer}>
-          <ActivityIndicator size="large" color="#2ecc71" />
-        </View>
-      </SafeAreaView>
+      <View style={styles.container}>
+        <ActivityIndicator size="large" color="#0000ff" />
+      </View>
     );
   }
 
+  if (error) {
+    return (
+      <View style={styles.container}>
+        <Text>Error: {error}</Text>
+      </View>
+    );
+  }
+
+  const chartData = {
+    labels: txData.map((item) => convertUTCToTime(item.block_hour)),
+    datasets: [
+      {
+        data: txData.map((item: any) => item.amount_staked_total),
+      },
+    ],
+  };
+
+  const pieData = [
+    {
+      name: 'BNB',
+      count: txData[0].cumulative_num_stake_bnb * 600,
+      color: '#006400',
+      legendFontColor: '#7F7F7F',
+      legendFontSize: 15,
+    },
+    {
+      name: 'ETH',
+      count: txData[0].cumulative_num_stake_ethereum * 3800,
+      color: '#32CD32',
+      legendFontColor: '#7F7F7F',
+      legendFontSize: 15,
+    },
+    {
+      name: 'OP',
+      count: txData[0].cumulative_num_stake_optimism * 2.5,
+      color: '#228B22',
+      legendFontColor: '#7F7F7F',
+      legendFontSize: 15,
+    },
+  ];
+
   return (
-    <SafeAreaView style={styles.mainContainer}>
-      <StatusBar barStyle="light-content" />
-      <LinearGradient
-        colors={['#2ecc71', '#27ae60']}
-        style={styles.topBar}
-      >
-        <Text style={styles.topBarTitle}>CyberDune</Text>
-      </LinearGradient>
-      <ScrollView contentContainerStyle={styles.container}>
-        {data ? (
-          <>
-            <Dashboard 
-              title={data.dashboard1.title} 
-              value={data.dashboard1.value} 
-              description={data.dashboard1.description} 
-              chartData={data.dashboard1.chartData}
-              chartType="line"
-              icon={<MaterialIcons name="show-chart" size={24} color="#2ecc71" style={styles.icon} />}
+    <SafeAreaView style={styles.safeArea}>
+      <ScrollView>
+        <View style={styles.container}>
+          <View style={styles.boxContainer}>
+            <View style={styles.box}>
+              <Text style={styles.boxText}>Total Staked Cyber</Text>
+              <Text style={styles.boxValue}>{txData[0].cumulative_amount_staked_total.toFixed(2)}</Text>
+            </View>
+            <View style={styles.box}>
+              <Text style={styles.boxText}>Total Restaked Cyber</Text>
+              <Text style={styles.boxValue}>{rstData[0].cumulative_net_amount_restaked_total.toFixed(2)}</Text>
+            </View>
+          </View>
+          <View style={styles.chartContainer}>
+            <Text style={styles.chartTitle}>Stake By Hour</Text>
+            <LineChart
+              data={chartData}
+              width={screenWidth - 60} // Adjusted for padding
+              height={220}
+              yAxisLabel=""
+              yAxisSuffix="K"
+              yAxisInterval={1}
+              chartConfig={{
+                backgroundColor: '#ffffff',
+                backgroundGradientFrom: '#ffffff',
+                backgroundGradientTo: '#ffffff',
+                decimalPlaces: 2,
+                color: (opacity = 1) => `rgba(46, 139, 87, ${opacity})`, // MediumSeaGreen
+                labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+                style: {
+                  borderRadius: 16,
+                },
+                propsForDots: {
+                  r: '6',
+                  strokeWidth: '2',
+                  stroke: '#2E8B57', // SeaGreen
+                },
+              }}
+              bezier
+              style={styles.chart}
             />
-            <Dashboard 
-              title={data.dashboard2.title} 
-              value={data.dashboard2.value} 
-              description={data.dashboard2.description} 
-              chartData={data.dashboard2.chartData}
-              chartType="pie"
-              icon={<FontAwesome5 name="network-wired" size={24} color="#2ecc71" style={styles.icon} />}
+          </View>
+          <View style={styles.chartContainer}>
+            <Text style={styles.chartTitle}>Stake Distribution (Total)</Text>
+            <PieChart
+              data={pieData}
+              width={screenWidth - 60} // Adjusted for padding
+              height={220}
+              chartConfig={{
+                backgroundColor: '#ffffff',
+                backgroundGradientFrom: '#ffffff',
+                backgroundGradientTo: '#ffffff',
+                color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+              }}
+              accessor="count"
+              backgroundColor="transparent"
+              paddingLeft="15"
+              absolute // Display percentage values
+              style={styles.chart}
             />
-            <Dashboard 
-              title={data.dashboard3.title} 
-              value={data.dashboard3.value} 
-              description={data.dashboard3.description}
-              icon={<MaterialIcons name="height" size={24} color="#2ecc71" style={styles.icon} />}
-            />
-          </>
-        ) : (
-          <Text style={styles.errorText}>Failed to load data</Text>
-        )}
+            <View style={styles.legendContainer}>
+              {pieData.map((data, index) => (
+                <View key={index} style={styles.legendItem}>
+                  <Text style={styles.legendName}>{data.name}</Text>
+                  <Text style={styles.legendCount}>${data.count}</Text>
+                </View>
+              ))}
+            </View>
+          </View>
+        </View>
+        {/* <Mocked/> */}
       </ScrollView>
     </SafeAreaView>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  mainContainer: {
-    flex: 1,
-    backgroundColor: '#f5f5f5',
-  },
-  topBar: {
-    width: '100%',
-    height: 80,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingTop: 20,
-    elevation: 5,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 3,
-  },
-  topBarTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#ffffff',
-  },
-  container: {
-    flexGrow: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 20,
-  },
-  loadingContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  dashboard: {
-    width: screenWidth * 0.9,
-    backgroundColor: '#ffffff',
-    padding: 20,
-    borderRadius: 15,
-    marginVertical: 10,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 5,
-    borderWidth: 1,
-    borderColor: '#2ecc71',
-  },
-  dashboardHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 10,
-  },
-  icon: {
-    marginRight: 10,
-  },
-  dashboardTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#2ecc71',
-  },
-  dashboardValue: {
-    fontSize: 36,
-    fontWeight: 'bold',
-    color: '#2ecc71',
-    marginBottom: 10,
-  },
-  dashboardDescription: {
-    fontSize: 16,
-    color: '#7f8c8d',
-  },
-  chart: {
-    marginVertical: 10,
-    borderRadius: 16,
-  },
-  errorText: {
-    fontSize: 18,
-    color: 'red',
-  },
-});
+  const styles = StyleSheet.create({
+    safeArea: {
+      flex: 1,
+      backgroundColor: '#ffffff',
+    },
+    container: {
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: 20,
+    },
+    chartContainer: {
+      width: screenWidth - 40,
+      padding: 20,
+      marginBottom: 20,
+      borderRadius: 16,
+      borderWidth: 2,
+      borderColor: '#2E8B57', // SeaGreen
+      backgroundColor: '#f0fff0', // Honeydew
+      alignItems: 'center',
+      elevation: 5, // Shadow
+    },
+    chartTitle: {
+      fontSize: 20,
+      fontWeight: 'bold',
+      color: '#2E8B57', // SeaGreen
+      marginBottom: 10,
+    },
+    boxContainer: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      marginTop: 30,
+      marginBottom: 20,
+      width: screenWidth - 20,
+    },
+    box: {
+      backgroundColor: '#f0fff0', // Honeydew
+      padding: 20,
+      borderRadius: 10,
+      margin: 10,
+      alignItems: 'center',
+      shadowColor: '#000',
+      shadowOffset: {
+        width: 0,
+        height: 2,
+      },
+      shadowOpacity: 0.25,
+      shadowRadius: 3.84,
+      elevation: 5,
+      flex: 1,
+    },
+    boxText: {
+      fontSize: 18,
+      fontWeight: 'bold',
+      color: '#2E8B57', // SeaGreen
+    },
+    boxValue: {
+      fontSize: 24,
+      marginTop: 5,
+      color: '#006400', // DarkGreen
+    },
+    legendContainer: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      justifyContent: 'center',
+      marginTop: 10,
+    },
+    legendItem: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginHorizontal: 10,
+      marginVertical: 5,
+    },
+    legendName: {
+      fontSize: 16,
+      color: '#333333',
+      marginRight: 5,
+    },
+    legendCount: {
+      fontSize: 16,
+      color: '#2E8B57', // SeaGreen
+      fontWeight: 'bold',
+    },
+    chart: {
+      marginVertical: 8,
+      borderRadius: 16,
+    },
+  });
+  
 
-export default App;
+export default LineChartComponent;
