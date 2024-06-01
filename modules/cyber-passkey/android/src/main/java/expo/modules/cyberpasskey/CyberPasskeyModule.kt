@@ -28,6 +28,14 @@ class CyberPasskeyModule : Module() {
       "Hello world! 👋"
     }
 
+    Function("getEOA") {
+      null  
+    }
+
+    Function("getAvatar") {
+      null
+    }
+
     Function("startActivity") {
       appContext.currentActivity?.let {
 //        it.startActivity(Intent(it, PasskeyActivity::class.java))

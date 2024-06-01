@@ -17,6 +17,10 @@ export function getEOA() {
   return CyberPasskeyModule.getEOA()
 }
 
+export function startActivity() {
+  return CyberPasskeyModule.startActivity();
+}
+
 export function getAvatar() {
   return CyberPasskeyModule.getAvatar()
 }

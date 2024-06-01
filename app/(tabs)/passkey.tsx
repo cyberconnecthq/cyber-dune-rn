@@ -11,6 +11,7 @@ const App: React.FC = () => {
       const eoa = CyberPasskeyModule.getEOA();
       const avatar = CyberPasskeyModule.getAvatar();
       if (typeof eoa === 'string' && typeof avatar === 'string') {
+        console.log('eoa:', eoa);
         const userData = {
           name: 'User',
           avatar: avatar,
@@ -27,6 +28,7 @@ const App: React.FC = () => {
         setBalances(chainBalances);
       } else {
         if (Platform.OS === 'android') {
+          console.log('Start activity');
           CyberPasskeyModule.startActivity();
         } else {
           CyberPasskeyModule.presentPasskeyViewController();
