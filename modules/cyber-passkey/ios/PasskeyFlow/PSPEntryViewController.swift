@@ -16,6 +16,7 @@ import SnapKit
 import Apollo
 
 class PSPEntryViewController:UIViewController, PassPortManagerWCDelegate, UISheetPresentationControllerDelegate {
+    var onDismiss:(()->())?
     
     func viewControllerForSignRequest() -> UIViewController {
         return self
@@ -438,6 +439,7 @@ extension PSPEntryViewController : PassPortManagerPassKeyDelegate {
         PassportManager.sharedInstance.processInfoAfterLogin(token:defaultAccessToken)
         DispatchQueue.main.asyncAfter(deadline: .now()+1.0) {
             self.navigationController?.dismiss(animated: true)
+            self.onDismiss?()
         }
     }
 }

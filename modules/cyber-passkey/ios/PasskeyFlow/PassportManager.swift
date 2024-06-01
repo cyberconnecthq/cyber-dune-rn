@@ -307,9 +307,9 @@ class PassportManager {
     
     func getEOA() -> String {
         let options = [
-            "0x0aE4b630D98A1E6D1A37858b806d1BdcCCCC314a",
-            "0xBb4805292728EEa8B1d9A78338Db2f5056dDa180",
-            "0x262FA032E857b5Fa066bC0587d234B942d08CbaB"]
+            "0x0aE4b630D98A1E6D1A37858b806d1BdcCCCC314a".lowercased(),
+            "0xBb4805292728EEa8B1d9A78338Db2f5056dDa180".lowercased(),
+            "0x262FA032E857b5Fa066bC0587d234B942d08CbaB".lowercased()]
         let choice = randomChoice(from: options)
         return choice
     }

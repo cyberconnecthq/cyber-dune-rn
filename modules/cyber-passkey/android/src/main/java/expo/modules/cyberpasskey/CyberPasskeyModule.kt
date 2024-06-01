@@ -34,6 +34,10 @@ class CyberPasskeyModule : Module() {
         if (sharedPref != null) sharedPref.getString("wallet", null) else null
     }
 
+    Function("logout") {
+        
+    }
+
     Function("getAvatar") {
       "https://ccgateway.infura-ipfs.io/ipfs/QmUjoJbH21wJZWtib3zQarhewyazXY4VWfQzeV8F4v5nPc"
     }

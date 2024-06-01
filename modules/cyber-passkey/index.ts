@@ -25,6 +25,10 @@ export function getAvatar() {
   return CyberPasskeyModule.getAvatar()
 }
 
+export function logout() {
+  return CyberPasskeyModule.logout()
+}
+
 export async function setValueAsync(value: string) {
   return await CyberPasskeyModule.setValueAsync(value);
 }
@@ -36,3 +40,9 @@ export function addChangeListener(listener: (event: ChangeEventPayload) => void)
 }
 
 export { CyberPasskeyView, CyberPasskeyViewProps, ChangeEventPayload };
+
+export type OnLogInEvent = {};
+
+export function addLoginListener(listener: (event: OnLogInEvent) => void): Subscription {
+  return emitter.addListener<OnLogInEvent>('onLogin', listener);
+}

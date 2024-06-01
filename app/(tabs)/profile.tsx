@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Image, ScrollView, Platform } from 'react-native';
+import { StyleSheet, Text, View, Image, ScrollView, Platform, NativeEventEmitter, NativeModules, SafeAreaView } from 'react-native';
+
 import CyberPasskeyModule from '@/modules/cyber-passkey/src/CyberPasskeyModule';
 import { Button } from 'react-native';
 import { useFocusEffect } from 'expo-router';
@@ -44,6 +45,21 @@ const App: React.FC = () => {
     };
 
     fetchData();
+
+
+    // 直接使用原生模块的addListener
+    const listener = CyberPasskeyModule.addListener('onLogin', (event) => {
+      // 处理事件
+      console.log('Received login event:', event);
+      fetchData();
+    });
+
+    // 组件卸载时移除监听器
+    return () => {
+      if (listener && typeof listener.remove === 'function') {
+        listener.remove();
+      }
+    };
   }, []);
 
   useFocusEffect(
@@ -60,34 +76,36 @@ const App: React.FC = () => {
     },[]));
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      {user && (
-        <View style={styles.card}>
-          <View style={styles.header}>
-            <Image source={{ uri: user.avatar }} style={styles.avatar} />
-            <View style={styles.userInfo}>
-              <Text style={styles.userName}>{user.name}</Text>
-              <Text style={styles.address}>Address: {user.address}</Text>
-              <Text style={styles.totalBalance}>Total Balance: {user.totalBalance}</Text>
+    <SafeAreaView>
+      <ScrollView contentContainerStyle={styles.container} >
+        {user && (
+          <View style={styles.card}>
+            <View style={styles.header}>
+              <Image source={{ uri: user.avatar }} style={styles.avatar} />
+              <View style={styles.userInfo}>
+                <Text style={styles.userName}>{user.name}</Text>
+                <Text style={styles.address}>Address: {user.address}</Text>
+                <Text style={styles.totalBalance}>Total Balance: {user.totalBalance}</Text>
+              </View>
             </View>
           </View>
-        </View>
-      )}
-      {balances.length > 0 && (
-        <View style={styles.form}>
-          <Text style={styles.title}>Your Balances</Text>
-          {balances.map((item, index) => (
-            <View key={index} style={styles.balanceItem}>
-              <Text style={styles.chainName}>{item.chain}</Text>
-              <Text style={styles.balance}>Balance: {item.balance}</Text>
-            </View>
-          ))}
-        </View>
-      )}
-      {
-    <View style={styles.button}>
-  </View>}
-    </ScrollView>
+        )}
+        {balances.length > 0 && (
+          <View style={styles.form}>
+            <Text style={styles.title}>Your Balances</Text>
+            {balances.map((item, index) => (
+              <View key={index} style={styles.balanceItem}>
+                <Text style={styles.chainName}>{item.chain}</Text>
+                <Text style={styles.balance}>Balance: {item.balance}</Text>
+              </View>
+            ))}
+          </View>
+        )}
+        {
+          <View style={styles.button}>
+          </View>}
+      </ScrollView>
+    </SafeAreaView>
   );
 }
   
