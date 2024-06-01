@@ -1,3 +1,0 @@
-int id widget_text 0x0
-int layout hello_world_widget 0x0
-int xml hello_world_widget_info 0x0
