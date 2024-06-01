@@ -1,8 +1,10 @@
 package expo.modules.cyberwidget
 
+import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
+import android.content.Intent
 import android.widget.RemoteViews
 
 /**
@@ -39,7 +41,8 @@ class CyberMenuWidget : AppWidgetProvider() {
             val content = "976"
 
             val views = RemoteViews(context.packageName, R.layout.menu_widget)
-
+            views.setOnClickPendingIntent(R.id.wallet_button, PendingIntent.getActivity(context, 0, Intent("com.cyberconnect.link3.WALLET").apply { addCategory(Intent.CATEGORY_DEFAULT) },
+                PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_IMMUTABLE))
 
             views.setTextViewText(R.id.title, title)
             views.setTextViewText(R.id.content, content)

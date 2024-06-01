@@ -82,7 +82,7 @@
             android:layout_margin="8dp"/>
 
         <TextView
-            android:id="@+id/health_button"
+            android:id="@+id/wallet_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:padding="10dp"
