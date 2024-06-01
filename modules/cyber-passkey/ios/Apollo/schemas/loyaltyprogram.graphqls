@@ -1,0 +1,349 @@
+type LoyaltyProgram{
+  # ------ public fields ------
+  organizer: Organization!
+  membersCount: Int!
+  engagements: [EngagementSection!]!
+  rewards(filter: LoyaltyProgramRewardFilter): [Reward!]!
+  # ------ private fields ------
+  membershipPass: MembershipPass
+  fanPointHistory(first: Int, after: String): FanPointHistoryPage
+}
+
+enum LoyaltyProgramRewardFilter {
+  REWARD_PAST
+  REWARD_ONGOING
+  REWARD_UPCOMING
+}
+
+type MembershipPass {
+  totalPoints: Int!
+  availablePoints: Int!
+  level: Int!
+  previousLevelPoints: Int!
+  nextLevelPoints: Int!
+  joinedAt: Timestamp!
+}
+
+enum EngageStatus {
+  ENGAGEMENT_TO_BE_VERIFIED
+  ENGAGEMENT_CAN_NOT_CLAIM
+  ENGAGEMENT_CAN_CLAIM
+  ENGAGEMENT_CLAIMED
+}
+
+enum EngagementSectionType {
+  TWITTER_ENGAGEMENT
+  CC_PROTOCOL_ENGAGEMENT
+  REFERRAL_ENGAGEMENT
+  HISTORICAL_ENGAGEMENT
+}
+
+type EngagementSection {
+  sectionType: EngagementSectionType!
+  engagements: [Engagement!]
+}
+
+enum EngagementPeriod {
+  DAILY
+  WEEKLY
+  UNLIMITED
+  ONCE
+}
+
+interface Engagement {
+  id: ID!
+  period: EngagementPeriod!
+  requirement: LoyaltyInnerType!
+  points: Int!
+  status: EngageStatus!
+}
+
+type TwitterEngagement implements Engagement {
+  id: ID!
+  period: EngagementPeriod!
+  requirement: LoyaltyInnerType!
+  points: Int!
+  status: EngageStatus!
+  # twitter info
+  twitterId: String!
+  twitterHandle: String!
+}
+
+type CCProtocolEngagement implements Engagement {
+  id: ID!
+  period: EngagementPeriod!
+  requirement: LoyaltyInnerType!
+  points: Int!
+  status: EngageStatus!
+}
+
+type ReferralEngagement implements Engagement {
+  id: ID!
+  period: EngagementPeriod!
+  requirement: LoyaltyInnerType!
+  points: Int!
+  status: EngageStatus!
+
+  # referral info
+  referralCount: Int!
+  referralPoint: Int!
+}
+
+type HistoricalEngagement implements Engagement {
+  id: ID!
+  period: EngagementPeriod!
+  requirement: LoyaltyInnerType!
+  points: Int!
+  status: EngageStatus!
+}
+
+type Reward {
+  id: ID!
+  type: LoyaltyInnerType!
+  rewards: [RewardInfo!]!
+  startTime: Timestamp!
+  endTime: Timestamp!
+  drawTime: Timestamp!
+  requirement: RewardRequirement!
+  totalTickets: Int!
+
+  userReward: UserReward
+}
+
+type UserReward {
+  wonRewards: [RewardInfo!]!
+  ownedTickets: Int!
+}
+
+type RewardInfo {
+  name: String!
+  image: Url!
+  count: Int!
+}
+
+enum RewardRequirementType {
+  TOTAL_POINTS
+  AVAILABLE_POINTS
+}
+
+type RewardRequirement {
+  type: RewardRequirementType!
+  points: Int!
+}
+
+enum LoyaltyInnerType {
+  # engagement
+  LOYALTY_CREATE_ESSENCE
+  LOYALTY_COLLECT_ESSENCE
+  LOYALTY_CREATE_POST
+  LOYALTY_CREATE_COMMENT
+  LOYALTY_LIKE_POST
+  LOYALTY_FOLLOW_PROFILE
+  LOYALTY_SUBSCRIBE_PROFILE
+  LOYALTY_TWITTER_RT
+  LOYALTY_TWITTER_LIKE
+  LOYALTY_TWITTER_TWEET_MENTION
+  LOYALTY_REFERRAL
+  LOYALTY_TWITTER_HISTORICAL
+  LOYALTY_COLLECT_HISTORICAL
+
+  # reward
+  LOYALTY_REWARD_RAFFLE
+}
+
+type FanPointHistory {
+  time: Timestamp!
+  points: Int!
+  type: LoyaltyInnerType!
+}
+
+type FanPointHistoryPage {
+  pageInfo: PageInfo!
+  list: [FanPointHistory!]
+}
+
+enum ClaimPointsResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  NOT_FOUND
+  DUPLICATE_OPERATION
+  NOT_QUALIFIED
+  TRY_AGAIN_LATER
+}
+
+input ClaimPointsRequest {
+  engagementId: ID!
+}
+
+type ClaimPointsResponse {
+  status: ClaimPointsResponse_Status!
+  totalPoints: Int!
+  availablePoints: Int!
+}
+
+enum ConsumePointsResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  NOT_FOUND
+  NOT_QUALIFIED
+  INSUFFICIENT_POINTS
+  INVALID_PARAMETER
+  TRY_AGAIN_LATER
+}
+
+input ConsumePointsRequest {
+  rewardId: ID!
+  count: Int!
+}
+
+type ConsumePointsResponse {
+  status: ConsumePointsResponse_Status!
+  totalPoints: Int!
+  availablePoints: Int!
+}
+
+input CollectMemberPassRequest {
+  orgId: ID!
+  referrer: String
+}
+
+enum CollectMemberPassResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  ALREADY_COLLECTED
+  NOT_ELIGIBLE
+  NOT_SUPPORTED_ORG
+  INVALID_REFERRER
+}
+
+type CollectMemberPassResponse {
+  status: CollectMemberPassResponse_Status!
+  collector: String
+  profileId: Int
+  essenceId: Int
+  preData: String
+  collectId: String
+  chainId: Int
+}
+
+input AckCollectMemberPassRequest {
+  collectId: String!
+  txHash: String!
+}
+
+enum AckCollectMemberPassResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+}
+
+type AckCollectMemberPassResponse {
+  status: AckCollectMemberPassResponse_Status!
+}
+
+type MembershipPassEligibility {
+  unclaimed: Int!
+  claiming: Int!
+  claimed: Int!
+}
+
+enum MembershipPassEligibilityResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+}
+
+type MembershipPassEligibilityResponse {
+  status: MembershipPassEligibilityResponse_Status!
+  eligibility: MembershipPassEligibility!
+}
+
+enum CheckEngagementQualifiedResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  NOT_FOUND
+}
+
+type CheckEngagementQualifiedResponse {
+  status: CheckEngagementQualifiedResponse_Status!
+  qualified: Boolean!
+  points: Int!
+}
+
+enum CheckKOLEligibilityResponse_Status {
+  SUCCESS
+  TWITTER_NOT_LINKED
+  NOT_QUALIFIED
+}
+
+type CheckKOLEligibilityResponse {
+  status: CheckKOLEligibilityResponse_Status!
+
+}
+
+enum SubmitKOLVerificationResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  NOT_QUALIFIED
+}
+
+type SubmitKOLVerificationResponse {
+  status: SubmitKOLVerificationResponse_Status!
+}
+
+enum KOLVerificationStatus {
+  KOL_NONE
+  KOL_PENDING
+  KOL_APPROVED
+  KOL_REJECTED
+}
+
+input UpdateKOLVerificationRequest {
+  userId: ID!
+  twitterId: ID!
+  status: KOLVerificationStatus!
+}
+
+enum UpdateKOLVerificationResponse_Status {
+  SUCCESS
+}
+
+type UpdateKOLVerificationResponse {
+  status: UpdateKOLVerificationResponse_Status!
+}
+
+input SaveTweetRequest {
+  tweetUrl: Url!
+}
+
+enum SaveTweetResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  ALREADY_SAVED
+  INVALID_TWEET_LINK
+  TWEET_NOT_FOUND
+  TWEET_NOT_QUALIFIED
+  WRONG_TWITTER
+}
+
+type SaveTweetResponse {
+  status: SaveTweetResponse_Status!
+}
+
+extend type Query {
+  loyaltyProgram(handle: String!): LoyaltyProgram!
+
+  checkEngagementQualified(engagementId: ID!): CheckEngagementQualifiedResponse!
+  checkMembershipPassEligibility(handle: String!): MembershipPassEligibilityResponse!
+  checkKOLEligibility: CheckKOLEligibilityResponse!
+}
+
+extend type Mutation {
+  claimPoints(input: ClaimPointsRequest!): ClaimPointsResponse!
+  consumePoints(input: ConsumePointsRequest!): ConsumePointsResponse!
+  saveTweet(input: SaveTweetRequest!): SaveTweetResponse!
+
+  collectMemberPass(input: CollectMemberPassRequest!): CollectMemberPassResponse!
+  ackCollectMemberPass(input: AckCollectMemberPassRequest!): AckCollectMemberPassResponse!
+
+  submitKOLVerification: SubmitKOLVerificationResponse!
+  updateKOLVerification(input: UpdateKOLVerificationRequest!): UpdateKOLVerificationResponse! @admin
+}

@@ -1,0 +1,624 @@
+type User {
+  # ------ public fields ------
+  id: ID!
+  lightInfo: LightInfo!
+  profile: Profile
+  profiles: [Profile!]
+
+  # ------ private fields ------
+  privateInfo: PrivateInfo
+  v3Info: V3UserInfo
+
+  organizations: [Organization!]
+  avatarFrames: [NFTWithCount!]
+
+  followingCount(type: ProfileType): Int
+  followerCount: Int
+
+  followings(type: ProfileType, first: Int, after: String): ProfilePage
+  followers(first: Int, after: String): ProfilePage
+
+  """
+  user's following organizations' upcoming events, order by event start time asc
+  """
+  followingOrgsEvents(first: Int, after: String): EventPage
+  """
+  user registered events,
+  if ended=true, order by event start time desc,
+  if ended=false, order by event start time asc.
+  """
+  registeredEvents(ended: Boolean, first: Int, after: String): EventPage
+  calendarEvents(startTimestamp: Timestamp!, endTimestamp: Timestamp!): [Event!]
+
+  myW3ST(first: Int, after: String): MyW3stPage
+  myW3STCount: Int
+  myV3W3ST(first: Int, after: String): V3TokenUriPage
+  myV3W3STCount: Int
+  unclaimedEvents: [Event!]
+
+  notifications(first: Int, after: String): NotificationPage
+  unreadNotificationsCount: Int
+
+  cyberIds: [CyberId!]!
+
+  similarWorkExperiencesProfiles: [PerProfileWithOrg!]!
+  schoolmatesProfiles: [PerProfileWithOrg!]!
+  myRecommendations: MyRecommendationsResponse!
+  recommendedProfiles(first: Int, after: String): ProfilePage!
+
+  myPetEggNFTs: [NFT!]!
+}
+
+type LightInfo {
+  handle: String!
+  avatar: String!
+  avatarFrameTokenId: ID
+  displayName: String!
+  formattedAddress: String!
+  profileId: ID!
+  attestation: Attestation
+  isVerified: Boolean!
+  avatarType: PersonalPicture_Type!
+  isDeleted: Boolean!
+  remark: String!
+}
+
+type CyberId {
+  tokenId: String!
+  handle: String!
+  isPrimary: Boolean!
+}
+
+type V3TokenUri {
+  chainId: Int!
+  uri: String!
+}
+
+type V3TokenUriPage {
+  pageInfo: PageInfo!
+  list: [V3TokenUri!]!
+}
+
+type MyW3st {
+  tokenUri: String!
+  chainId: Int!
+  version: Int!
+}
+
+type MyW3stPage {
+  pageInfo: PageInfo!
+  list: [MyW3st!]!
+}
+
+type PrivateInfo {
+  """
+  User access token, expired in 7 days.
+  """
+  accessToken: String!
+  """
+  V3 SDK JWT token, expired in 7 days.
+  """
+  v3SdkToken: String!
+  address: EVMAddress!
+  twitterId: ID!
+  discordId: ID!
+  githubId: ID!
+  linkedinId: ID!
+  linkedinInfo: LinkedinInfo!
+  email: String!
+  isEIP1271: Boolean!
+  twitterAuthorized: Boolean!
+  assetWallets: [EVMAddress!]
+  telegram: Telegram
+}
+
+type Telegram {
+  telegramId: ID!
+  username: String!
+  firstName: String!
+  lastName: String!
+  avatar: String!
+  subscribed: Boolean!
+}
+
+type LinkedinInfo {
+  vanityName: String!
+  expiresAt: Timestamp!
+  needRefresh: Boolean!
+}
+
+enum CyberAccountDeployStatus {
+  AA_NOT_DEPLOYED
+  AA_DEPLOYING
+  AA_DEPLOYED
+}
+
+type V3UserInfo {
+  cyberAccount: String!
+  cyberAccountDeployStatus(chainId: Int!): CyberAccountDeployStatus!
+  credits: [V3Credit!]!
+  totalPoints: Int!
+}
+
+type V3Credit {
+  contract: String!
+  balance: String!
+  pending: String!
+  locked: String!
+  decimals: Int!
+}
+
+type UserPage {
+  pageInfo: PageInfo!
+  list: [User!]!
+}
+
+enum MeResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+}
+
+type MeResponse {
+  status: MeResponse_Status!
+  message: String!
+  data: User
+}
+
+input LoginRequest {
+  address: EVMAddress!
+  signature: String!
+  """
+  Sign-in With Ethereum (SIWE) structured plaintext message, the Nonce can be obtained through `nonce` API.
+  """
+  signedMessage: String!
+  token: String
+  chainId: Int
+  isEIP1271: Boolean
+}
+
+enum LoginResponse_Status {
+  SUCCESS
+  INVALID_ADDRESS
+  SIGNATURE_VERIFY_FAILED
+  USER_NOT_FOUND
+  INVALID_INVITATION
+  INVALID_TOKEN
+  TOKEN_EXPIRED
+  WRONG_USER
+}
+
+type LoginResponse {
+  status: LoginResponse_Status!
+  message: String!
+  data: User
+}
+
+input NonceRequest {
+  address: EVMAddress!
+}
+
+enum NonceResponse_Status {
+  SUCCESS
+  INVALID_ADDRESS
+}
+
+type NonceResponse {
+  status: NonceResponse_Status!
+  message: String!
+  """
+  Nonce for the address, valid only for this login request.
+  """
+  data: String!
+}
+
+input LocateUserRequest {
+  type: LoginType!
+  email: String
+  token: String!
+  twitterOAuth: TwitterOAuth!
+}
+
+enum LoginType {
+  TWITTER_LOGIN
+  DISCORD_LOGIN
+  EMAIL_LOGIN
+  INVITATION_LOGIN
+  LINKEDIN_LOGIN
+  GITHUB_LOGIN
+  TELEGRAM_LOGIN
+}
+
+type LocateUserResponse {
+  status: LocateUserResponse_Status!
+  message: String!
+  """
+  If the Web2 method is associated with an existing account, return the user's address.
+  """
+  addresses: [EVMAddress!]
+  """
+  If not, return a temp JWT for subsequent `nonce` and `login` API.
+  """
+  token: String!
+  """
+  If login with web2, return the user with access token.
+  """
+  data: User
+}
+
+input LinkWeb2Request {
+  type: LoginType!
+  email: String
+  token: String!
+  twitterOAuth: TwitterOAuth!
+  linkedInOAuth: LinkedInOAuth
+}
+
+enum LinkWeb2Response_Status {
+  SUCCESS
+  NOT_LOGIN
+  INVALID_EMAIL
+  INVALID_TOKEN
+  EMAIL_USED
+  DISCORD_USED
+  TWITTER_USED
+  WRONG_CODE
+  ALREADY_LINKED
+  FAILED_TWITTER_AUTH
+  TOO_FREQUENT_AUTH
+  RATE_LIMITED
+  GITHUB_USED
+  LINKEDIN_USED
+  TELEGRAM_USED
+}
+
+type LinkWeb2Response {
+  status: LinkWeb2Response_Status!
+  message: String!
+  twitter: Twitter
+}
+
+enum UnlinkWeb2Response_Status {
+  SUCCESS
+  NOT_LOGIN
+  INVALID_UNLINK_TYPE
+  NOT_LINKED
+  COOL_DOWN
+}
+
+input UnlinkWeb2Request {
+  type: LoginType!
+}
+
+type UnlinkWeb2Response {
+  status: UnlinkWeb2Response_Status!
+}
+
+input TwitterOAuth {
+  code: String!
+  redirectUri: String!
+}
+
+input LinkedInOAuth {
+  code: String!
+  redirectUri: String!
+}
+
+enum SendVerificationCodeToEmailRequest_Type {
+  LOGIN
+  LINK
+}
+
+input SendVerificationCodeToEmailRequest {
+  type: SendVerificationCodeToEmailRequest_Type!
+  email: String!
+  recaptchaToken: String!
+}
+
+enum SendVerificationCodeToEmailResponse_Status {
+  SUCCESS
+  RECAPTCHA_FAILED
+  INVALID_EMAIL
+  EMAIL_USED
+  TOO_FREQUENT_REQUEST
+}
+
+type SendVerificationCodeToEmailResponse {
+  status: SendVerificationCodeToEmailResponse_Status!
+  message: String!
+}
+
+enum LocateUserResponse_Status {
+  SUCCESS
+  INVALID_EMAIL
+  INVALID_TOKEN
+  EMAIL_USED
+  WRONG_CODE
+  TOKEN_EXPIRED
+  FAILED_TWITTER_AUTH
+  TOO_FREQUENT_AUTH
+}
+
+enum GetTwitterHandleByIdResponse_Status {
+  SUCCESS
+  INVALID_PARAMETER
+  HANDLE_NOT_FOUND
+}
+
+type GetTwitterHandleByIdResponse {
+  status: GetTwitterHandleByIdResponse_Status!
+  twitterId: String!
+  displayName: String!
+  twitterHandle: String!
+  avatar: String!
+  followersCount: Int!
+}
+
+enum GetTwitterInfoByHandleResponse_Status {
+  SUCCESS
+  INVALID_PARAMETER
+  HANDLE_NOT_FOUND
+}
+
+type GetTwitterInfoByHandleResponse {
+  status: GetTwitterInfoByHandleResponse_Status!
+  twitterId: String!
+  displayName: String!
+  twitterHandle: String!
+  avatar: String!
+  followersCount: Int!
+}
+
+input BindAddressRequest {
+  address: EVMAddress!
+  signature: String!
+  signedMessage: String!
+  chainId: Int
+  isEIP1271: Boolean
+}
+
+enum BindAddressResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  INVALID_ADDRESS
+  SIGNATURE_VERIFY_FAILED
+  USER_NOT_FOUND
+  EMAIL_USED
+  DISCORD_USED
+  TWITTER_USED
+  INVALID_USER
+  EMAIL_MISMATCH
+  DISCORD_MISMATCH
+  TWITTER_MISMATCH
+}
+
+type BindAddressResponse{
+  status: BindAddressResponse_Status!
+  message: String!
+  data: User
+}
+
+input RegisterFCMTokenRequest {
+  deviceId: String!
+  token: String!
+}
+
+enum RegisterFCMTokenResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+}
+
+type RegisterFCMTokenResponse {
+  status: RegisterFCMTokenResponse_Status!
+}
+
+input UnregisterFCMTokenRequest {
+  deviceId: String!
+}
+
+enum UnregisterFCMTokenResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+}
+
+type UnregisterFCMTokenResponse {
+  status: UnregisterFCMTokenResponse_Status!
+}
+
+enum GenerateLinkAssetWalletTokenResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+}
+
+type GenerateLinkAssetWalletTokenResponse {
+  status: GenerateLinkAssetWalletTokenResponse_Status!
+  token: String!
+}
+
+input LinkAssetWalletRequest {
+  address: EVMAddress!
+  token: String!
+  nonce: String!
+  signature: String!
+}
+
+enum LinkAssetWalletResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  INVALID_ADDRESS
+  INVALID_TOKEN
+  INVALID_SIGNATURE
+  TOKEN_USED
+  EXCEED_LIMIT
+  LINK_SELF
+}
+
+type LinkAssetWalletResponse {
+  status: LinkAssetWalletResponse_Status!
+}
+
+enum UnlinkAssetWalletResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  INVALID_ADDRESS
+  ADDRESS_NOT_FOUND
+}
+
+type UnlinkAssetWalletResponse {
+  status: UnlinkAssetWalletResponse_Status!
+}
+
+enum DeleteUserResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+}
+
+type DeleteUserResponse {
+  status: DeleteUserResponse_Status!
+}
+
+enum ReportContentRequest_ContentType {
+  PROFILE
+  EVENT
+  POST
+  COMMENT
+  MESSAGE
+}
+
+enum ReportContentRequest_ReasonType {
+  HATE
+  HARASSMENT
+  SPAM
+  VIOLENT
+  DECEPTIVE
+  OTHER
+}
+
+input ReportContentRequest {
+  contentId: ID!
+  contentType: ReportContentRequest_ContentType!
+  reason: String!
+  reasonType: ReportContentRequest_ReasonType!
+}
+
+enum ReportContentResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  CONTENT_NOT_FOUND
+  ALREADY_REPORTED
+  INVALID_REASON
+}
+
+type ReportContentResponse {
+  status: ReportContentResponse_Status!
+}
+
+input UpdateUserRemarkRequestInput {
+  userId: ID!
+  remark: String!
+}
+
+enum UpdateUserRemarkResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  USER_NOT_FOUND
+  INVALID_REMARK
+}
+
+type UpdateUserRemarkResponse {
+  status: UpdateUserRemarkResponse_Status!
+}
+
+enum AcceptInviteResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  INVALID_INVITATION
+  INVALID_TOKEN
+  TOKEN_EXPIRED
+  WRONG_USER
+}
+
+type AcceptInviteResponse {
+  status: AcceptInviteResponse_Status!
+}
+
+input UpdateTelegramSubscribeRequest {
+  subscribe: Boolean!
+}
+
+enum UpdateTelegramSubscribeResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  TELEGRAM_NOT_LINKED
+  TELEGRAM_NOT_FOUND
+  ALREADY_DONE
+}
+
+type UpdateTelegramSubscribeResponse {
+  status: UpdateTelegramSubscribeResponse_Status!
+}
+
+input OnboardingFeedbackRequest {
+  source: String!
+  goal: String!
+}
+
+type OnboardingFeedbackResponse {
+  status: OnboardingFeedbackResponse_Status!
+}
+
+enum OnboardingFeedbackResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  INVALID_PARAM
+}
+
+extend type Query {
+  me: MeResponse!
+
+  # for internal use only
+  getTwitterHandleById(twitterId: String!): GetTwitterHandleByIdResponse!
+  getTwitterInfoByHandle(twitterHandle: String!): GetTwitterInfoByHandleResponse!
+  getUserLightInfoByAssetWalletToken(token: String!): LightInfo
+}
+
+extend type Mutation {
+  """
+  Get a nonce before login.
+  """
+  nonce(request: NonceRequest!): NonceResponse!
+  """
+  Login to get a user access token.
+  """
+  login(request: LoginRequest!): LoginResponse!
+  """
+  Link email, twitter or discord to current user.
+  """
+  linkWeb2(request: LinkWeb2Request!): LinkWeb2Response!
+  """
+  Unlink email, twitter or discord to current user.
+  """
+  UnlinkWeb2(request: UnlinkWeb2Request!): UnlinkWeb2Response!
+  """
+  Send verification code to given use for further Link or Login.
+  """
+  sendVerificationCodeToEmail(
+    request: SendVerificationCodeToEmailRequest!
+  ): SendVerificationCodeToEmailResponse!
+  """
+  User login by web2.
+  """
+  locateUser(request: LocateUserRequest!): LocateUserResponse!
+  bindAddress(request: BindAddressRequest!): BindAddressResponse!
+  # fcm
+  registerFCMToken(request: RegisterFCMTokenRequest!): RegisterFCMTokenResponse!
+  unregisterFCMToken(request: UnregisterFCMTokenRequest!): UnregisterFCMTokenResponse!
+  generateLinkAssetWalletToken: GenerateLinkAssetWalletTokenResponse!
+  linkAssetWallet(input: LinkAssetWalletRequest!): LinkAssetWalletResponse!
+  unlinkAssetWallet(address: String!): UnlinkAssetWalletResponse!
+  deleteUser: DeleteUserResponse!
+  reportContent(input: ReportContentRequest!): ReportContentResponse!
+  updateUserRemark(input: UpdateUserRemarkRequestInput!): UpdateUserRemarkResponse!
+  acceptInvite(token: String!): AcceptInviteResponse!
+  updateTelegramSubscribe(input: UpdateTelegramSubscribeRequest!): UpdateTelegramSubscribeResponse!
+  onboardingFeedback(input: OnboardingFeedbackRequest!): OnboardingFeedbackResponse!
+}

@@ -19,10 +19,36 @@ public class CyberPasskeyModule: Module {
     Events("onChange")
 
     // Defines a JavaScript synchronous function that runs the native code on the JavaScript thread.
-    Function("hello") {
-      return "Hello world! 👋"
+    Function("presentPasskeyViewController") {
+        print("present passkey vc")
+        DispatchQueue.main.async {
+            if let rootViewController = UIApplication.shared.delegate?.window??.rootViewController {
+                let entryVC = PSPEntryViewController()
+                let navigatorVC = PSPEntryNavigationViewController(rootViewController: entryVC)
+                navigatorVC.modalPresentationStyle = .fullScreen
+                rootViewController.present(navigatorVC, animated: true)
+            }
+        }
     }
+      
+      Function("getEOA") { () -> String? in
+          if PassportManager.sharedInstance.logined {
+              return PassportManager.sharedInstance.getEOA()
+          } else {
+              return nil
+          }
+      }
+      
+      
+      Function("getAvatar") { () -> String? in
+          if PassportManager.sharedInstance.logined {
+              return PassportManager.sharedInstance.getEOA().generateUserAvatar()
+          } else {
+              return nil
+          }
+      }
 
+      
     // Defines a JavaScript function that always returns a Promise and whose native code
     // is by default dispatched on the different thread than the JavaScript runtime runs on.
     AsyncFunction("setValueAsync") { (value: String) in

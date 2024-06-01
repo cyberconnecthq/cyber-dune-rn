@@ -1,7 +1,7 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/wangchong/AndroidStudioProjects/cyber-dune-rn/modules/cyber-widget/android/src/main/AndroidManifest.xml:2:1-25:12
-INJECTED from /Users/wangchong/AndroidStudioProjects/cyber-dune-rn/modules/cyber-widget/android/src/main/AndroidManifest.xml:2:1-25:12
+ADDED from /Users/wangchong/AndroidStudioProjects/cyber-dune-rn/modules/cyber-widget/android/src/main/AndroidManifest.xml:2:1-100:12
+INJECTED from /Users/wangchong/AndroidStudioProjects/cyber-dune-rn/modules/cyber-widget/android/src/main/AndroidManifest.xml:2:1-100:12
 	package
 		ADDED from /Users/wangchong/AndroidStudioProjects/cyber-dune-rn/modules/cyber-widget/android/src/main/AndroidManifest.xml:3:5-39
 		INJECTED from /Users/wangchong/AndroidStudioProjects/cyber-dune-rn/modules/cyber-widget/android/src/main/AndroidManifest.xml
@@ -17,26 +17,68 @@ INJECTED from /Users/wangchong/AndroidStudioProjects/cyber-dune-rn/modules/cyber
 		ADDED from /Users/wangchong/AndroidStudioProjects/cyber-dune-rn/modules/cyber-widget/android/src/main/AndroidManifest.xml:5:15-41
 		INJECTED from /Users/wangchong/AndroidStudioProjects/cyber-dune-rn/modules/cyber-widget/android/src/main/AndroidManifest.xml
 application
-ADDED from /Users/wangchong/AndroidStudioProjects/cyber-dune-rn/modules/cyber-widget/android/src/main/AndroidManifest.xml:7:5-23:19
+ADDED from /Users/wangchong/AndroidStudioProjects/cyber-dune-rn/modules/cyber-widget/android/src/main/AndroidManifest.xml:7:5-98:19
 	android:supportsRtl
 		ADDED from /Users/wangchong/AndroidStudioProjects/cyber-dune-rn/modules/cyber-widget/android/src/main/AndroidManifest.xml:9:9-35
 	android:allowBackup
 		ADDED from /Users/wangchong/AndroidStudioProjects/cyber-dune-rn/modules/cyber-widget/android/src/main/AndroidManifest.xml:8:9-35
-receiver#expo.modules.cyberwidget.HelloWorldWidget
-ADDED from /Users/wangchong/AndroidStudioProjects/cyber-dune-rn/modules/cyber-widget/android/src/main/AndroidManifest.xml:11:9-21:20
+receiver#expo.modules.cyberwidget.GasWidget
+ADDED from /Users/wangchong/AndroidStudioProjects/cyber-dune-rn/modules/cyber-widget/android/src/main/AndroidManifest.xml:10:9-20:20
 	android:exported
-		ADDED from /Users/wangchong/AndroidStudioProjects/cyber-dune-rn/modules/cyber-widget/android/src/main/AndroidManifest.xml:13:13-36
+		ADDED from /Users/wangchong/AndroidStudioProjects/cyber-dune-rn/modules/cyber-widget/android/src/main/AndroidManifest.xml:12:13-37
 	android:name
-		ADDED from /Users/wangchong/AndroidStudioProjects/cyber-dune-rn/modules/cyber-widget/android/src/main/AndroidManifest.xml:12:13-69
+		ADDED from /Users/wangchong/AndroidStudioProjects/cyber-dune-rn/modules/cyber-widget/android/src/main/AndroidManifest.xml:11:13-38
 intent-filter#action:name:android.appwidget.action.APPWIDGET_UPDATE
-ADDED from /Users/wangchong/AndroidStudioProjects/cyber-dune-rn/modules/cyber-widget/android/src/main/AndroidManifest.xml:14:13-16:29
+ADDED from /Users/wangchong/AndroidStudioProjects/cyber-dune-rn/modules/cyber-widget/android/src/main/AndroidManifest.xml:13:13-15:29
 action#android.appwidget.action.APPWIDGET_UPDATE
-ADDED from /Users/wangchong/AndroidStudioProjects/cyber-dune-rn/modules/cyber-widget/android/src/main/AndroidManifest.xml:15:17-84
+ADDED from /Users/wangchong/AndroidStudioProjects/cyber-dune-rn/modules/cyber-widget/android/src/main/AndroidManifest.xml:14:17-84
 	android:name
-		ADDED from /Users/wangchong/AndroidStudioProjects/cyber-dune-rn/modules/cyber-widget/android/src/main/AndroidManifest.xml:15:25-81
+		ADDED from /Users/wangchong/AndroidStudioProjects/cyber-dune-rn/modules/cyber-widget/android/src/main/AndroidManifest.xml:14:25-81
 meta-data#android.appwidget.provider
-ADDED from /Users/wangchong/AndroidStudioProjects/cyber-dune-rn/modules/cyber-widget/android/src/main/AndroidManifest.xml:18:13-20:67
+ADDED from /Users/wangchong/AndroidStudioProjects/cyber-dune-rn/modules/cyber-widget/android/src/main/AndroidManifest.xml:17:13-19:61
 	android:resource
-		ADDED from /Users/wangchong/AndroidStudioProjects/cyber-dune-rn/modules/cyber-widget/android/src/main/AndroidManifest.xml:20:17-64
-	android:name
 		ADDED from /Users/wangchong/AndroidStudioProjects/cyber-dune-rn/modules/cyber-widget/android/src/main/AndroidManifest.xml:19:17-58
+	android:name
+		ADDED from /Users/wangchong/AndroidStudioProjects/cyber-dune-rn/modules/cyber-widget/android/src/main/AndroidManifest.xml:18:17-58
+receiver#expo.modules.cyberwidget.CyberPriceWidget
+ADDED from /Users/wangchong/AndroidStudioProjects/cyber-dune-rn/modules/cyber-widget/android/src/main/AndroidManifest.xml:21:9-31:20
+	android:exported
+		ADDED from /Users/wangchong/AndroidStudioProjects/cyber-dune-rn/modules/cyber-widget/android/src/main/AndroidManifest.xml:23:13-37
+	android:name
+		ADDED from /Users/wangchong/AndroidStudioProjects/cyber-dune-rn/modules/cyber-widget/android/src/main/AndroidManifest.xml:22:13-45
+receiver#expo.modules.cyberwidget.CyberDAUWidget
+ADDED from /Users/wangchong/AndroidStudioProjects/cyber-dune-rn/modules/cyber-widget/android/src/main/AndroidManifest.xml:32:9-42:20
+	android:exported
+		ADDED from /Users/wangchong/AndroidStudioProjects/cyber-dune-rn/modules/cyber-widget/android/src/main/AndroidManifest.xml:34:13-37
+	android:name
+		ADDED from /Users/wangchong/AndroidStudioProjects/cyber-dune-rn/modules/cyber-widget/android/src/main/AndroidManifest.xml:33:13-43
+receiver#expo.modules.cyberwidget.CyberReStakingWidget
+ADDED from /Users/wangchong/AndroidStudioProjects/cyber-dune-rn/modules/cyber-widget/android/src/main/AndroidManifest.xml:43:9-53:20
+	android:exported
+		ADDED from /Users/wangchong/AndroidStudioProjects/cyber-dune-rn/modules/cyber-widget/android/src/main/AndroidManifest.xml:45:13-37
+	android:name
+		ADDED from /Users/wangchong/AndroidStudioProjects/cyber-dune-rn/modules/cyber-widget/android/src/main/AndroidManifest.xml:44:13-49
+receiver#expo.modules.cyberwidget.CyberStakingWidget
+ADDED from /Users/wangchong/AndroidStudioProjects/cyber-dune-rn/modules/cyber-widget/android/src/main/AndroidManifest.xml:54:9-64:20
+	android:exported
+		ADDED from /Users/wangchong/AndroidStudioProjects/cyber-dune-rn/modules/cyber-widget/android/src/main/AndroidManifest.xml:56:13-37
+	android:name
+		ADDED from /Users/wangchong/AndroidStudioProjects/cyber-dune-rn/modules/cyber-widget/android/src/main/AndroidManifest.xml:55:13-47
+receiver#expo.modules.cyberwidget.L2TransactionWidget
+ADDED from /Users/wangchong/AndroidStudioProjects/cyber-dune-rn/modules/cyber-widget/android/src/main/AndroidManifest.xml:65:9-75:20
+	android:exported
+		ADDED from /Users/wangchong/AndroidStudioProjects/cyber-dune-rn/modules/cyber-widget/android/src/main/AndroidManifest.xml:67:13-37
+	android:name
+		ADDED from /Users/wangchong/AndroidStudioProjects/cyber-dune-rn/modules/cyber-widget/android/src/main/AndroidManifest.xml:66:13-48
+receiver#expo.modules.cyberwidget.StakerCountWidget
+ADDED from /Users/wangchong/AndroidStudioProjects/cyber-dune-rn/modules/cyber-widget/android/src/main/AndroidManifest.xml:76:9-86:20
+	android:exported
+		ADDED from /Users/wangchong/AndroidStudioProjects/cyber-dune-rn/modules/cyber-widget/android/src/main/AndroidManifest.xml:78:13-37
+	android:name
+		ADDED from /Users/wangchong/AndroidStudioProjects/cyber-dune-rn/modules/cyber-widget/android/src/main/AndroidManifest.xml:77:13-46
+receiver#expo.modules.cyberwidget.LineWidget
+ADDED from /Users/wangchong/AndroidStudioProjects/cyber-dune-rn/modules/cyber-widget/android/src/main/AndroidManifest.xml:87:9-97:20
+	android:exported
+		ADDED from /Users/wangchong/AndroidStudioProjects/cyber-dune-rn/modules/cyber-widget/android/src/main/AndroidManifest.xml:89:13-36
+	android:name
+		ADDED from /Users/wangchong/AndroidStudioProjects/cyber-dune-rn/modules/cyber-widget/android/src/main/AndroidManifest.xml:88:13-39

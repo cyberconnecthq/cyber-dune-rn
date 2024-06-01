@@ -1,0 +1,415 @@
+type Chat {
+  id: ID!
+  me: User!
+  user: User!
+
+  unreadCount: Int!
+  lastMessage: Message
+  """
+  default direction is NEXT
+  """
+  messages(first: Int, after: String, order: MessageDirection): MessagePage!
+  price: ChatPrice!
+  receiverDeleted: Boolean!
+  blocked: Boolean!
+}
+
+type ChatPage {
+  pageInfo: PageInfo!
+  list: [Chat!]!
+  chatsWithEarn: [Chat!]
+}
+
+type Message {
+  id: ID!
+  sender: User!
+  chatUser: User!
+  msgType: MessageType!
+  content: String!
+  msgTime: Int!
+  paid: PaidInfo!
+  status: MessageStatus!
+  replyToEarn: Boolean!
+}
+
+type ChatUser {
+  unreadCount: Int!
+  basicPrice: TokenValue!
+  unRepliedPrice: TokenValue!
+  creditBalance: TokenValue!
+}
+
+type DmCreditAccount {
+  balance: TokenValue!
+  withdrawableBalance: TokenValue!
+  nonWithdrawableBalance: TokenValue!
+}
+
+type MessagePage {
+  pageInfo: PageInfo!
+  list: [Message!]!
+}
+
+type PaidInfo {
+  status: PaidStatus!
+  value: TokenValue
+  earnValue: TokenValue
+  refundAt: Int
+}
+
+type TokenValue {
+  value: String!
+  decimal: Int!
+  currency: String!
+}
+
+type ChatPrice {
+  price: TokenValue!
+  priceStatus: ChatPriceStatus!
+  basePrice: TokenValue
+  factor: Int
+}
+
+type PriceFeedback {
+  feedback: ChatPriceFeedback
+  description: String
+}
+
+type CreditHistory {
+  to: User
+  operation: CreditOperation!
+  status: CreditStatus!
+  value: TokenValue!
+  time: Int!
+  source: CreditSource!
+  chatUser: User
+  confirmed: Boolean!
+  chainId: Int
+  txHash: String
+}
+
+type CreditHistoryPage {
+  pageInfo: PageInfo!
+  list: [CreditHistory!]!
+}
+
+enum MessageDirection {
+  NEXT
+  PREVIOUS
+}
+
+enum MessageType {
+  TEXT
+  IMAGE
+}
+
+enum MessageStatus {
+  SENT
+  REJECTED
+  PAYING @deprecated
+  SENDING @deprecated
+}
+
+enum PaidStatus {
+  UNPAID @deprecated
+  PENDING @deprecated
+  PAID
+  EARNED
+  REFUNDED
+}
+
+enum Payment {
+  DEFAULT
+  CREDIT
+}
+
+enum CreditOperation {
+  DEPOSIT
+  CONSUME
+  EARN
+  WITHDRAW
+}
+
+enum CreditStatus {
+  PENDING
+  SUCCESS
+  REFUNDED
+  FAILED
+}
+
+enum CreditSource {
+  DEFAULT
+  BONUS
+}
+
+enum ChatPriceStatus {
+  SUCCESS
+  PENDING
+  EXPIRED
+}
+
+enum ChatPriceFeedback {
+  HIGH
+  LOW
+}
+
+input MessageInput {
+  chatId: ID!
+  msgType: MessageType!
+  content: String!
+}
+
+type SendMessageResponse {
+  status: SendMessageResponse_Status!
+}
+
+enum SendMessageResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  CHAT_NOT_FOUND
+  INVALID_MESSAGE_TYPE
+  NEED_PAID
+  PENDING_PAID
+  CANNOT_SEND_TO_SELF
+  PENDING_PRICE
+}
+
+input ReadMessagesInput {
+  chatId: ID!
+}
+
+type ReadMessagesResponse {
+  status: ReadMessagesResponse_Status!
+}
+
+enum ReadMessagesResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  CHAT_NOT_FOUND
+}
+
+type DeleteChatResponse {
+  status: DeleteChatResponse_Status!
+}
+
+enum DeleteChatResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  CHAT_NOT_FOUND
+}
+
+type BlockChatUserResponse {
+  status: BlockChatUserResponse_Status!
+}
+
+enum BlockChatUserResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  USER_NOT_FOUND
+}
+
+type UnblockChatUserResponse {
+  status: UnblockChatUserResponse_Status!
+}
+
+enum UnblockChatUserResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  USER_NOT_FOUND
+}
+
+input InitPaidMessageInput {
+  message: MessageInput!
+  value: TokenValueInput
+  chainId: Int!
+  credit: TokenValueInput
+}
+
+input TokenValueInput {
+  value: String!
+  decimal: Int!
+  currency: String!
+}
+
+type InitPaidMessageResponse {
+  status: InitPaidMessageResponse_Status!
+  message: Message
+  sponsorSig: String!
+}
+
+enum InitPaidMessageResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  CHAT_NOT_FOUND
+  INVALID_MESSAGE_TYPE
+  PENDING_PAID
+  ERROR_PAID_VALUE
+  INVALID_CHAIN_ID
+  CANNOT_SEND_TO_SELF
+  ERROR_CREDIT
+  CREDIT_NOT_ENOUGH
+  PENDING_PRICE
+}
+
+input AckPaidMessageInput {
+  chatId: ID!
+  msgId: ID!
+}
+
+type AckPaidMessageResponse {
+  status: AckPaidMessageResponse_Status!
+}
+
+enum AckPaidMessageResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  PAID_MESSAGE_NOT_FOUND
+}
+
+type UpdateChatBasicPriceResponse {
+  status: UpdateChatBasicPriceResponse_Status!
+}
+
+enum UpdateChatBasicPriceResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  ERROR_PRICE
+}
+
+input UpdateChatBasicPriceInput {
+  price: TokenValueInput!
+}
+
+input DeleteMessageInput {
+  chatId: ID!
+  msgId: ID!
+}
+
+type DeleteMessageResponse {
+  status: DeleteMessageResponse_Status!
+}
+
+enum DeleteMessageResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  MESSAGE_NOT_FOUND
+}
+
+type RefreshChatPriceResponse {
+  status: RefreshChatPriceResponse_Status!
+}
+
+enum RefreshChatPriceResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  USER_NOT_FOUND
+}
+
+input SubmitChatPriceFeedbackInput {
+  feedback: ChatPriceFeedback
+  description: String
+}
+
+type SubmitChatPriceFeedbackResponse {
+  status: SubmitChatPriceFeedbackResponse_Status!
+}
+
+enum SubmitChatPriceFeedbackResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+}
+
+input PaidMessageSponsorSigInput {
+  value: TokenValueInput!
+  chainId: Int!
+}
+
+type PaidMessageSponsorSigResponse {
+  sponsorSig: String
+}
+
+input AckDepositCreditInput {
+  chainId: Int!
+  txHash: String!
+  address: String!
+  value: TokenValueInput!
+}
+
+type AckDepositCreditResponse {
+  status: AckDepositCreditResponse_Status!
+}
+
+enum AckDepositCreditResponse_Status {
+  SUCCESS
+  INVALID_CHAIN_ID
+  INVALID_TX_HASH
+  INVALID_ADDRESS
+  PENDING_TX
+  INVALID_VALUE
+  RATE_LIMIT
+  TX_LOCKED
+}
+
+input WithdrawCreditInput {
+  chainId: Int!
+  address: String!
+  value: TokenValueInput!
+}
+
+type WithdrawCreditResponse {
+  status: WithdrawCreditResponse_Status!
+}
+
+enum WithdrawCreditResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  INVALID_VALUE
+  INVALID_ADDRESS
+  CREDIT_NOT_ENOUGH
+  INVALID_CHAIN_ID
+}
+
+input UpdatePriceFactorInput {
+  factor: Int!
+}
+
+type UpdatePriceFactorResponse {
+  status: UpdatePriceFactorResponse_Status!
+}
+
+enum UpdatePriceFactorResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  INVALID_FACTOR
+}
+
+extend type User {
+  chat(id: ID!): Chat
+  chats(first: Int, after: String,): ChatPage!
+  message(id: ID!): Message
+  messages(chatId: ID, first: Int, after: String): MessagePage!
+  unreadMessageCount: Int!
+  blockChatUsers: [User!]!
+  totalEarned: TokenValue!
+  chatUser: ChatUser
+  creditHistories(first: Int, after: String, operation: CreditOperation): CreditHistoryPage!
+  price: ChatPrice!
+  priceFeedback: PriceFeedback!
+  dmCreditAccount: DmCreditAccount!
+}
+
+extend type Mutation {
+  sendMessage(input: MessageInput!): SendMessageResponse!
+  readMessages(input: ReadMessagesInput!): ReadMessagesResponse!
+  deleteChat(chatId: ID!): DeleteChatResponse!
+  blockChatUser(userId: ID!): BlockChatUserResponse!
+  unblockChatUser(userId: ID!): UnblockChatUserResponse!
+  initPaidMessage(input: InitPaidMessageInput!): InitPaidMessageResponse!
+  updateChatBasicPrice(input: UpdateChatBasicPriceInput!): UpdateChatBasicPriceResponse!
+  deleteMessage(input: DeleteMessageInput!): DeleteMessageResponse!
+  refreshChatPrice(userId: ID!): RefreshChatPriceResponse!
+  submitChatPriceFeedback(input: SubmitChatPriceFeedbackInput!): SubmitChatPriceFeedbackResponse!
+  ackDepositCredit(input: AckDepositCreditInput!): AckDepositCreditResponse!
+  withdrawCredit(input: WithdrawCreditInput!): WithdrawCreditResponse!
+  updatePriceFactor(input: UpdatePriceFactorInput!): UpdatePriceFactorResponse!
+}

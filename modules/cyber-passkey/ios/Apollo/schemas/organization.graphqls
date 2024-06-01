@@ -1,0 +1,430 @@
+type Organization {
+  # ------ public fields ------
+  id: ID!
+  lightInfo: OrganizationLightInfo!
+  twitterId: String!
+  verification: VerificationStatus!
+  profile: Profile!
+  followersCount: Int!
+  events(ended: Boolean, first: Int, after: String): EventPage!
+  eventsCount(ended: Boolean): Int!
+  # current user's role
+  currentAccess: Role!
+  posts(first: Int, after: String): PostPage
+  postsCount: Int!
+
+  # ------ private fields ------
+  members(role: Role, first: Int, after: String): MemberPage
+  invitations(first: Int, after: String): InvitationPage
+  reviewing: ReviewingOrganization
+  vaults: [Vault!]
+  scheduledSpaces: [ScheduledSpace!]
+  invitationCodes: [InvitationCode!]
+
+  audienceSummary: AudienceSummary! @orgAdminOnly
+  audiences(first: Int, after: String, filter: AudienceFilter): AudiencePage! @orgAdminOnly
+  audiencesCount(filter: AudienceFilter): Int! @orgAdminOnly
+  postDrafts(first: Int, after: String): PostDraftPage @orgAdminOnly
+  postDraftsCount: Int! @orgAdminOnly
+  eventPerks: [OrganizationWhitelistType!] @orgAdminOnly
+}
+
+type OrganizationLightInfo {
+  profileHandle: String!
+  displayName: String!
+  profilePicture: String!
+  isFollowing: Boolean!
+  attestation: Attestation
+}
+
+type OrganizationPage {
+  totalCount: Int!
+  pageInfo: PageInfo!
+  list: [Organization!]!
+}
+
+enum Role {
+  ALIEN
+  OWNER
+  ADMIN
+  EDITOR
+  VIEWER
+}
+
+enum VerificationStatus {
+  """
+  Default status. User can submit a organization profile handle.
+  """
+  NONE
+  """
+  Waiting for verification from the LinkΞ team.
+  """
+  PENDING
+  """
+  Verified by the LinkΞ team.
+  """
+  VERIFIED
+  """
+  Twitter not verified by the LinkΞ team.
+  """
+  TWITTER_REJECTED
+  """
+  Handle not verified by the LinkΞ team.
+  """
+  HANDLE_REJECTED
+  """
+  Handle has been registered by the LinkΞ team.
+  """
+  HANDLE_REGISTERED
+}
+
+type Member {
+  userId: ID!
+  name: String!
+  avatar: String!
+  avatarFrameTokenId: ID
+  isKol: Boolean!
+  email: String!
+  handle: String!
+  role: Role!
+}
+
+type MemberPage {
+  pageInfo: PageInfo!
+  list: [Member!]!
+}
+
+type AudiencePage {
+  pageInfo: PageInfo!
+  list: [Audience!]
+}
+
+type Audience {
+  user: UserAnalysisInfo!
+  isFollower: Boolean!
+  totalEvents: Int!
+  totalRegistered: Int!
+  totalAttended: Int!
+  totalClaimed: Int!
+  totalRaffleJoined: Int!
+  totalRaffleClaimed: Int!
+  """
+  timestamp of the first event they registered/joined/claimed
+  """
+  firstSeen: Timestamp!
+  """
+  totalStaytime in minutes
+  """
+  totalStayTime: Float!
+  topErcHolding: [String!]
+  nftNetWorthUsd: Float!
+  erc20NetWorthUsd: Float!
+  ethBalance: Float!
+  ethNetWorthUsd: Float!
+  joinedEventDetails: [JoinedEventDetail]!
+}
+
+type JoinedEventDetail {
+  eventId: String!
+  eventTitle: String!
+  eventStartTime: Timestamp!
+  isRegistered: Boolean!
+  totalDuration: Int!
+  claimedW3st: Boolean!
+  joinedRaffle: Boolean!
+  wonRaffle: Boolean!
+}
+
+type AudienceSummary {
+  totalFollowers: Int!
+  totalEvents: Int!
+  totalParticipants: Int!
+  totalClaimed: Int!
+}
+
+enum InvitationStatus {
+  INVITATION_PENDING
+  INVITATION_ACCEPTED
+  INVITATION_EXPIRED
+}
+
+type Invitation {
+  email: String!
+  role: Role!
+  status: InvitationStatus!
+}
+
+type InvitationPage {
+  pageInfo: PageInfo!
+  list: [Invitation!]!
+}
+
+type Vault {
+  chainId: Int!
+  tokenInfo: [TokenInfo!]!
+}
+
+type TokenInfo {
+  symbol: String!
+  tokenIcon: String!
+  contractAddress: String!
+  available: String!
+  locked: String!
+  totalAmount: String!
+}
+
+enum AudienceFilterSort {
+  EVENTS_ASC
+  EVENTS_DESC
+  DURATION_ASC
+  DURATION_DESC
+  FIRST_SEEN_ASC
+  FIRST_SEEN_DESC
+}
+
+input AudienceFilter {
+  eventList: [ID!]
+  isFollower: Boolean
+  hasHandle: Boolean
+  hasTwitter: Boolean
+  hasDiscord: Boolean
+
+  sort: AudienceFilterSort
+}
+
+input SendInvitationRequest {
+  email: String!
+  orgId: String!
+  role: Role!
+}
+
+enum SendInvitationResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  USER_NOT_FOUND
+  ORGANIZATION_NOT_FOUND
+  PERMISSION_DENIED
+  EMAIL_NOT_LINKED
+  INVALID_PARAMETER
+  DUPLICATE_INVITATION
+}
+
+type SendInvitationResponse {
+  status: SendInvitationResponse_Status!
+  message: String!
+}
+
+input ChangeMemberRequest {
+  orgId: ID!
+  userId: ID!
+  role: Role!
+}
+
+enum ChangeMemberResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  PERMISSION_DENIED
+  INVALID_PARAMETER
+}
+
+type ChangeMemberResponse {
+  status: ChangeMemberResponse_Status!
+  message: String!
+}
+
+enum RemoveMemberResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  PERMISSION_DENIED
+  INVALID_PARAMETER
+}
+
+input RemoveMemberRequest {
+  orgId: ID!
+  userId: ID!
+}
+
+type RemoveMemberResponse {
+  status: RemoveMemberResponse_Status!
+  message: String!
+}
+
+input LinkOrganizationTwitterRequest {
+  orgId: ID!
+  twitterOAuth: TwitterOAuth!
+}
+
+enum LinkOrganizationTwitterResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  ORGANIZATION_NOT_FOUND
+  PERMISSION_DENIED
+  INVALID_PARAMETER
+  WRONG_VERIFICATION_STATUS
+  DUPLICATE_TWITTER
+  TOO_FREQUENT_AUTH
+}
+
+type LinkOrganizationTwitterResponse {
+  status: LinkOrganizationTwitterResponse_Status!
+  message: String!
+  twitter: Twitter!
+}
+
+type ReviewingOrganization {
+  orgId: ID!
+  handle: String!
+  twitterId: String!
+  verification: VerificationStatus!
+  survey: ReviewingProfileSurvey
+}
+
+enum ReviewingProfileSurvey_Option {
+  TWITTER
+  TELEGRAM
+  FRIEND
+  ORGANIZATION
+  BD
+  COMMUNITY
+  OTHER
+}
+
+type ReviewingProfileSurvey {
+  options: [ReviewingProfileSurvey_Option!]!
+  source: String
+}
+
+enum AllVerificationResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+}
+
+type AllVerificationResponse {
+  status: AllVerificationResponse_Status!
+  message: String!
+  data: [ReviewingOrganization!]
+}
+
+enum UpdateVerificationResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  PROFILE_NOT_FOUND
+  TWITTER_ID_NOT_UNIQUE
+  ORGANIZATION_NOT_FOUND
+  REGISTERED_HANDLE
+  RESERVED_HANDLE
+  CLAIMING_HANDLE
+}
+
+type UpdateVerificationResponse {
+  status: UpdateVerificationResponse_Status!
+  message: String!
+}
+
+enum RevokeVerificationResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  PROFILE_NOT_FOUND
+  ORGANIZATION_NOT_FOUND
+  INVALID_HANDLE
+  WRONG_VERIFICATION_STATUS
+}
+
+type RevokeVerificationResponse {
+  status: RevokeVerificationResponse_Status!
+  message: String!
+}
+
+enum AudienceAnalysisDownloadResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  PERMISSION_DENIED
+  EMAIL_NOT_LINKED
+  RATE_LIMITED
+}
+
+type AudienceAnalysisDownloadResponse {
+  status: AudienceAnalysisDownloadResponse_Status!
+  message: String!
+}
+
+type ScheduledSpace {
+  spaceUrl: String!
+  title: String!
+  StartTimestamp: Int!
+}
+
+type InvitationCode {
+  code: String!
+  isUsed: Boolean!
+}
+
+type Link3SummaryResponse {
+  ccProfilesCount: Int!
+  verifiedOrgsCount: Int!
+  eventsCount: Int!
+  essencesCount: Int!
+  participantsCount: Int!
+}
+
+enum FollowerType {
+  LINK3
+  TWITTER
+}
+
+enum OrganizationWhitelistType {
+  CREATE_OTHER_EVENT
+  ADD_W3ST_WHITELIST
+  CREATE_V3_W3ST
+}
+
+extend type Query {
+  organization(id: ID!): Organization
+  organizations(
+    displayNameFilter: String
+    sectorFilter: String
+    first: Int
+    after: String
+  ): OrganizationPage!
+  link3Summary: Link3SummaryResponse!
+  popularOrganizations(
+    followerType: FollowerType!
+    limit: Int!
+  ): [Organization!]
+}
+
+extend type Mutation {
+  """
+  Send invitation to set a user as a member in organization.
+  """
+  sendInvitation(request: SendInvitationRequest!): SendInvitationResponse!
+  """
+  Set role for a member in organization.
+  """
+  changeMember(request: ChangeMemberRequest!): ChangeMemberResponse!
+  """
+  Remove a member from organization.
+  """
+  removeMember(request: RemoveMemberRequest!): RemoveMemberResponse!
+  """
+  Link organization twitter.
+  """
+  linkOrganizationTwitter(
+    request: LinkOrganizationTwitterRequest!
+  ): LinkOrganizationTwitterResponse!
+  """
+  admin API
+  """
+  verify(orgId: ID!, status: VerificationStatus!): UpdateVerificationResponse! @admin
+  """
+  admin API
+  """
+  revoke(orgId: ID!, handle: String!): RevokeVerificationResponse! @admin
+  """
+  audience analysis download api
+  """
+  audienceAnalysisDownload(
+    orgId: ID!
+    filter: AudienceFilter
+  ): AudienceAnalysisDownloadResponse!
+}

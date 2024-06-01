@@ -1,0 +1,187 @@
+type W3ST {
+  version: Int!
+  gasless: Boolean!
+  imageUrl: Url!
+  requirements: [W3STRequirement!]!
+  """
+  W3ST's on-chain info, if the deployment is complete
+  """
+  contractInfo: [W3STContractInfo!]
+
+  """
+  W3ST's on-chain info, if the deployment is complete
+  """
+  v3contractInfo: [V3W3STContractInfo!]
+
+  """
+  current user status
+  """
+  eligible: W3STEligibility
+}
+
+type W3STContractInfo {
+  chainId: Int!
+  profileAddress: EVMAddress!
+  profileId: Int!
+  essenceId: Int!
+  essenceAddress: EVMAddress!
+  tokenHoldersCount: Int!
+  deployStatus: W3STDeployStatus! # check profileNFT & essenceNFT deployment
+}
+
+type V3W3STContractInfo {
+  chainId: Int!
+  cyberAccount: EVMAddress!
+  tokenId: Int!
+  w3stAddress: EVMAddress!
+  tokenHoldersCount: Int!
+  deployStatus: W3STDeployStatus!
+}
+
+type W3STEligibility {
+  unclaimed: Int!
+  claiming: Int!
+  claimed: Int!
+  stayTime: Int!
+  readyToClaim: Boolean!
+  requirements: [W3STRequirementEligibility!]!
+  claimedByOther: Boolean!
+  firstClaim: Boolean!
+  eligibleChainIds: [Int!]!
+}
+
+type W3STRequirementEligibility {
+  eligible: Boolean!
+  requirement: W3STRequirement!
+}
+
+enum W3STRequirementType {
+  STAY
+  KYC
+  FOLLOW
+  OFFLINE_CHECK_IN
+}
+
+type W3STRequirement {
+  type: W3STRequirementType!
+  value: Int
+}
+
+enum W3STDeployStatus {
+  PROFILE_NOT_DEPLOYED
+  DEPLOYING_PROFILE
+  PROFILE_DEPLOYED
+  PROFILE_DEPLOY_FAILED
+  DEPLOYING_W3ST
+  W3ST_DEPLOY_FAILED
+  ALL_DEPLOYED
+}
+
+input W3STRequirementInput {
+  type: W3STRequirementType!
+  value: Int
+}
+
+input AckCollectW3STRequest {
+  collectId: String!
+  txHash: String!
+}
+
+enum CollectW3STResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  ALREADY_COLLECTED
+  NOT_ELIGIBLE
+  ESSENCE_NOT_FOUND
+  TRY_AGAIN_LATER
+  COLLECTING_ON_OTHER_CHAIN
+}
+
+type CollectW3STResponse {
+  status: CollectW3STResponse_Status!
+  gasLess: Boolean!
+  collector: String
+  profileId: Int
+  essenceId: Int
+  preData: String
+  collectId: String
+  chainId: Int
+}
+
+enum AckCollectW3STResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+}
+
+type AckCollectW3STResponse {
+  status: AckCollectW3STResponse_Status!
+}
+
+input DeployV3W3STRequest {
+  eventId: ID!
+  badgeCid: String!
+  requirements: [W3STRequirementInput]!
+  chainIds: [Int!]!
+}
+
+enum DeployV3W3STResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  EVENT_NOT_FOUND
+  PERMISSION_DENIED
+  ALREADY_DEPLOYED
+  AT_LEAST_STAY_TIME_IS_REQUIRED
+  INVALID_AT_LEAST_STAY_TIME
+  EVENT_TYPE_NOT_SUPPORTED
+  UNSUPPORTED_CHAIN
+}
+
+type DeployV3W3STResponse {
+  status: DeployV3W3STResponse_Status!
+  message: String!
+}
+
+enum CollectV3W3STResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+  ALREADY_COLLECTED
+  NOT_ELIGIBLE
+  ESSENCE_NOT_FOUND
+  TRY_AGAIN_LATER
+  COLLECTING_ON_OTHER_CHAIN
+}
+
+type CollectV3W3STResponse {
+  status: CollectV3W3STResponse_Status!
+  gasLess: Boolean!
+  collector: String
+  cyberAccount: String
+  tokenId: Int
+  data: String
+  collectId: String
+  chainId: Int
+  sponsorSig: String
+}
+
+input AckCollectV3W3STRequest {
+  collectId: String!
+  txHash: String!
+}
+
+enum AckCollectV3W3STResponse_Status {
+  SUCCESS
+  NOT_LOGIN
+}
+
+type AckCollectV3W3STResponse {
+  status: AckCollectV3W3STResponse_Status!
+}
+
+extend type Mutation {
+  collectW3ST(eventId: ID!, chainId: Int!): CollectW3STResponse!
+  ackCollectW3ST(input: AckCollectW3STRequest!): AckCollectW3STResponse!
+
+  deployV3W3ST(input: DeployV3W3STRequest!): DeployV3W3STResponse!
+  collectV3W3ST(eventId: ID!, chainId: Int!): CollectV3W3STResponse!
+  ackCollectV3W3ST(input: AckCollectV3W3STRequest!): AckCollectV3W3STResponse!
+}
