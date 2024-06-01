@@ -1,25 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="expo.modules.cyberwidget" >
+    package="expo.modules.cyberwidget">
 
     <uses-sdk android:minSdkVersion="23" />
 
     <application
         android:allowBackup="true"
         android:supportsRtl="true">
-
         <receiver
-            android:name="expo.modules.cyberwidget.HelloWorldWidget"
-            android:exported="true" >
+            android:name=".GasWidget"
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
 
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/hello_world_widget_info" />
+                android:resource="@xml/green_widget_info" />
         </receiver>
+        <receiver
+            android:name=".CyberPriceWidget"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
 
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/red_widget_info" />
+        </receiver>
+        <receiver
+            android:name=".CyberDAUWidget"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/blue_widget_info" />
+        </receiver>
+        <receiver
+            android:name=".CyberReStakingWidget"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/brown_widget_info" />
+        </receiver>
+        <receiver
+            android:name=".CyberStakingWidget"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/orange_widget_info" />
+        </receiver>
+        <receiver
+            android:name=".L2TransactionWidget"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/grey_widget_info" />
+        </receiver>
+        <receiver
+            android:name=".StakerCountWidget"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/pink_widget_info" />
+        </receiver>
+        <receiver
+            android:name=".LineWidget"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/line_widget_info" />
+        </receiver>
     </application>
 
 </manifest>

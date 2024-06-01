@@ -5,6 +5,7 @@ version = '0.6.0'
 
 def expoModulesCorePlugin = new File(project(":expo-modules-core").projectDir.absolutePath, "ExpoModulesCorePlugin.gradle")
 apply from: expoModulesCorePlugin
+apply plugin: 'org.jetbrains.kotlin.android'
 applyKotlinExpoModulesCorePlugin()
 useCoreDependencies()
 useExpoPublishing()
@@ -40,4 +41,11 @@ android {
   lintOptions {
     abortOnError false
   }
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+  implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 }

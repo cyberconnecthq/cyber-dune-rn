@@ -1,0 +1,20 @@
+<resources>
+
+    <style name="Widget.CyberDune.AppWidget.Container" parent="android:Widget">
+        <item name="android:id">@android:id/background</item>
+        <item name="android:background">?android:attr/colorBackground</item>
+    </style>
+
+    <style name="Widget.CyberDune.AppWidget.InnerView" parent="android:Widget">
+        <!-- 设置背景为自定义的圆角背景 -->
+        <item name="android:background">@drawable/rounded_corner_background</item>
+
+        <!-- 设置文字颜色为图片中选定的辅助色 -->
+        <item name="android:textColor">#0F0F19</item>
+
+        <!-- 增加内边距使组件看起来更美观 -->
+        <item name="android:padding">2dp</item>
+
+    </style>
+
+</resources>
