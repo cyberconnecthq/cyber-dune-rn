@@ -68,11 +68,11 @@ struct CyberDuneWidgetEntryView : View {
             .resizable()
             .frame(width: 88, height: 287/795 * 88)
           Spacer().frame(height: 12)
-          Text("GasFee: ")
+          Text("GasFee:")
             .foregroundColor(Color.black)
             .font(Font.system(size: 12))
           +
-          Text("6.43 Gwei")
+          Text("6.4Gwei")
             .foregroundColor(Color.black)
             .font(Font.system(size: 14, weight: .bold))
           Spacer().frame(height: 12)
@@ -84,81 +84,92 @@ struct CyberDuneWidgetEntryView : View {
             .foregroundColor(Color.black)
             .font(Font.system(size: 14, weight: .bold))
         }
-        .padding(.leading, 12)
+        .padding(.leading, 10)
         Spacer().frame(width: 12)
         VStack(alignment:.leading){
           HStack{
-            
-            HStack{
-              Spacer().frame(width: 8)
-              Image("profile")
-                .resizable()
-                .frame(width: 14, height: 14)
-              Text("Profile")
-                .font(Font.system(size: 14, weight: .bold))
-                .foregroundColor(Color.black)
-              Spacer()
-            }
-            .frame(width: 99, height: 30)
-            .overlay {
-              RoundedRectangle(cornerRadius: 8)
-                .stroke(Color(.green), lineWidth: 1.0)
-            }
+            Link(destination: URL(string: "cyberdune://profile")!, label: {
+              HStack{
+                Spacer().frame(width: 8)
+                Image("profile")
+                  .resizable()
+                  .frame(width: 14, height: 14)
+                Text("Profile")
+                  .font(Font.system(size: 14, weight: .bold))
+                  .foregroundColor(Color.black)
+                Spacer()
+              }
+              .frame(width: 85, height: 30)
+              .overlay {
+                RoundedRectangle(cornerRadius: 8)
+                  .stroke(Color(.green), lineWidth: 1.0)
+              }
+            })
             
             Spacer().frame(width: 12)
-            HStack{
-              Spacer().frame(width: 8)
-              Image("transfer")
-                .resizable()
-                .frame(width: 14, height: 14)
-              Text("Transfer")
-                .font(Font.system(size: 14, weight: .bold))
-                .foregroundColor(Color.black)
-              Spacer()
-            }
-            .frame(width: 99, height: 30)
-            .overlay {
-              RoundedRectangle(cornerRadius: 8)
-                .stroke(Color(.green), lineWidth: 1.0)
-            }
+            
+            Link(destination: URL(string: "cyberdune://transfer")!, label: {
+              HStack{
+                Spacer().frame(width: 8)
+                Image("transfer")
+                  .resizable()
+                  .frame(width: 14, height: 14)
+                Text("Trans")
+                  .font(Font.system(size: 14, weight: .bold))
+                  .foregroundColor(Color.black)
+                Spacer()
+              }
+              .frame(width: 85, height: 30)
+              .overlay {
+                RoundedRectangle(cornerRadius: 8)
+                  .stroke(Color(.green), lineWidth: 1.0)
+              }
+            })
             Spacer()
           }
           
           Spacer().frame(height: 16)
           
           HStack{
-            HStack{
-              Spacer().frame(width: 8)
-              Image("qrcode")
-                .resizable()
-                .frame(width: 12, height: 12)
-              Text("QR Code")
-                .font(Font.system(size: 14, weight: .bold))
-                .foregroundColor(Color.black)
-              Spacer()
-            }
-            .frame(width: 99, height: 30)
-            .overlay {
-              RoundedRectangle(cornerRadius: 8)
-                .stroke(Color(.green), lineWidth: 1.0)
-            }
+            Link(destination: URL(string: "cyberdune://qrCode")!, label: {
+              HStack{
+                Spacer().frame(width: 8)
+                Image("qrcode")
+                  .resizable()
+                  .frame(width: 12, height: 12)
+                Text("QR")
+                  .font(Font.system(size: 14, weight: .bold))
+                  .foregroundColor(Color.black)
+                Spacer()
+              }
+              .frame(width: 85, height: 30)
+              .overlay {
+                RoundedRectangle(cornerRadius: 8)
+                  .stroke(Color(.green), lineWidth: 1.0)
+              }
+            })
+            
             Spacer().frame(width: 12)
-            HStack{
-              Spacer().frame(width: 8)
-              Image("scan")
-                .resizable()
-                .frame(width: 14, height: 14)
-              Text("Scan")
-                .font(Font.system(size: 14, weight: .bold))
-                .foregroundColor(Color.black)
-              Spacer()
-            }
-            .frame(width: 99, height: 30)
-            .overlay {
-              RoundedRectangle(cornerRadius: 8)
-                .stroke(Color(.green), lineWidth: 1.0)
-            }
-
+            
+            
+            Link(destination: URL(string: "cyberdune://scan")!, label: {
+              HStack{
+                Spacer().frame(width: 8)
+                Image("scan")
+                  .resizable()
+                  .frame(width: 14, height: 14)
+                Text("Scan")
+                  .font(Font.system(size: 14, weight: .bold))
+                  .foregroundColor(Color.black)
+                Spacer()
+              }
+              .frame(width: 85, height: 30)
+              .overlay {
+                RoundedRectangle(cornerRadius: 8)
+                  .stroke(Color(.green), lineWidth: 1.0)
+              }
+            })
+            
           }
         }
         Spacer()
@@ -204,23 +215,23 @@ struct CyberDuneWidget: Widget {
 }
 
 struct DoubleBorderStackStyle: ViewModifier {
-    let innerColor: Color
-    let outerColor: Color
-    let borderWidth1: CGFloat
-    let borderWidth2: CGFloat
-    let cornerRadius: CGFloat
-
-    func body(content: Content) -> some View {
-        content
-            .padding(2)
-            .background(
-                RoundedRectangle(cornerRadius: cornerRadius)
-                    .stroke(outerColor, lineWidth: borderWidth2)
-                    .background(
-                        RoundedRectangle(cornerRadius: cornerRadius)
-                            .stroke(innerColor, lineWidth: borderWidth1)
-                            .padding(1)
-                    )
-            )
-    }
+  let innerColor: Color
+  let outerColor: Color
+  let borderWidth1: CGFloat
+  let borderWidth2: CGFloat
+  let cornerRadius: CGFloat
+  
+  func body(content: Content) -> some View {
+    content
+      .padding(2)
+      .background(
+        RoundedRectangle(cornerRadius: cornerRadius)
+          .stroke(outerColor, lineWidth: borderWidth2)
+          .background(
+            RoundedRectangle(cornerRadius: cornerRadius)
+              .stroke(innerColor, lineWidth: borderWidth1)
+              .padding(1)
+          )
+      )
+  }
 }
