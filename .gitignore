@@ -17,3 +17,6 @@ web-build/
 android/app/build/*
 modules/cyber-passkey/android/app/build/*
 modules/cyber-widget/android/app/build/*
+modules/cyber-widget/android/build/*
+modules/cyber-widget/android/build/*
+*.class
