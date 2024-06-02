@@ -36,7 +36,7 @@ class StakerCountWidget : AppWidgetProvider() {
             appWidgetId: Int
         ) {
             val title = "Staker Count"
-            val content = "38888"
+            val content = "39214"
 
             val views = RemoteViews(context.packageName, R.layout.pink_widget)
 

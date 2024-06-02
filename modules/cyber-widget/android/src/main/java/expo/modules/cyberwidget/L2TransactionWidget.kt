@@ -35,8 +35,8 @@ class L2TransactionWidget : AppWidgetProvider() {
             appWidgetManager: AppWidgetManager,
             appWidgetId: Int
         ) {
-            val title = "Staking Cyber"
-            val content = "38940"
+            val title = "L2 Transaction"
+            val content = "4.54M"
 
             val views = RemoteViews(context.packageName, R.layout.grey_widget)
 

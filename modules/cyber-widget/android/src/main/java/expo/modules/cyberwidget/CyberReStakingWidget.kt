@@ -36,7 +36,7 @@ class CyberReStakingWidget : AppWidgetProvider() {
             appWidgetId: Int
         ) {
             val title = "ReStaking Cyber"
-            val content = "38940"
+            val content = "4002"
 
             val views = RemoteViews(context.packageName, R.layout.brown_widget)
 
