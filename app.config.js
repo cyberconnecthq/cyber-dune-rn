@@ -61,6 +61,15 @@ export default {
             }
           ]
     ],
-    owner: "darx"
+    owner: "damien8201",
+    extra: {
+        eas: {
+          projectId: "204e3d50-9b8f-4bf8-921d-2a4d1b2e535f"
+        }
+      },
+      "updates": {
+        "url": "https://u.expo.dev/204e3d50-9b8f-4bf8-921d-2a4d1b2e535f"
+      },
+      "runtimeVersion": "1.0.0"
 };
 
